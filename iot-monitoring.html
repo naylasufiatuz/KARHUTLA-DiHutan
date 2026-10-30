@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#07150e">
+<meta name="description" content="Penjelasan sederhana IoT Monitoring DiHutan dan perangkat yang direncanakan.">
+<title>IoT Monitoring — Teknologi DiHutan</title>
+<link rel="stylesheet" href="technology.css">
+</head>
+<body>
+<header class="tech-nav">
+  <a class="brand" href="index.html" aria-label="DiHutan, kembali ke beranda"><img src="dihutan-logo-mark.png" alt=""><strong>DiHutan</strong></a>
+  <nav class="nav-links" aria-label="Navigasi teknologi">
+    <a href="technology.html">Teknologi</a>
+    <a class="active" href="iot-monitoring.html" aria-current="page">IoT Monitoring</a>
+    <a href="ai-forest-guardian.html">AI Guardian</a>
+    <a href="autospray.html">AutoSpray</a>
+  </nav>
+  <a class="home-link" href="index.html">BERANDA <span aria-hidden="true">↗</span></a>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Pos jaga 01 · Mengamati</p>
+        <h1>IoT <i>Monitoring.</i></h1>
+        <p class="hero-copy">Bayangkan sensor kecil di lapangan yang memeriksa keadaan tanah. Hasil pengukurannya bisa dikirim ke perangkat pemantau, sehingga petugas tidak harus selalu datang hanya untuk mengecek angka.</p>
+        <div class="hero-actions"><a class="button primary" href="#cara-kerja">Lihat cara kerjanya <span aria-hidden="true">↓</span></a><a class="button" href="technology.html">← Semua teknologi</a></div>
+      </div>
+      <div class="hero-art"><img src="assets/technology/Soil%20Moisture%20Sensor%20Module%20and%20Probe.png" alt="Modul dan probe sensor kelembapan tanah"><span class="hero-art-caption">Contoh sensor · kelembapan tanah</span></div>
+    </div>
+  </section>
+
+  <section class="section" id="cara-kerja">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">Dari tanah ke layar</p><h2>Alurnya sederhana.</h2><p>Setiap bagian punya tugas yang berbeda. Angka hanya bisa muncul sebagai data lapangan kalau perangkatnya sudah dipasang dan tersambung.</p></div>
+      <div class="steps">
+        <article class="step"><h3>Sensor mengukur</h3><p>Probe ditancapkan ke tanah untuk membaca tingkat kelembapannya.</p></article>
+        <article class="step"><h3>ESP32 membaca data</h3><p>Papan kecil bernama ESP32 menerima hasil dari sensor dan menyiapkannya untuk dikirim.</p></article>
+        <article class="step"><h3>Petugas melihat hasil</h3><p>Jika ada jaringan dan aplikasi yang terhubung, hasil dapat ditampilkan untuk membantu pemantauan.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">Perangkat yang disiapkan</p><h2>Kenali alatnya.</h2><p>Foto berikut adalah perangkat yang tersedia di berkas proyek. Susunan akhirnya tetap bergantung pada rancangan dan pengujian di lapangan.</p></div>
+      <div class="device-gallery">
+        <article class="device"><img src="assets/technology/Soil%20Moisture%20Sensor%20Module%20and%20Probe.png" alt="Sensor kelembapan tanah"><div><h3>Sensor kelembapan tanah</h3><p>Mengukur kondisi lembap atau kering di sekitar probe.</p></div></article>
+        <article class="device"><img src="assets/technology/ESP32%20Development%20Board%20Product%20Cutout.png" alt="Papan pengembangan ESP32"><div><h3>Papan ESP32</h3><p>Membaca data dari sensor dan dapat berkomunikasi lewat jaringan yang tersedia.</p></div></article>
+        <article class="device"><img src="assets/technology/ESP32%20Expansion%20Board%20Close-Up.png" alt="Papan ekspansi ESP32"><div><h3>Papan ekspansi</h3><p>Membantu menyambungkan modul dan kabel dengan lebih rapi.</p></div></article>
+      </div>
+      <p class="note">Yang tersedia di aset proyek adalah sensor kelembapan tanah. Data suhu, gas, atau tinggi muka air membutuhkan sensor tersendiri; halaman ini tidak menganggap alat tersebut sudah terpasang.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head"><p class="eyebrow">Yang perlu diketahui</p><h2>Angka contoh bukan pemantauan langsung.</h2></div>
+      <div class="feature-list">
+        <div class="feature-row"><strong>Apa manfaatnya?</strong><p>Petugas dapat lebih mudah melihat perubahan data dari waktu ke waktu dan menentukan kapan perlu memeriksa lokasi.</p></div>
+        <div class="feature-row"><strong>Apakah sudah live?</strong><p>Belum dapat dipastikan dari situs ini. Angka di halaman utama adalah contoh tampilan, bukan kiriman sensor langsung.</p></div>
+        <div class="feature-row"><strong>Bagaimana dengan area tanpa sinyal?</strong><p>Perlu cara penyimpanan atau pengiriman data yang sesuai kondisi lokasi. Koneksi dan jangkauannya harus diuji sebelum dipakai.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="closing"><div class="wrap closing-card"><div><h2>Berikutnya: memahami pola.</h2><p>Setelah data terkumpul, AI Forest Guardian menjadi konsep untuk membantu merangkum perubahan agar lebih mudah dibaca.</p></div><a class="button primary" href="ai-forest-guardian.html">Lanjut ke AI Guardian <span aria-hidden="true">→</span></a></div></section>
+</main>
+<footer class="footer"><div class="footer-inner"><span>© DiHutan · Menjaga hutan, memahami perubahan.</span><a href="technology.html">Semua teknologi ↗</a></div></footer>
+</body>
+</html>

@@ -726,13 +726,13 @@ export default function LandingView() {
             priority
           />
         </div>
-        <div className="fr">
-          <h1>
-            Edisi <i>Renaisans</i>
+        <div className="fr" style={{ color: "#ffffff" }}>
+          <h1 style={{ color: "#ffffff" }}>
+            Edisi <i style={{ color: "#ffffff" }}>Renaisans</i>
             <br />
             Hutan
           </h1>
-          <p className="tg">
+          <p className="tg" style={{ color: "#ffffff" }}>
             Dunia baru untuk hutan Kalimantan.
             <br />9 fitur cegah karhutla.
           </p>
@@ -755,14 +755,14 @@ export default function LandingView() {
 
         {/* Main Navigation */}
         <nav className="landing-nav" aria-label="Navigasi utama">
-          <a className="lg" href="#h" aria-label="DiHutan, ke Beranda">
+          <a className="lg" href="#h" aria-label="DiHutan, ke Beranda" style={{ color: "#ffffff" }}>
             <Image
               src="/dihutan-logo-mark.png"
               alt="Logo DiHutan"
               width={40}
               height={40}
             />
-            <strong>dihutan</strong>
+            <strong style={{ color: "#ffffff" }}>dihutan</strong>
           </a>
           <div className="nav-links" aria-label="Section">
             <a
@@ -1584,7 +1584,7 @@ export default function LandingView() {
                     width={45}
                     height={45}
                   />
-                  <strong>dihutan</strong>
+                  <strong style={{ color: "#ffffff" }}>dihutan</strong>
                 </a>
                 <p>
                   Menjaga hutan, merawat gambut, dan membawa teknologi lebih

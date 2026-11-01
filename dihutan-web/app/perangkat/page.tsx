@@ -26,19 +26,19 @@ export default function PerangkatIoTPublikPage() {
   );
 
   return (
-    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", background: "#f6f8f5", color: "#17251e" }}>
+    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", background: "#F5F7F2", color: "#17251D" }}>
       <PublicNav />
 
       {/* Hero Section */}
-      <section style={{ background: "#0b3b2b", color: "#ffffff", padding: "64px 24px" }}>
+      <section style={{ background: "#173F2B", color: "#FFFFFF", padding: "64px 24px" }}>
         <div style={{ maxWidth: "1000px", margin: "0 auto", textAlign: "center" }}>
-          <span style={{ fontSize: "11px", fontWeight: 800, color: "#68d391", letterSpacing: "0.14em", textTransform: "uppercase" }}>
+          <span style={{ fontSize: "11px", fontWeight: 800, color: "#8BAF70", letterSpacing: "0.14em", textTransform: "uppercase" }}>
             DOKUMENTASI PERANGKAT KERAS
           </span>
           <h1 style={{ fontSize: "clamp(30px, 4vw, 46px)", fontWeight: 800, letterSpacing: "-0.03em", margin: "10px 0 16px" }}>
             Perangkat Fisik IoT DiHutan
           </h1>
-          <p style={{ fontSize: "16px", color: "#d1ead7", lineHeight: 1.6, maxWidth: "760px", margin: "0 auto" }}>
+          <p style={{ fontSize: "16px", color: "#E0ECE4", lineHeight: 1.6, maxWidth: "760px", margin: "0 auto" }}>
             Dokumentasi foto produk nyata, spesifikasi teknis lapangan, dan peran setiap komponen elektronik dalam memantau kelembapan gambut dan kanopi hutan Kalimantan.
           </p>
         </div>
@@ -49,18 +49,18 @@ export default function PerangkatIoTPublikPage() {
         {/* Notice on Real Engineering Status */}
         <div
           style={{
-            background: "#ffffff",
-            border: "1px solid #bbf7d0",
+            background: "#EAF5EE",
+            border: "1px solid #BFE2CB",
             borderRadius: "16px",
             padding: "20px 24px",
             display: "flex",
             alignItems: "center",
             gap: "16px",
-            boxShadow: "0 4px 16px rgba(0,0,0,0.02)",
+            boxShadow: "0 1px 3px rgba(23, 37, 29, 0.04)",
           }}
         >
-          <Zap size={28} color="#0a7544" style={{ flexShrink: 0 }} />
-          <div style={{ fontSize: "12.5px", color: "#234e32", lineHeight: 1.6 }}>
+          <Zap size={28} color="#173F2B" style={{ flexShrink: 0 }} />
+          <div style={{ fontSize: "12.5px", color: "#173F2B", lineHeight: 1.6 }}>
             <strong>Integritas Status &amp; Pengukuran Lapangan:</strong> Foto di bawah merupakan dokumentasi komponen fisik asli dari laboratorium kerja DiHutan. Status konektivitas (ONLINE/OFFLINE) menunjukkan komunikasi mikrokontroler dengan server. Pompa air dan relay memiliki status operasional (ACTIVE/INACTIVE) terpisah yang hanya terpicu saat kondisi darurat kekeringan gambut terbukti di lapangan. Komponen pasif seperti adaptor tidak diberi status palsu.
           </div>
         </div>
@@ -68,59 +68,59 @@ export default function PerangkatIoTPublikPage() {
         {/* System Wiring Flow Diagram */}
         <div
           style={{
-            background: "#ffffff",
-            border: "1px solid #e1e8e2",
+            background: "#FFFFFF",
+            border: "1px solid #DFE6DC",
             borderRadius: "18px",
             padding: "28px",
-            boxShadow: "0 4px 16px rgba(0,0,0,0.02)",
+            boxShadow: "0 1px 3px rgba(23, 37, 29, 0.04)",
           }}
         >
           <div style={{ marginBottom: "16px" }}>
-            <span style={{ fontSize: "10.5px", fontWeight: 800, color: "#0a7544", letterSpacing: "0.12em", textTransform: "uppercase" }}>
+            <span style={{ fontSize: "10.5px", fontWeight: 800, color: "#173F2B", letterSpacing: "0.12em", textTransform: "uppercase" }}>
               DIAGRAM HUBUNGAN ELEKTRONIK &amp; MEKANIK
             </span>
-            <h3 style={{ fontSize: "18px", fontWeight: 800, color: "#0f2417", margin: "4px 0 2px" }}>
+            <h3 style={{ fontSize: "18px", fontWeight: 800, color: "#17251D", margin: "4px 0 2px" }}>
               Rantai Daya, Pengolahan Sinyal, dan Aksi Lapangan
             </h3>
-            <p style={{ fontSize: "12px", color: "#6f8774", margin: 0 }}>
+            <p style={{ fontSize: "12px", color: "#647268", margin: 0 }}>
               Alur fisik dari catu daya listrik, papan terminal ekspansi, mikrokontroler, 3 sensor masukan, hingga aktuator pembasahan
             </p>
           </div>
 
           <div style={{ display: "flex", alignItems: "center", gap: "10px", overflowX: "auto", padding: "12px 4px" }}>
-            <div style={{ background: "#f8faf8", border: "1px solid #dce3dc", borderRadius: "12px", padding: "12px 14px", minWidth: "120px", textAlign: "center", fontSize: "11px" }}>
-              <strong>Adaptor DC</strong>
-              <span style={{ display: "block", fontSize: "9.5px", color: "#6f8774" }}>Sumber Daya Listrik</span>
+            <div style={{ background: "#F8FAF7", border: "1px solid #DFE6DC", borderRadius: "12px", padding: "12px 14px", minWidth: "120px", textAlign: "center", fontSize: "11px" }}>
+              <strong style={{ color: "#17251D" }}>Adaptor DC</strong>
+              <span style={{ display: "block", fontSize: "9.5px", color: "#647268" }}>Sumber Daya Listrik</span>
             </div>
-            <span style={{ color: "#8da18e", fontWeight: "bold" }}>&rarr;</span>
+            <span style={{ color: "#B5C5B6", fontWeight: "bold" }}>&rarr;</span>
 
-            <div style={{ background: "#f8faf8", border: "1px solid #dce3dc", borderRadius: "12px", padding: "12px 14px", minWidth: "120px", textAlign: "center", fontSize: "11px" }}>
-              <strong>Expansion Board</strong>
-              <span style={{ display: "block", fontSize: "9.5px", color: "#6f8774" }}>Distribusi Rel Pin</span>
+            <div style={{ background: "#F8FAF7", border: "1px solid #DFE6DC", borderRadius: "12px", padding: "12px 14px", minWidth: "120px", textAlign: "center", fontSize: "11px" }}>
+              <strong style={{ color: "#17251D" }}>Expansion Board</strong>
+              <span style={{ display: "block", fontSize: "9.5px", color: "#647268" }}>Distribusi Rel Pin</span>
             </div>
-            <span style={{ color: "#8da18e", fontWeight: "bold" }}>&rarr;</span>
+            <span style={{ color: "#B5C5B6", fontWeight: "bold" }}>&rarr;</span>
 
-            <div style={{ background: "#eaf5ee", border: "1px solid #86efac", borderRadius: "12px", padding: "12px 14px", minWidth: "130px", textAlign: "center", fontSize: "11px", color: "#0a7544" }}>
+            <div style={{ background: "#EAF5EE", border: "1px solid #BFE2CB", borderRadius: "12px", padding: "12px 14px", minWidth: "130px", textAlign: "center", fontSize: "11px", color: "#166534" }}>
               <strong>ESP32 Core</strong>
-              <span style={{ display: "block", fontSize: "9.5px" }}>Logika Edge &amp; Wi-Fi</span>
+              <span style={{ display: "block", fontSize: "9.5px", color: "#27834A" }}>Logika Edge &amp; Wi-Fi</span>
             </div>
-            <span style={{ color: "#8da18e", fontWeight: "bold" }}>&harr;</span>
+            <span style={{ color: "#B5C5B6", fontWeight: "bold" }}>&harr;</span>
 
-            <div style={{ background: "#eaf5ee", border: "1px solid #86efac", borderRadius: "12px", padding: "12px 14px", minWidth: "140px", textAlign: "center", fontSize: "11px", color: "#0a7544" }}>
+            <div style={{ background: "#EAF5EE", border: "1px solid #BFE2CB", borderRadius: "12px", padding: "12px 14px", minWidth: "140px", textAlign: "center", fontSize: "11px", color: "#166534" }}>
               <strong>3 Sensor Masukan</strong>
-              <span style={{ display: "block", fontSize: "9.5px" }}>DHT11 + Gas + Gambut</span>
+              <span style={{ display: "block", fontSize: "9.5px", color: "#27834A" }}>DHT11 + Gas + Gambut</span>
             </div>
-            <span style={{ color: "#8da18e", fontWeight: "bold" }}>&rarr;</span>
+            <span style={{ color: "#B5C5B6", fontWeight: "bold" }}>&rarr;</span>
 
-            <div style={{ background: "#f8faf8", border: "1px solid #dce3dc", borderRadius: "12px", padding: "12px 14px", minWidth: "120px", textAlign: "center", fontSize: "11px" }}>
-              <strong>Modul Relay 5V</strong>
-              <span style={{ display: "block", fontSize: "9.5px", color: "#6f8774" }}>Sakelar Optocoupler</span>
+            <div style={{ background: "#F8FAF7", border: "1px solid #DFE6DC", borderRadius: "12px", padding: "12px 14px", minWidth: "120px", textAlign: "center", fontSize: "11px" }}>
+              <strong style={{ color: "#17251D" }}>Modul Relay 5V</strong>
+              <span style={{ display: "block", fontSize: "9.5px", color: "#647268" }}>Sakelar Optocoupler</span>
             </div>
-            <span style={{ color: "#8da18e", fontWeight: "bold" }}>&rarr;</span>
+            <span style={{ color: "#B5C5B6", fontWeight: "bold" }}>&rarr;</span>
 
-            <div style={{ background: "#f0f9ff", border: "1px solid #7dd3fc", borderRadius: "12px", padding: "12px 14px", minWidth: "120px", textAlign: "center", fontSize: "11px", color: "#0369a1" }}>
+            <div style={{ background: "#F0F9FF", border: "1px solid #BAE6FD", borderRadius: "12px", padding: "12px 14px", minWidth: "120px", textAlign: "center", fontSize: "11px", color: "#0369A1" }}>
               <strong>Mini Water Pump</strong>
-              <span style={{ display: "block", fontSize: "9.5px" }}>Aktuator AutoSpray</span>
+              <span style={{ display: "block", fontSize: "9.5px", color: "#0284C7" }}>Aktuator AutoSpray</span>
             </div>
           </div>
         </div>
@@ -137,9 +137,9 @@ export default function PerangkatIoTPublikPage() {
                 fontSize: "12px",
                 fontWeight: 600,
                 cursor: "pointer",
-                background: filterCat === c.key ? "#0b3b2b" : "#ffffff",
-                color: filterCat === c.key ? "#ffffff" : "#43564b",
-                border: `1px solid ${filterCat === c.key ? "#0b3b2b" : "#dce3dc"}`,
+                background: filterCat === c.key ? "#173F2B" : "#FFFFFF",
+                color: filterCat === c.key ? "#FFFFFF" : "#647268",
+                border: `1px solid ${filterCat === c.key ? "#173F2B" : "#DFE6DC"}`,
                 transition: "all 0.18s ease",
               }}
             >
@@ -154,21 +154,21 @@ export default function PerangkatIoTPublikPage() {
             <div
               key={dev.id}
               style={{
-                background: "#ffffff",
-                border: "1px solid #e1e8e2",
+                background: "#FFFFFF",
+                border: "1px solid #DFE6DC",
                 borderRadius: "18px",
                 overflow: "hidden",
                 display: "flex",
                 flexDirection: "column",
-                boxShadow: "0 4px 16px rgba(0,0,0,0.02)",
+                boxShadow: "0 1px 3px rgba(23, 37, 29, 0.04)",
               }}
             >
               {/* Photo Box */}
               <div
                 style={{
                   height: "170px",
-                  background: "#f8faf8",
-                  borderBottom: "1px solid #edf1ed",
+                  background: "#F8FAF7",
+                  borderBottom: "1px solid #DFE6DC",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -187,27 +187,27 @@ export default function PerangkatIoTPublikPage() {
 
               {/* Body */}
               <div style={{ padding: "20px", display: "flex", flexDirection: "column", gap: "8px", flexGrow: 1 }}>
-                <span style={{ fontSize: "9.5px", fontWeight: 800, color: "#0a7544", letterSpacing: "0.1em", textTransform: "uppercase", background: "#eaf5ee", padding: "3px 8px", borderRadius: "6px", width: "fit-content" }}>
+                <span style={{ fontSize: "9.5px", fontWeight: 800, color: "#173F2B", letterSpacing: "0.1em", textTransform: "uppercase", background: "#EAF5EE", border: "1px solid #BFE2CB", padding: "3px 8px", borderRadius: "6px", width: "fit-content" }}>
                   {dev.category}
                 </span>
 
-                <h3 style={{ fontSize: "16px", fontWeight: 800, color: "#0f2417", margin: 0 }}>
+                <h3 style={{ fontSize: "16px", fontWeight: 800, color: "#17251D", margin: 0 }}>
                   {dev.name}
                 </h3>
 
-                <p style={{ fontSize: "12px", color: "#526857", lineHeight: 1.5, margin: "0 0 8px", flexGrow: 1 }}>
+                <p style={{ fontSize: "12px", color: "#647268", lineHeight: 1.5, margin: "0 0 8px", flexGrow: 1 }}>
                   {dev.fieldRole}
                 </p>
 
                 {/* Specs sample */}
-                <div style={{ fontSize: "11px", borderTop: "1px solid #f0f3f0", paddingTop: "10px", display: "flex", flexDirection: "column", gap: "4px" }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", color: "#6f8774" }}>
+                <div style={{ fontSize: "11px", borderTop: "1px solid #DFE6DC", paddingTop: "10px", display: "flex", flexDirection: "column", gap: "4px" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", color: "#647268" }}>
                     <span>Model:</span>
-                    <strong style={{ color: "#0f2417" }}>{dev.specs[0]?.value || "-"}</strong>
+                    <strong style={{ color: "#17251D" }}>{dev.specs[0]?.value || "-"}</strong>
                   </div>
-                  <div style={{ display: "flex", justifyContent: "space-between", color: "#6f8774" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", color: "#647268" }}>
                     <span>Tegangan:</span>
-                    <strong style={{ color: "#0f2417" }}>{dev.specs[1]?.value || "-"}</strong>
+                    <strong style={{ color: "#17251D" }}>{dev.specs[1]?.value || "-"}</strong>
                   </div>
                 </div>
 
@@ -218,9 +218,9 @@ export default function PerangkatIoTPublikPage() {
                     marginTop: "12px",
                     padding: "9px 14px",
                     borderRadius: "10px",
-                    background: "#f7f9f7",
-                    border: "1px solid #dce3dc",
-                    color: "#0a7544",
+                    background: "#F8FAF7",
+                    border: "1px solid #DFE6DC",
+                    color: "#173F2B",
                     fontSize: "12px",
                     fontWeight: 700,
                     cursor: "pointer",
@@ -245,7 +245,7 @@ export default function PerangkatIoTPublikPage() {
           style={{
             position: "fixed",
             inset: 0,
-            background: "rgba(9, 46, 29, 0.45)",
+            background: "rgba(23, 37, 29, 0.45)",
             backdropFilter: "blur(6px)",
             zIndex: 100,
             display: "flex",
@@ -257,13 +257,13 @@ export default function PerangkatIoTPublikPage() {
         >
           <div
             style={{
-              background: "#ffffff",
-              border: "1px solid #e1e7e1",
+              background: "#FFFFFF",
+              border: "1px solid #DFE6DC",
               borderRadius: "20px",
               maxWidth: "560px",
               width: "100%",
               padding: "28px",
-              boxShadow: "0 24px 60px rgba(0, 0, 0, 0.15)",
+              boxShadow: "0 24px 60px rgba(23, 37, 29, 0.15)",
               position: "relative",
             }}
             onClick={(e) => e.stopPropagation()}
@@ -276,21 +276,21 @@ export default function PerangkatIoTPublikPage() {
                 right: "16px",
                 background: "transparent",
                 border: "none",
-                color: "#6f8774",
+                color: "#647268",
                 cursor: "pointer",
               }}
             >
               <X size={20} />
             </button>
 
-            <span style={{ fontSize: "10px", fontWeight: 800, color: "#0a7544", letterSpacing: "0.12em", textTransform: "uppercase" }}>
+            <span style={{ fontSize: "10.5px", fontWeight: 800, color: "#173F2B", letterSpacing: "0.12em", textTransform: "uppercase" }}>
               {selectedDevice.category} · {selectedDevice.code}
             </span>
-            <h3 style={{ fontSize: "22px", fontWeight: 800, color: "#0f2417", margin: "4px 0 14px" }}>
+            <h3 style={{ fontSize: "22px", fontWeight: 800, color: "#17251D", margin: "4px 0 14px" }}>
               {selectedDevice.name}
             </h3>
 
-            <div style={{ height: "180px", background: "#f8faf8", border: "1px solid #edf1ed", borderRadius: "14px", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "16px" }}>
+            <div style={{ height: "180px", background: "#F8FAF7", border: "1px solid #DFE6DC", borderRadius: "14px", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "16px" }}>
               <Image
                 src={selectedDevice.image}
                 alt={selectedDevice.name}
@@ -300,18 +300,18 @@ export default function PerangkatIoTPublikPage() {
               />
             </div>
 
-            <p style={{ fontSize: "13px", color: "#43564b", lineHeight: 1.6, margin: "0 0 16px" }}>
+            <p style={{ fontSize: "13px", color: "#36453B", lineHeight: 1.6, margin: "0 0 16px" }}>
               {selectedDevice.fullDesc}
             </p>
 
-            <h4 style={{ fontSize: "12px", color: "#0a7544", margin: "0 0 8px", textTransform: "uppercase", letterSpacing: "0.08em" }}>
+            <h4 style={{ fontSize: "12px", color: "#173F2B", margin: "0 0 8px", textTransform: "uppercase", letterSpacing: "0.08em" }}>
               Spesifikasi Lengkap Lapangan
             </h4>
-            <div style={{ background: "#f7f9f7", border: "1px solid #dce3dc", borderRadius: "10px", padding: "12px 14px", display: "grid", gap: "6px", fontSize: "11.5px", marginBottom: "20px" }}>
+            <div style={{ background: "#F8FAF7", border: "1px solid #DFE6DC", borderRadius: "10px", padding: "12px 14px", display: "grid", gap: "6px", fontSize: "11.5px", marginBottom: "20px" }}>
               {selectedDevice.specs.map((s, i) => (
                 <div key={i} style={{ display: "flex", justifyContent: "space-between" }}>
-                  <span style={{ color: "#6f8774" }}>{s.label}:</span>
-                  <strong style={{ color: "#0f2417", textAlign: "right" }}>{s.value}</strong>
+                  <span style={{ color: "#647268" }}>{s.label}:</span>
+                  <strong style={{ color: "#17251D", textAlign: "right" }}>{s.value}</strong>
                 </div>
               ))}
             </div>
@@ -322,9 +322,9 @@ export default function PerangkatIoTPublikPage() {
                 width: "100%",
                 padding: "12px",
                 borderRadius: "99px",
-                background: "#0b3b2b",
+                background: "#173F2B",
                 border: "none",
-                color: "#ffffff",
+                color: "#FFFFFF",
                 fontSize: "12.5px",
                 fontWeight: 700,
                 cursor: "pointer",

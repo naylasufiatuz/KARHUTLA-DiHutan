@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
+import { Activity, Bell, Users, ShieldCheck, Leaf } from "lucide-react";
 
 interface RegisteredUser {
   nama: string;
@@ -208,9 +209,7 @@ export default function RegisterView() {
 
             <div className="register-benefits">
               <div className="benefit-card">
-                <span className="benefit-icon" role="img" aria-label="Radar">
-                  🛰️
-                </span>
+                <div className="benefit-icon" style={{ width: "36px", height: "36px", borderRadius: "10px", backgroundColor: "#EAF5EE", display: "flex", alignItems: "center", justifyContent: "center", color: "#27834A" }}><Activity size={18} /></div>
                 <div>
                   <strong>Akses Peta Pantau & Data Sensor Lapangan</strong>
                   <p>
@@ -221,9 +220,7 @@ export default function RegisterView() {
               </div>
 
               <div className="benefit-card">
-                <span className="benefit-icon" role="img" aria-label="Peringatan">
-                  ⚡
-                </span>
+                <div className="benefit-icon" style={{ width: "36px", height: "36px", borderRadius: "10px", backgroundColor: "#FEF8EC", display: "flex", alignItems: "center", justifyContent: "center", color: "#D99A2B" }}><Bell size={18} /></div>
                 <div>
                   <strong>Peringatan Dini Cepat Karhutla</strong>
                   <p>
@@ -234,9 +231,7 @@ export default function RegisterView() {
               </div>
 
               <div className="benefit-card">
-                <span className="benefit-icon" role="img" aria-label="Kolaborasi">
-                  🤝
-                </span>
+                <div className="benefit-icon" style={{ width: "36px", height: "36px", borderRadius: "10px", backgroundColor: "#EAF2E8", display: "flex", alignItems: "center", justifyContent: "center", color: "#173F2B" }}><Users size={18} /></div>
                 <div>
                   <strong>Kolaborasi Komunitas & Pelaporan Terpadu</strong>
                   <p>
@@ -260,6 +255,7 @@ export default function RegisterView() {
                 <div className="register-card-head">
                   <h2>Daftar Akun Penjaga</h2>
                   <p>Lengkapi formulir berikut untuk mendapatkan hak akses pemantauan rimba.</p>
+                  <div style={{ display: "inline-flex", alignItems: "center", gap: "6px", marginTop: "10px", padding: "5px 12px", borderRadius: "8px", backgroundColor: "#EAF5EE", border: "1px solid #BCE3CB", color: "#27834A", fontSize: "11.5px", fontWeight: 700 }}><ShieldCheck size={14} /><span>Hak Akses Publik: <strong>USER</strong> (Relawan / Warga Rimba)</span></div>
                 </div>
 
                 <form className="register-form" onSubmit={handleSubmit} noValidate>
@@ -524,9 +520,7 @@ export default function RegisterView() {
             ) : (
               /* Success Screen */
               <div className="register-success-view">
-                <div className="success-badge-icon" role="img" aria-label="Sukses">
-                  🌿
-                </div>
+                <div className="success-badge-icon"><Leaf size={26} color="#27834A" /></div>
                 <h3>Selamat Datang, Penjaga Rimba!</h3>
                 <p>
                   Pendaftaran akunmu telah berhasil. Data kamu kini tercatat di jaringan

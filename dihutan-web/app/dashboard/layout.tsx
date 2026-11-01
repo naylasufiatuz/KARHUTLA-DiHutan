@@ -106,7 +106,7 @@ function DashboardLayoutInner({ children }: { children: React.ReactNode }) {
           onClick={() => setIsMobileOpen(false)}
         >
           <div className="sidebar-logo-icon">
-            <Leaf size={22} color="#092e1d" strokeWidth={2.2} />
+            <Leaf size={22} color="#173F2B" strokeWidth={2.2} />
           </div>
           {!isCollapsed && (
             <div className="sidebar-brand-text">
@@ -257,7 +257,7 @@ function DashboardLayoutInner({ children }: { children: React.ReactNode }) {
                 <span className="topbar-user-name">{userProfile.name}</span>
                 <span className="topbar-user-role">{role}</span>
               </div>
-              <ChevronDown size={14} color="#637867" />
+              <ChevronDown size={14} color="#647268" />
 
               {/* User Dropdown Menu */}
               {isUserMenuOpen && (
@@ -267,10 +267,10 @@ function DashboardLayoutInner({ children }: { children: React.ReactNode }) {
                     top: "44px",
                     right: 0,
                     width: "230px",
-                    background: "#ffffff",
+                    background: "#FFFFFF",
                     borderRadius: "12px",
-                    boxShadow: "0 10px 30px rgba(0,0,0,0.12)",
-                    border: "1px solid #e1e7e1",
+                    boxShadow: "0 10px 30px rgba(23, 37, 29, 0.12)",
+                    border: "1px solid #DFE6DC",
                     padding: "10px",
                     zIndex: 50,
                   }}
@@ -279,14 +279,14 @@ function DashboardLayoutInner({ children }: { children: React.ReactNode }) {
                   <div
                     style={{
                       padding: "4px 8px 10px",
-                      borderBottom: "1px solid #f0f3f0",
+                      borderBottom: "1px solid #DFE6DC",
                     }}
                   >
                     <div
                       style={{
                         fontSize: "12px",
                         fontWeight: 700,
-                        color: "#0f2417",
+                        color: "#17251D",
                       }}
                     >
                       {userProfile.name}
@@ -294,7 +294,7 @@ function DashboardLayoutInner({ children }: { children: React.ReactNode }) {
                     <div
                       style={{
                         fontSize: "11px",
-                        color: "#6f8774",
+                        color: "#647268",
                         overflow: "hidden",
                         textOverflow: "ellipsis",
                         whiteSpace: "nowrap",
@@ -309,7 +309,7 @@ function DashboardLayoutInner({ children }: { children: React.ReactNode }) {
                       padding: "8px 8px 4px",
                       fontSize: "10.5px",
                       fontWeight: 700,
-                      color: "#6f8774",
+                      color: "#647268",
                       textTransform: "uppercase",
                       letterSpacing: "0.05em",
                     }}
@@ -331,8 +331,8 @@ function DashboardLayoutInner({ children }: { children: React.ReactNode }) {
                         padding: "7px 10px",
                         borderRadius: "6px",
                         border: "none",
-                        background: role === r ? "#eaf5ee" : "transparent",
-                        color: role === r ? "#0a7544" : "#0f2417",
+                        background: role === r ? "#EAF5EE" : "transparent",
+                        color: role === r ? "#173F2B" : "#17251D",
                         fontSize: "11.5px",
                         fontWeight: role === r ? 700 : 500,
                         cursor: "pointer",
@@ -348,7 +348,7 @@ function DashboardLayoutInner({ children }: { children: React.ReactNode }) {
 
                   <div
                     style={{
-                      borderTop: "1px solid #f0f3f0",
+                      borderTop: "1px solid #DFE6DC",
                       marginTop: "6px",
                       paddingTop: "6px",
                       display: "flex",
@@ -364,7 +364,7 @@ function DashboardLayoutInner({ children }: { children: React.ReactNode }) {
                         alignItems: "center",
                         gap: "6px",
                         padding: "7px 10px",
-                        color: "#274d32",
+                        color: "#173F2B",
                         fontSize: "11.5px",
                         textDecoration: "none",
                         fontWeight: 600,
@@ -386,7 +386,7 @@ function DashboardLayoutInner({ children }: { children: React.ReactNode }) {
                         alignItems: "center",
                         gap: "6px",
                         padding: "7px 10px",
-                        color: "#ef4444",
+                        color: "#C7473D",
                         fontSize: "11.5px",
                         fontWeight: 700,
                         background: "transparent",

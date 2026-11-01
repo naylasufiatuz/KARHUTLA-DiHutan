@@ -35,16 +35,17 @@ const KapuasMonitoringMap = dynamic(
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          background: "#081b10",
-          color: "#c9ff9f",
+          background: "#F0F4EE",
+          color: "#173F2B",
           fontFamily: "Inter, sans-serif",
           borderRadius: "20px",
+          border: "1px solid #DFE6DC",
           gap: "12px",
         }}
       >
-        <Radio size={28} className="spin-animation" color="#c9ff9f" />
+        <Radio size={28} className="spin-animation" color="#173F2B" />
         <strong>Menghubungkan Mesin Peta MapLibre &amp; OpenStreetMap...</strong>
-        <span style={{ fontSize: "11px", color: "#8da18e" }}>
+        <span style={{ fontSize: "11.5px", color: "#647268" }}>
           Memuat tile kawasan Sungai Kapuas, Kalimantan Barat
         </span>
       </div>
@@ -247,7 +248,7 @@ export default function DashboardMonitoringPage() {
           </div>
           <div
             className="metric-value"
-            style={{ color: avgSoil < 40 ? "#f1c40f" : "#f4f6ed" }}
+            style={{ color: avgSoil < 30 ? "#C7473D" : avgSoil < 45 ? "#D99A2B" : "#17251D" }}
           >
             {avgSoil}%
           </div>
@@ -271,22 +272,23 @@ export default function DashboardMonitoringPage() {
       {/* Simulator / Telemetry Ingestion Bar */}
       <div
         style={{
-          background: "#0c2016",
-          border: "1px solid rgba(255, 255, 255, 0.08)",
+          backgroundColor: "#FFFFFF",
+          border: "1px solid #DFE6DC",
           borderRadius: "14px",
-          padding: "12px 18px",
+          padding: "14px 18px",
           marginBottom: "16px",
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
           flexWrap: "wrap",
           gap: "12px",
-          fontSize: "12px",
+          fontSize: "12.5px",
+          boxShadow: "0 1px 3px rgba(23, 37, 29, 0.04)",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-          <Sliders size={16} color="#c9ff9f" />
-          <span style={{ color: "#e2ecd8" }}>
+          <Sliders size={16} color="#173F2B" />
+          <span style={{ color: "#17251D" }}>
             <strong>Uji Telemetri IoT ({selectedLoc.deviceCode}):</strong> Kirim
             data pembacaan sensor ke endpoint backend Supabase:
           </span>
@@ -299,9 +301,9 @@ export default function DashboardMonitoringPage() {
             style={{
               padding: "5px 12px",
               borderRadius: "99px",
-              background: "rgba(46, 204, 113, 0.15)",
-              border: "1px solid #2ecc71",
-              color: "#2ecc71",
+              backgroundColor: "#EAF5EE",
+              border: "1px solid #BCE3CB",
+              color: "#27834A",
               fontSize: "11px",
               fontWeight: 700,
               cursor: "pointer",
@@ -315,9 +317,9 @@ export default function DashboardMonitoringPage() {
             style={{
               padding: "5px 12px",
               borderRadius: "99px",
-              background: "rgba(241, 196, 15, 0.15)",
-              border: "1px solid #f1c40f",
-              color: "#f1c40f",
+              backgroundColor: "#FEF8EC",
+              border: "1px solid #F6DEAF",
+              color: "#D99A2B",
               fontSize: "11px",
               fontWeight: 700,
               cursor: "pointer",
@@ -331,9 +333,9 @@ export default function DashboardMonitoringPage() {
             style={{
               padding: "5px 12px",
               borderRadius: "99px",
-              background: "rgba(231, 76, 60, 0.15)",
-              border: "1px solid #e74c3c",
-              color: "#e74c3c",
+              backgroundColor: "#FDF2F1",
+              border: "1px solid #F8C8C4",
+              color: "#C7473D",
               fontSize: "11px",
               fontWeight: 700,
               cursor: "pointer",
@@ -346,7 +348,7 @@ export default function DashboardMonitoringPage() {
             style={{
               background: "none",
               border: "none",
-              color: "#8da18e",
+              color: "#647268",
               cursor: "pointer",
               padding: "4px",
             }}
@@ -360,16 +362,17 @@ export default function DashboardMonitoringPage() {
       {simulationToast && (
         <div
           style={{
-            background: "#123023",
-            border: "1px solid #c9ff9f",
+            backgroundColor: "#EAF5EE",
+            border: "1px solid #BCE3CB",
             borderRadius: "10px",
             padding: "10px 16px",
             marginBottom: "16px",
-            fontSize: "12px",
-            color: "#c9ff9f",
+            fontSize: "12.5px",
+            color: "#27834A",
             display: "flex",
             alignItems: "center",
             gap: "10px",
+            fontWeight: 600,
           }}
         >
           <CheckCircle2 size={16} />
@@ -397,7 +400,7 @@ export default function DashboardMonitoringPage() {
         <div
           style={{
             background: "#ffffff",
-            border: "1px solid #e1e7e1",
+            border: "1px solid #DFE6DC",
             borderRadius: "18px",
             padding: "24px",
             boxShadow: "0 4px 16px rgba(0, 0, 0, 0.02)",
@@ -416,7 +419,7 @@ export default function DashboardMonitoringPage() {
                 style={{
                   fontSize: "10px",
                   fontWeight: 800,
-                  color: "#0a7544",
+                  color: "#173F2B",
                   letterSpacing: "0.12em",
                 }}
               >
@@ -426,7 +429,7 @@ export default function DashboardMonitoringPage() {
                 style={{
                   fontFamily: "Fraunces, Georgia, serif",
                   fontSize: "20px",
-                  color: "#0f2417",
+                  color: "#17251D",
                   margin: "4px 0 2px",
                 }}
               >
@@ -435,7 +438,7 @@ export default function DashboardMonitoringPage() {
               <span
                 style={{
                   fontSize: "11.5px",
-                  color: "#6f8774",
+                  color: "#647268",
                   display: "inline-flex",
                   alignItems: "center",
                   gap: "4px",
@@ -461,7 +464,7 @@ export default function DashboardMonitoringPage() {
                     : "#fee2e2",
                 color:
                   selectedLoc.status === "normal"
-                    ? "#0a7544"
+                    ? "#27834A"
                     : selectedLoc.status === "perhatian"
                     ? "#b45309"
                     : "#b91c1c",
@@ -504,34 +507,34 @@ export default function DashboardMonitoringPage() {
           >
             <div>
               <span
-                style={{ fontSize: "10px", color: "#6f8774", display: "block" }}
+                style={{ fontSize: "10px", color: "#647268", display: "block" }}
               >
                 SUHU KANOPI
               </span>
-              <strong style={{ fontSize: "16px", color: "#0f2417" }}>
+              <strong style={{ fontSize: "16px", color: "#17251D" }}>
                 {selectedLoc.temperature}°C
               </strong>
             </div>
             <div>
               <span
-                style={{ fontSize: "10px", color: "#6f8774", display: "block" }}
+                style={{ fontSize: "10px", color: "#647268", display: "block" }}
               >
                 KELEMBAPAN UDARA
               </span>
-              <strong style={{ fontSize: "16px", color: "#0f2417" }}>
+              <strong style={{ fontSize: "16px", color: "#17251D" }}>
                 {selectedLoc.humidity}% RH
               </strong>
             </div>
             <div>
               <span
-                style={{ fontSize: "10px", color: "#6f8774", display: "block" }}
+                style={{ fontSize: "10px", color: "#647268", display: "block" }}
               >
                 KADAR AIR GAMBUT
               </span>
               <strong
                 style={{
                   fontSize: "16px",
-                  color: selectedLoc.soilMoisture < 30 ? "#b91c1c" : "#0a7544",
+                  color: selectedLoc.soilMoisture < 30 ? "#C7473D" : "#27834A",
                 }}
               >
                 {selectedLoc.soilMoisture}%
@@ -539,11 +542,11 @@ export default function DashboardMonitoringPage() {
             </div>
             <div>
               <span
-                style={{ fontSize: "10px", color: "#6f8774", display: "block" }}
+                style={{ fontSize: "10px", color: "#647268", display: "block" }}
               >
                 KONSENTRASI GAS
               </span>
-              <strong style={{ fontSize: "16px", color: "#0f2417" }}>
+              <strong style={{ fontSize: "16px", color: "#17251D" }}>
                 {selectedLoc.gasPpm} ADC
               </strong>
             </div>
@@ -555,7 +558,7 @@ export default function DashboardMonitoringPage() {
               justifyContent: "space-between",
               alignItems: "center",
               fontSize: "10.5px",
-              color: "#6f8774",
+              color: "#647268",
             }}
           >
             <span>
@@ -569,7 +572,7 @@ export default function DashboardMonitoringPage() {
               style={{
                 marginTop: "16px",
                 paddingTop: "14px",
-                borderTop: "1px solid #e1e7e1",
+                borderTop: "1px solid #DFE6DC",
                 display: "flex",
                 gap: "10px",
               }}
@@ -585,7 +588,7 @@ export default function DashboardMonitoringPage() {
                   padding: "9px 14px",
                   borderRadius: "8px",
                   background: "#eaf5ee",
-                  color: "#0a7544",
+                  color: "#173F2B",
                   border: "1px solid #bbf7d0",
                   fontWeight: 700,
                   fontSize: "11px",
@@ -635,7 +638,7 @@ export default function DashboardMonitoringPage() {
         <div
           style={{
             background: "#ffffff",
-            border: "1px solid #e1e7e1",
+            border: "1px solid #DFE6DC",
             borderRadius: "18px",
             padding: "24px",
             display: "flex",
@@ -648,7 +651,7 @@ export default function DashboardMonitoringPage() {
               style={{
                 fontSize: "10px",
                 fontWeight: 800,
-                color: "#0a7544",
+                color: "#173F2B",
                 letterSpacing: "0.12em",
               }}
             >
@@ -658,13 +661,13 @@ export default function DashboardMonitoringPage() {
               style={{
                 fontFamily: "Fraunces, Georgia, serif",
                 fontSize: "18px",
-                color: "#0f2417",
+                color: "#17251D",
                 margin: "4px 0",
               }}
             >
               Riwayat Sensor Kelembapan &amp; Suhu
             </h3>
-            <p style={{ fontSize: "11.5px", color: "#6f8774", margin: 0 }}>
+            <p style={{ fontSize: "11.5px", color: "#647268", margin: 0 }}>
               Fluktuasi harian tanah gambut vs suhu kanopi di titik pemantauan
             </p>
           </div>
@@ -755,19 +758,19 @@ export default function DashboardMonitoringPage() {
               </text>
 
               {/* Axis Labels */}
-              <text x="30" y="153" fill="#6f8774" fontSize="9">
+              <text x="30" y="153" fill="#647268" fontSize="9">
                 00:00
               </text>
-              <text x="110" y="153" fill="#6f8774" fontSize="9">
+              <text x="110" y="153" fill="#647268" fontSize="9">
                 06:00
               </text>
-              <text x="210" y="153" fill="#6f8774" fontSize="9">
+              <text x="210" y="153" fill="#647268" fontSize="9">
                 12:00 (Terik)
               </text>
-              <text x="300" y="153" fill="#6f8774" fontSize="9">
+              <text x="300" y="153" fill="#647268" fontSize="9">
                 18:00
               </text>
-              <text x="365" y="153" fill="#6f8774" fontSize="9">
+              <text x="365" y="153" fill="#647268" fontSize="9">
                 Kini
               </text>
             </svg>

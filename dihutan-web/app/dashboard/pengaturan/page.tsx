@@ -3,28 +3,26 @@
 import React, { useState, useEffect, useCallback } from "react";
 import {
   Shield,
-  User,
   Lock,
   CheckCircle2,
   AlertTriangle,
   Copy,
-  Database,
   Save,
   RotateCcw,
   KeyRound,
   LogOut,
   Smartphone,
   Download,
+  Laptop,
 } from "lucide-react";
 import { useDashboard } from "@/lib/dashboard-context";
-import { UserRole } from "@/lib/dashboard-data";
 import { createClient } from "@/lib/supabase/client";
 
 export default function DashboardPengaturanPage() {
-  const { role, setRole, userProfile, updateUserProfile, logout } = useDashboard();
+  const { role, userProfile, updateUserProfile, logout } = useDashboard();
   const [fullName, setFullName] = useState(userProfile.name || "Ardi Rahman");
-  const [email, setEmail] = useState(userProfile.email || "ardi@dihutan.id");
-  const [phone, setPhone] = useState(userProfile.phone || "0812-9876-5432");
+  const [email, setEmail] = useState(userProfile.email || "ardi.rahman@dihutan.id");
+  const [phone, setPhone] = useState(userProfile.phone || "0812-3456-7890");
   const [region, setRegion] = useState(
     userProfile.region || "Pontianak & DAS Kapuas (Kalimantan Barat)"
   );
@@ -32,7 +30,7 @@ export default function DashboardPengaturanPage() {
   const [savedSuccess, setSavedSuccess] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
 
-  // Password Update
+  // Password Update State
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordMsg, setPasswordMsg] = useState<{
@@ -98,51 +96,6 @@ export default function DashboardPengaturanPage() {
     };
   }, []);
 
-  const rolesMatrix: {
-    role: UserRole;
-    name: string;
-    description: string;
-    permissions: string[];
-    badgeColor: string;
-  }[] = [
-    {
-      role: "USER",
-      name: "USER (Penjaga Warga / Relawan)",
-      description: "Akses masyarakat umum, relawan, dan pemerhati lingkungan.",
-      permissions: [
-        "Melihat Overview, Peta Sungai Kapuas, dan Data Sensor Telemetri",
-        "Melihat katalog perangkat fisik IoT dan status operasional",
-        "Membaca materi Perpustakaan Penjaga Rimba dan menyimpan bookmark bacaan",
-        "Mengirim laporan lapangan dan memantau perkembangan status laporannya",
-      ],
-      badgeColor: "#2ecc71",
-    },
-    {
-      role: "PIHAK_BERTANGGUNG_JAWAB",
-      name: "PIHAK BERTANGGUNG JAWAB (BKSDA / Manggala Agni)",
-      description: "Akses operasional petugas patroli hutan dan pos pemadam kebakaran.",
-      permissions: [
-        "Semua hak akses Penjaga Warga (USER)",
-        "Mengubah status laporan warga (Tandai Diverifikasi, Kirim Regu Investigasi, Selesaikan)",
-        "Memicu aksi koordinasi pembasahan darurat AutoSpray pada titik peringatan",
-        "Melihat rincian log telemetri dan log peristiwa operasional perangkat",
-      ],
-      badgeColor: "#f1c40f",
-    },
-    {
-      role: "ADMIN",
-      name: "ADMIN (Administrator Sistem DiHutan)",
-      description: "Akses penuh konfigurasi platform, konten, dan database.",
-      permissions: [
-        "Semua hak akses Petugas Lapangan",
-        "Menambah, mengedit, dan mengatur status publikasi materi ensiklopedia digital",
-        "Mengelola data master lokasi pemantauan dan inventaris hardware IoT",
-        "Mengelola seluruh laporan masuk dan ekspor audit log sistem",
-      ],
-      badgeColor: "#e74c3c",
-    },
-  ];
-
   const handleSaveProfile = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSaving(true);
@@ -195,7 +148,7 @@ export default function DashboardPengaturanPage() {
 
     if (newPassword !== confirmPassword) {
       setPasswordMsg({
-        text: "Konfirmasi kata sandi tidak cocok.",
+        text: "Konfirmasi kata sandi tidak cocok dengan kata sandi baru.",
         type: "error",
       });
       return;
@@ -240,493 +193,537 @@ export default function DashboardPengaturanPage() {
     setTimeout(() => setCopied(false), 3000);
   };
 
+  // Derive dynamic user initials
+  const userInitials = React.useMemo(() => {
+    const nameToUse = fullName || userProfile?.name || "DiHutan";
+    const parts = nameToUse.trim().split(/\s+/).filter(Boolean);
+    if (parts.length > 1) {
+      return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+    }
+    return nameToUse.slice(0, 2).toUpperCase() || "DH";
+  }, [fullName, userProfile?.name]);
+
+  const roleLabels = {
+    USER: {
+      title: "USER (Penjaga Warga / Relawan)",
+      badgeBg: "#EAF5EE",
+      badgeBorder: "#BCE3CB",
+      badgeColor: "#27834A",
+      desc: "Hak akses pemantauan terbuka, pelaporan mandiri, dan ensiklopedia botani.",
+    },
+    PIHAK_BERTANGGUNG_JAWAB: {
+      title: "PIHAK BERTANGGUNG JAWAB (BKSDA / Manggala Agni)",
+      badgeBg: "#FEF8EC",
+      badgeBorder: "#F6DEAF",
+      badgeColor: "#D99A2B",
+      desc: "Hak verifikasi lapangan laporan warga dan pemicuan semprot AutoSpray darurat.",
+    },
+    ADMIN: {
+      title: "ADMIN (Administrator Sistem DiHutan)",
+      badgeBg: "#FDF2F1",
+      badgeBorder: "#F8C8C4",
+      badgeColor: "#C7473D",
+      desc: "Hak akses penuh database, manajemen pos pemantauan, dan inventaris hardware.",
+    },
+  };
+
+  const currentRoleInfo = roleLabels[role] || roleLabels.USER;
+
   return (
-    <div style={{ maxWidth: "960px", marginInline: "auto" }}>
-      {/* 1. Role Selection Matrix (3 Role Utama) */}
-      <div
-        style={{
-          background: "#0c2016",
-          border: "1px solid rgba(255, 255, 255, 0.08)",
-          borderRadius: "18px",
-          padding: "24px",
-          marginBottom: "28px",
-        }}
-      >
-        <span
+    <div
+      style={{
+        maxWidth: "960px",
+        marginInline: "auto",
+        display: "flex",
+        flexDirection: "column",
+        gap: "24px",
+      }}
+    >
+      {/* Page Header */}
+      <div>
+        <h1
           style={{
-            fontSize: "10px",
+            fontSize: "26px",
             fontWeight: 800,
-            color: "#c9ff9f",
-            letterSpacing: "0.14em",
-            textTransform: "uppercase",
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "5px",
+            color: "#17251D",
+            margin: "0 0 6px 0",
+            letterSpacing: "-0.02em",
           }}
         >
-          <Shield size={12} />
-          OTORISASI TIGA PERAN PENGGUNA
-        </span>
-        <h2
-          style={{
-            fontFamily: "Fraunces, Georgia, serif",
-            fontSize: "22px",
-            color: "#f4f6ed",
-            margin: "4px 0 6px",
-          }}
-        >
-          Pilih Peran Aktif Anda
-        </h2>
-        <p style={{ fontSize: "12px", color: "#8da18e", margin: "0 0 20px" }}>
-          Sistem akan secara instan menyesuaikan menu sidebar, wewenang tindakan
-          di peta, hak verifikasi laporan, dan manajemen ensiklopedia sesuai
-          peran yang dipilih.
+          Pengaturan Akun &amp; Sistem
+        </h1>
+        <p style={{ fontSize: "13px", color: "#647268", margin: 0 }}>
+          Kelola profil pengguna, keamanan kata sandi, diagnostik database, dan sesi aktif.
         </p>
-
-        <div style={{ display: "grid", gap: "14px" }}>
-          {rolesMatrix.map((r) => {
-            const isSelected = role === r.role;
-            return (
-              <div
-                key={r.role}
-                onClick={() => setRole(r.role)}
-                style={{
-                  background: isSelected
-                    ? "rgba(201, 255, 159, 0.08)"
-                    : "rgba(255, 255, 255, 0.03)",
-                  border: `1.5px solid ${
-                    isSelected ? r.badgeColor : "rgba(255, 255, 255, 0.07)"
-                  }`,
-                  borderRadius: "14px",
-                  padding: "18px 20px",
-                  cursor: "pointer",
-                  transition: "all 0.2s ease",
-                }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    marginBottom: "6px",
-                  }}
-                >
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "10px",
-                    }}
-                  >
-                    <span
-                      style={{
-                        width: "12px",
-                        height: "12px",
-                        borderRadius: "50%",
-                        background: isSelected ? r.badgeColor : "transparent",
-                        border: `2px solid ${r.badgeColor}`,
-                        display: "inline-block",
-                      }}
-                    />
-                    <strong style={{ fontSize: "14px", color: "#ffffff" }}>
-                      {r.name}
-                    </strong>
-                  </div>
-                  {isSelected && (
-                    <span
-                      style={{
-                        fontSize: "10.5px",
-                        fontWeight: 800,
-                        color: r.badgeColor,
-                        letterSpacing: "0.08em",
-                        display: "inline-flex",
-                        alignItems: "center",
-                        gap: "4px",
-                      }}
-                    >
-                      <CheckCircle2 size={12} />
-                      AKTIF SEKARANG
-                    </span>
-                  )}
-                </div>
-
-                <p
-                  style={{
-                    fontSize: "11.5px",
-                    color: "#b5c7b4",
-                    margin: "0 0 10px 22px",
-                  }}
-                >
-                  {r.description}
-                </p>
-
-                <div
-                  style={{
-                    marginLeft: "22px",
-                    display: "grid",
-                    gap: "4px",
-                    fontSize: "11px",
-                    color: "#7a9c7d",
-                  }}
-                >
-                  {r.permissions.map((p, pIdx) => (
-                    <div
-                      key={pIdx}
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: "6px",
-                      }}
-                    >
-                      <CheckCircle2 size={11} color={r.badgeColor} />
-                      <span>{p}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            );
-          })}
-        </div>
       </div>
 
-      {/* 2. User Profile Form */}
-      <div
+      {/* A. PROFIL PENGGUNA CARD */}
+      <section
         style={{
-          background: "#0c2016",
-          border: "1px solid rgba(255, 255, 255, 0.08)",
-          borderRadius: "18px",
-          padding: "24px",
-          marginBottom: "28px",
+          backgroundColor: "#FFFFFF",
+          borderRadius: "16px",
+          border: "1px solid #DFE6DC",
+          padding: "clamp(20px, 3vw, 28px)",
+          boxShadow: "0 1px 3px rgba(23, 37, 29, 0.04)",
         }}
       >
-        <span
+        <div
           style={{
-            fontSize: "10px",
-            fontWeight: 800,
-            color: "#c9ff9f",
-            letterSpacing: "0.14em",
-            display: "inline-flex",
+            display: "flex",
             alignItems: "center",
-            gap: "5px",
+            justifyContent: "space-between",
+            flexWrap: "wrap",
+            gap: "12px",
+            marginBottom: "20px",
+            paddingBottom: "16px",
+            borderBottom: "1px solid #DFE6DC",
           }}
         >
-          <User size={12} />
-          IDENTITAS PENJAGA RIMBA
-        </span>
-        <h3
-          style={{
-            fontFamily: "Fraunces, Georgia, serif",
-            fontSize: "20px",
-            color: "#f4f6ed",
-            margin: "4px 0 16px",
-          }}
-        >
-          Informasi Profil Pengguna
-        </h3>
+          <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+            <div
+              style={{
+                width: "52px",
+                height: "52px",
+                borderRadius: "50%",
+                backgroundColor: "#EAF5EE",
+                border: "2px solid #BCE3CB",
+                color: "#173F2B",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: "18px",
+                fontWeight: 800,
+                flexShrink: 0,
+              }}
+            >
+              {userInitials}
+            </div>
+            <div>
+              <h2
+                style={{
+                  fontSize: "18px",
+                  fontWeight: 800,
+                  color: "#17251D",
+                  margin: "0 0 3px 0",
+                }}
+              >
+                A. Profil Pengguna
+              </h2>
+              <span style={{ fontSize: "12px", color: "#647268" }}>
+                Informasi identitas personal dan wilayah tugas pemantauan
+              </span>
+            </div>
+          </div>
+
+          {/* Role Informational Badge (Read-only as per prompt spec) */}
+          <div
+            style={{
+              padding: "6px 12px",
+              borderRadius: "8px",
+              backgroundColor: currentRoleInfo.badgeBg,
+              border: `1px solid ${currentRoleInfo.badgeBorder}`,
+              color: currentRoleInfo.badgeColor,
+              fontSize: "11.5px",
+              fontWeight: 700,
+              display: "flex",
+              alignItems: "center",
+              gap: "6px",
+            }}
+          >
+            <Shield size={14} />
+            <span>Peran: {currentRoleInfo.title}</span>
+          </div>
+        </div>
 
         {savedSuccess && (
           <div
             style={{
-              background: "rgba(39, 174, 96, 0.15)",
-              border: "1px solid #2ecc71",
+              backgroundColor: "#EAF5EE",
+              border: "1px solid #BCE3CB",
               borderRadius: "10px",
               padding: "10px 14px",
-              marginBottom: "14px",
-              fontSize: "11.5px",
-              color: "#c9ff9f",
+              color: "#27834A",
+              fontSize: "12.5px",
+              fontWeight: 600,
               display: "flex",
               alignItems: "center",
               gap: "8px",
+              marginBottom: "16px",
             }}
           >
-            <CheckCircle2 size={16} color="#4ade80" />
-            <span>Perubahan profil berhasil disimpan ke database Supabase!</span>
+            <CheckCircle2 size={16} />
+            <span>Profil berhasil diperbarui dan tersinkronisasi ke seluruh sistem!</span>
           </div>
         )}
 
-        <form
-          onSubmit={handleSaveProfile}
-          style={{ display: "grid", gap: "14px" }}
-        >
+        <form onSubmit={handleSaveProfile} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "14px",
+              gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+              gap: "16px",
             }}
           >
-            <div className="report-field">
-              <label>Nama Lengkap</label>
+            <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+              <label style={{ fontSize: "12px", fontWeight: 700, color: "#17251D" }}>
+                Nama Lengkap
+              </label>
               <input
                 type="text"
-                className="report-input"
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
                 required
+                style={{
+                  padding: "10px 14px",
+                  borderRadius: "10px",
+                  border: "1px solid #DFE6DC",
+                  backgroundColor: "#FFFFFF",
+                  color: "#17251D",
+                  fontSize: "13px",
+                  outline: "none",
+                }}
+                onFocus={(e) => (e.target.style.borderColor = "#173F2B")}
+                onBlur={(e) => (e.target.style.borderColor = "#DFE6DC")}
               />
             </div>
-            <div className="report-field">
-              <label>Alamat Email</label>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+              <label style={{ fontSize: "12px", fontWeight: 700, color: "#17251D" }}>
+                Alamat Email
+              </label>
               <input
                 type="email"
-                className="report-input"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
+                style={{
+                  padding: "10px 14px",
+                  borderRadius: "10px",
+                  border: "1px solid #DFE6DC",
+                  backgroundColor: "#FFFFFF",
+                  color: "#17251D",
+                  fontSize: "13px",
+                  outline: "none",
+                }}
+                onFocus={(e) => (e.target.style.borderColor = "#173F2B")}
+                onBlur={(e) => (e.target.style.borderColor = "#DFE6DC")}
               />
             </div>
-          </div>
 
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "14px",
-            }}
-          >
-            <div className="report-field">
-              <label>No. Kontak Telepon / WhatsApp</label>
+            <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+              <label style={{ fontSize: "12px", fontWeight: 700, color: "#17251D" }}>
+                Nomor Telepon / WhatsApp
+              </label>
               <input
                 type="tel"
-                className="report-input"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
+                style={{
+                  padding: "10px 14px",
+                  borderRadius: "10px",
+                  border: "1px solid #DFE6DC",
+                  backgroundColor: "#FFFFFF",
+                  color: "#17251D",
+                  fontSize: "13px",
+                  outline: "none",
+                }}
+                onFocus={(e) => (e.target.style.borderColor = "#173F2B")}
+                onBlur={(e) => (e.target.style.borderColor = "#DFE6DC")}
               />
             </div>
-            <div className="report-field">
-              <label>Wilayah Fokus Pemantauan</label>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+              <label style={{ fontSize: "12px", fontWeight: 700, color: "#17251D" }}>
+                Wilayah Pemantauan
+              </label>
               <input
                 type="text"
-                className="report-input"
                 value={region}
                 onChange={(e) => setRegion(e.target.value)}
+                style={{
+                  padding: "10px 14px",
+                  borderRadius: "10px",
+                  border: "1px solid #DFE6DC",
+                  backgroundColor: "#FFFFFF",
+                  color: "#17251D",
+                  fontSize: "13px",
+                  outline: "none",
+                }}
+                onFocus={(e) => (e.target.style.borderColor = "#173F2B")}
+                onBlur={(e) => (e.target.style.borderColor = "#DFE6DC")}
               />
             </div>
           </div>
 
-          <button
-            type="submit"
-            className="report-submit-btn"
-            disabled={isSaving}
-            style={{
-              width: "fit-content",
-              padding: "10px 24px",
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "8px",
-            }}
-          >
-            <Save size={14} />
-            <span>{isSaving ? "Menyimpan..." : "Simpan Perubahan Profil"}</span>
-          </button>
+          <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "4px" }}>
+            <button
+              type="submit"
+              disabled={isSaving}
+              style={{
+                backgroundColor: "#173F2B",
+                color: "#FFFFFF",
+                border: "none",
+                borderRadius: "10px",
+                padding: "10px 20px",
+                fontSize: "13px",
+                fontWeight: 700,
+                cursor: isSaving ? "not-allowed" : "pointer",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "8px",
+                boxShadow: "0 2px 6px rgba(23, 63, 43, 0.2)",
+              }}
+            >
+              <Save size={15} />
+              <span>{isSaving ? "Menyimpan..." : "Simpan Perubahan Profil"}</span>
+            </button>
+          </div>
         </form>
-      </div>
+      </section>
 
-      {/* 3. Change Password Card */}
-      <div
+      {/* B. KEAMANAN AKUN & SESI CARD */}
+      <section
         style={{
-          background: "#0c2016",
-          border: "1px solid rgba(255, 255, 255, 0.08)",
-          borderRadius: "18px",
-          padding: "24px",
-          marginBottom: "28px",
+          backgroundColor: "#FFFFFF",
+          borderRadius: "16px",
+          border: "1px solid #DFE6DC",
+          padding: "clamp(20px, 3vw, 28px)",
+          boxShadow: "0 1px 3px rgba(23, 37, 29, 0.04)",
         }}
       >
-        <span
-          style={{
-            fontSize: "10px",
-            fontWeight: 800,
-            color: "#c9ff9f",
-            letterSpacing: "0.14em",
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "5px",
-          }}
-        >
-          <Lock size={12} />
-          KEAMANAN AKUN
-        </span>
-        <h3
-          style={{
-            fontFamily: "Fraunces, Georgia, serif",
-            fontSize: "20px",
-            color: "#f4f6ed",
-            margin: "4px 0 16px",
-          }}
-        >
-          Perbarui Kata Sandi
-        </h3>
+        <div style={{ marginBottom: "18px", paddingBottom: "14px", borderBottom: "1px solid #DFE6DC" }}>
+          <h2
+            style={{
+              fontSize: "18px",
+              fontWeight: 800,
+              color: "#17251D",
+              margin: "0 0 3px 0",
+            }}
+          >
+            B. Keamanan Akun &amp; Sesi
+          </h2>
+          <span style={{ fontSize: "12px", color: "#647268" }}>
+            Perbarui kata sandi secara berkala dan periksa status perlindungan sesi
+          </span>
+        </div>
 
         {passwordMsg && (
           <div
             style={{
-              background:
-                passwordMsg.type === "success"
-                  ? "rgba(39, 174, 96, 0.15)"
-                  : "rgba(231, 76, 60, 0.15)",
-              border: `1px solid ${
-                passwordMsg.type === "success" ? "#2ecc71" : "#e74c3c"
-              }`,
+              backgroundColor: passwordMsg.type === "success" ? "#EAF5EE" : "#FDF2F1",
+              border: `1px solid ${passwordMsg.type === "success" ? "#BCE3CB" : "#F8C8C4"}`,
               borderRadius: "10px",
               padding: "10px 14px",
-              marginBottom: "14px",
-              fontSize: "11.5px",
-              color: passwordMsg.type === "success" ? "#c9ff9f" : "#fca5a5",
+              color: passwordMsg.type === "success" ? "#27834A" : "#C7473D",
+              fontSize: "12.5px",
+              fontWeight: 600,
               display: "flex",
               alignItems: "center",
               gap: "8px",
+              marginBottom: "16px",
             }}
           >
-            {passwordMsg.type === "success" ? (
-              <CheckCircle2 size={16} color="#4ade80" />
-            ) : (
-              <AlertTriangle size={16} color="#f87171" />
-            )}
+            {passwordMsg.type === "success" ? <CheckCircle2 size={16} /> : <AlertTriangle size={16} />}
             <span>{passwordMsg.text}</span>
           </div>
         )}
 
-        <form
-          onSubmit={handleUpdatePassword}
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "14px",
-          }}
-        >
-          <div className="report-field">
-            <label>Kata Sandi Baru</label>
-            <input
-              type="password"
-              className="report-input"
-              placeholder="Minimal 8 karakter"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-              required
-            />
-          </div>
-          <div className="report-field">
-            <label>Konfirmasi Kata Sandi Baru</label>
-            <input
-              type="password"
-              className="report-input"
-              placeholder="Ulangi kata sandi baru"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-            />
+        <form onSubmit={handleUpdatePassword} style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+              gap: "16px",
+            }}
+          >
+            <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+              <label style={{ fontSize: "12px", fontWeight: 700, color: "#17251D" }}>
+                Kata Sandi Baru (Min. 8 karakter)
+              </label>
+              <input
+                type="password"
+                placeholder="••••••••"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                required
+                style={{
+                  padding: "10px 14px",
+                  borderRadius: "10px",
+                  border: "1px solid #DFE6DC",
+                  backgroundColor: "#FFFFFF",
+                  color: "#17251D",
+                  fontSize: "13px",
+                  outline: "none",
+                }}
+                onFocus={(e) => (e.target.style.borderColor = "#173F2B")}
+                onBlur={(e) => (e.target.style.borderColor = "#DFE6DC")}
+              />
+            </div>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+              <label style={{ fontSize: "12px", fontWeight: 700, color: "#17251D" }}>
+                Ulangi Kata Sandi Baru
+              </label>
+              <input
+                type="password"
+                placeholder="••••••••"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+                style={{
+                  padding: "10px 14px",
+                  borderRadius: "10px",
+                  border: "1px solid #DFE6DC",
+                  backgroundColor: "#FFFFFF",
+                  color: "#17251D",
+                  fontSize: "13px",
+                  outline: "none",
+                }}
+                onFocus={(e) => (e.target.style.borderColor = "#173F2B")}
+                onBlur={(e) => (e.target.style.borderColor = "#DFE6DC")}
+              />
+            </div>
           </div>
 
-          <div style={{ gridColumn: "1 / -1" }}>
+          {/* Session Security Information Box */}
+          <div
+            style={{
+              backgroundColor: "#F8FAF7",
+              border: "1px solid #DFE6DC",
+              borderRadius: "12px",
+              padding: "14px 16px",
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+              gap: "12px",
+              fontSize: "12px",
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+              <Laptop size={18} color="#285C40" />
+              <div>
+                <span style={{ color: "#647268", display: "block", fontSize: "11px" }}>Perangkat Sesi:</span>
+                <strong style={{ color: "#17251D" }}>Browser Klien Aktif</strong>
+              </div>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+              <Lock size={18} color="#27834A" />
+              <div>
+                <span style={{ color: "#647268", display: "block", fontSize: "11px" }}>Protokol Enkripsi:</span>
+                <strong style={{ color: "#27834A" }}>TLS / HTTPS Terproteksi</strong>
+              </div>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+              <Shield size={18} color="#173F2B" />
+              <div>
+                <span style={{ color: "#647268", display: "block", fontSize: "11px" }}>Token Auth:</span>
+                <strong style={{ color: "#17251D" }}>JWT Session Supabase</strong>
+              </div>
+            </div>
+          </div>
+
+          <div style={{ display: "flex", justifyContent: "flex-end" }}>
             <button
               type="submit"
-              className="report-submit-btn"
               disabled={isUpdatingPassword}
               style={{
-                width: "fit-content",
-                padding: "10px 24px",
+                backgroundColor: "#285C40",
+                color: "#FFFFFF",
+                border: "none",
+                borderRadius: "10px",
+                padding: "10px 20px",
+                fontSize: "13px",
+                fontWeight: 700,
+                cursor: isUpdatingPassword ? "not-allowed" : "pointer",
                 display: "inline-flex",
                 alignItems: "center",
                 gap: "8px",
               }}
             >
-              <KeyRound size={14} />
-              <span>
-                {isUpdatingPassword
-                  ? "Memperbarui Sandi..."
-                  : "Perbarui Kata Sandi"}
-              </span>
+              <KeyRound size={15} />
+              <span>{isUpdatingPassword ? "Memperbarui..." : "Perbarui Kata Sandi"}</span>
             </button>
           </div>
         </form>
-      </div>
+      </section>
 
-      {/* 4. Supabase Database & Migration Card */}
-      <div
+      {/* C. INFORMASI SISTEM & INTEGRASI CARD */}
+      <section
         style={{
-          background: "#091c12",
-          border: "1px solid rgba(255, 255, 255, 0.08)",
-          borderRadius: "18px",
-          padding: "24px",
+          backgroundColor: "#FFFFFF",
+          borderRadius: "16px",
+          border: "1px solid #DFE6DC",
+          padding: "clamp(20px, 3vw, 28px)",
+          boxShadow: "0 1px 3px rgba(23, 37, 29, 0.04)",
         }}
       >
-        <span
-          style={{
-            fontSize: "10px",
-            fontWeight: 800,
-            color: "#c9ff9f",
-            letterSpacing: "0.14em",
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "5px",
-          }}
-        >
-          <Database size={12} />
-          INTEGRASI DATABASE SUPABASE
-        </span>
-        <h3
-          style={{
-            fontFamily: "Fraunces, Georgia, serif",
-            fontSize: "20px",
-            color: "#f4f6ed",
-            margin: "4px 0 6px",
-          }}
-        >
-          Koneksi Supabase PostgreSQL
-        </h3>
-        <p style={{ fontSize: "12px", color: "#8da18e", margin: "0 0 16px" }}>
-          Status konfigurasi backend dan berkas migrasi skema database DiHutan.
-        </p>
+        <div style={{ marginBottom: "18px", paddingBottom: "14px", borderBottom: "1px solid #DFE6DC" }}>
+          <h2
+            style={{
+              fontSize: "18px",
+              fontWeight: 800,
+              color: "#17251D",
+              margin: "0 0 3px 0",
+            }}
+          >
+            C. Informasi Sistem &amp; Integrasi Database
+          </h2>
+          <span style={{ fontSize: "12px", color: "#647268" }}>
+            Status backend Supabase, skema migrasi SQL, dan rilis aplikasi Android
+          </span>
+        </div>
 
+        {/* Database Metrics Table */}
         <div
           style={{
-            background: "rgba(0,0,0,0.3)",
-            borderRadius: "10px",
-            padding: "14px",
+            backgroundColor: "#F8FAF7",
+            border: "1px solid #DFE6DC",
+            borderRadius: "12px",
+            padding: "16px",
             display: "grid",
-            gap: "8px",
-            fontSize: "11.5px",
-            marginBottom: "16px",
+            gap: "10px",
+            fontSize: "12.5px",
+            marginBottom: "18px",
           }}
         >
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <span style={{ color: "#7a947c" }}>Status Backend:</span>
-            <strong style={{ color: "#c9ff9f" }}>{dbStatus}</strong>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <span style={{ color: "#647268" }}>Status Backend PostgreSQL:</span>
+            <strong style={{ color: "#27834A", display: "inline-flex", alignItems: "center", gap: "6px" }}>
+              <span style={{ width: "8px", height: "8px", borderRadius: "50%", backgroundColor: "#27834A" }} />
+              {dbStatus}
+            </strong>
           </div>
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <span style={{ color: "#7a947c" }}>Project ID:</span>
-            <strong style={{ color: "#ffffff" }}>erayvecbxrnqeayfxjfa</strong>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <span style={{ color: "#647268" }}>Project ID:</span>
+            <strong style={{ color: "#17251D", fontFamily: "var(--font-mono, monospace)" }}>
+              erayvecbxrnqeayfxjfa
+            </strong>
           </div>
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <span style={{ color: "#7a947c" }}>Project URL:</span>
-            <strong style={{ color: "#ffffff" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <span style={{ color: "#647268" }}>Project URL:</span>
+            <strong style={{ color: "#17251D", fontFamily: "var(--font-mono, monospace)" }}>
               https://erayvecbxrnqeayfxjfa.supabase.co
             </strong>
           </div>
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <span style={{ color: "#7a947c" }}>File Migrasi Skema:</span>
-            <strong style={{ color: "#c9ff9f" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <span style={{ color: "#647268" }}>File Migrasi Skema SQL:</span>
+            <strong style={{ color: "#285C40", fontFamily: "var(--font-mono, monospace)" }}>
               supabase/migrations/20260331_dihutan_schema.sql
-            </strong>
-          </div>
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <span style={{ color: "#7a947c" }}>Status Enkripsi Frontend:</span>
-            <strong style={{ color: "#2ecc71" }}>
-              Aman (Hanya Publishable Key di Client)
             </strong>
           </div>
         </div>
 
-        <div style={{ display: "flex", gap: "10px" }}>
+        {/* Action Controls for System */}
+        <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", marginBottom: "20px" }}>
           <button
+            type="button"
             onClick={copySqlMigration}
             style={{
-              padding: "8px 16px",
-              borderRadius: "8px",
-              background: "rgba(201, 255, 159, 0.12)",
-              border: "1px solid #c9ff9f",
-              color: "#c9ff9f",
-              fontSize: "11.5px",
+              padding: "9px 16px",
+              borderRadius: "10px",
+              backgroundColor: "#EAF2E8",
+              border: "1px solid #CAD5C6",
+              color: "#173F2B",
+              fontSize: "12px",
               fontWeight: 700,
               cursor: "pointer",
               display: "inline-flex",
@@ -734,22 +731,21 @@ export default function DashboardPengaturanPage() {
               gap: "6px",
             }}
           >
-            <Copy size={13} />
-            <span>
-              {copied ? "Lokasi File Tersalin!" : "Salin Lokasi File Skema SQL"}
-            </span>
+            <Copy size={14} />
+            <span>{copied ? "Lokasi File Tersalin!" : "Salin Path Skema SQL"}</span>
           </button>
 
           <button
+            type="button"
             onClick={checkDbHealth}
             disabled={isCheckingDb}
             style={{
-              padding: "8px 16px",
-              borderRadius: "8px",
-              background: "rgba(255, 255, 255, 0.05)",
-              border: "1px solid rgba(255, 255, 255, 0.15)",
-              color: "#e2ecd8",
-              fontSize: "11.5px",
+              padding: "9px 16px",
+              borderRadius: "10px",
+              backgroundColor: "#FFFFFF",
+              border: "1px solid #DFE6DC",
+              color: "#17251D",
+              fontSize: "12px",
               fontWeight: 600,
               cursor: "pointer",
               display: "inline-flex",
@@ -757,91 +753,81 @@ export default function DashboardPengaturanPage() {
               gap: "6px",
             }}
           >
-            <RotateCcw size={13} />
+            <RotateCcw size={14} />
             <span>{isCheckingDb ? "Memeriksa..." : "Uji Koneksi Backend"}</span>
           </button>
         </div>
-      </div>
 
-      {/* 4.5 MOBILE APP DOWNLOAD CARD */}
-      <div
-        style={{
-          background: "#ffffff",
-          borderRadius: "16px",
-          padding: "24px",
-          border: "1px solid #d1fae5",
-          boxShadow: "0 2px 8px rgba(0,0,0,0.03)",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          flexWrap: "wrap",
-          gap: "16px",
-          marginBottom: "20px",
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-          <div
-            style={{
-              width: "44px",
-              height: "44px",
-              borderRadius: "12px",
-              background: "#ecfdf5",
-              color: "#059669",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              flexShrink: 0,
-            }}
-          >
-            <Smartphone size={22} />
-          </div>
-          <div>
-            <h3
-              style={{
-                fontSize: "15px",
-                fontWeight: 700,
-                color: "#065f46",
-                margin: "0 0 4px",
-              }}
-            >
-              Aplikasi Mobile DiHutan (Android APK)
-            </h3>
-            <p style={{ fontSize: "12px", color: "#6b7280", margin: 0 }}>
-              Versi Stabil v1.4.2 (28 MB) · Pasang langsung di smartphone petugas dan relawan lapangan.
-            </p>
-          </div>
-        </div>
-        <a
-          href="https://drive.google.com/file/d/1OvJh5XtWD4I64kgkJLK69zpy28fiMaIP/view"
-          target="_blank"
-          rel="noopener noreferrer"
+        {/* Mobile APK Release Card */}
+        <div
           style={{
-            padding: "10px 20px",
-            borderRadius: "10px",
-            background: "#059669",
-            color: "#ffffff",
-            textDecoration: "none",
-            fontSize: "13px",
-            fontWeight: 700,
-            display: "inline-flex",
+            backgroundColor: "#F7FAF6",
+            border: "1px solid #DFE6DC",
+            borderRadius: "12px",
+            padding: "16px 20px",
+            display: "flex",
+            justifyContent: "space-between",
             alignItems: "center",
-            gap: "8px",
-            boxShadow: "0 2px 6px rgba(5, 150, 105, 0.3)",
+            flexWrap: "wrap",
+            gap: "14px",
           }}
         >
-          <Download size={15} />
-          <span>Unduh File APK Android ↗</span>
-        </a>
-      </div>
+          <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
+            <div
+              style={{
+                width: "42px",
+                height: "42px",
+                borderRadius: "10px",
+                backgroundColor: "#EAF5EE",
+                color: "#27834A",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexShrink: 0,
+              }}
+            >
+              <Smartphone size={22} />
+            </div>
+            <div>
+              <strong style={{ fontSize: "14px", color: "#17251D", display: "block" }}>
+                Aplikasi Mobile DiHutan (Android APK)
+              </strong>
+              <span style={{ fontSize: "12px", color: "#647268" }}>
+                Rilis Resmi v1.4.2 (28 MB) · Pasang langsung di smartphone petugas lapangan.
+              </span>
+            </div>
+          </div>
+          <a
+            href="https://drive.google.com/file/d/1OvJh5XtWD4I64kgkJLK69zpy28fiMaIP/view"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              padding: "9px 18px",
+              borderRadius: "10px",
+              backgroundColor: "#173F2B",
+              color: "#FFFFFF",
+              textDecoration: "none",
+              fontSize: "12.5px",
+              fontWeight: 700,
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "8px",
+            }}
+          >
+            <Download size={14} />
+            <span>Unduh File APK ↗</span>
+          </a>
+        </div>
+      </section>
 
-      {/* 5. SESSION & SIGN OUT CARD */}
-      <div
+      {/* D. PENGATURAN AKUN & LOGOUT CARD */}
+      <section
         style={{
-          background: "#ffffff",
+          backgroundColor: "#FFFFFF",
           borderRadius: "16px",
-          padding: "24px",
-          border: "1px solid #fee2e2",
-          boxShadow: "0 2px 8px rgba(0,0,0,0.03)",
+          border: "1px solid #F8C8C4",
+          padding: "clamp(20px, 3vw, 24px)",
+          boxShadow: "0 1px 3px rgba(23, 37, 29, 0.04)",
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
@@ -850,28 +836,28 @@ export default function DashboardPengaturanPage() {
         }}
       >
         <div>
-          <h3
+          <h2
             style={{
-              fontSize: "15px",
-              fontWeight: 700,
-              color: "#991b1b",
-              margin: "0 0 4px",
+              fontSize: "17px",
+              fontWeight: 800,
+              color: "#C7473D",
+              margin: "0 0 4px 0",
             }}
           >
-            Keluar dari Sesi Dashboard
-          </h3>
-          <p style={{ fontSize: "12px", color: "#6b7280", margin: 0 }}>
-            Tutup sesi aktif Anda di perangkat ini secara aman dan kembali ke halaman login.
+            D. Keluar dari Sesi Dashboard
+          </h2>
+          <p style={{ fontSize: "12.5px", color: "#647268", margin: 0 }}>
+            Tutup sesi aktif akun Anda di browser ini secara aman dan kembali ke halaman login.
           </p>
         </div>
         <button
           type="button"
           onClick={() => logout()}
           style={{
-            padding: "10px 20px",
+            padding: "10px 22px",
             borderRadius: "10px",
-            background: "#ef4444",
-            color: "#ffffff",
+            backgroundColor: "#C7473D",
+            color: "#FFFFFF",
             border: "none",
             fontSize: "13px",
             fontWeight: 700,
@@ -879,13 +865,16 @@ export default function DashboardPengaturanPage() {
             display: "inline-flex",
             alignItems: "center",
             gap: "8px",
-            boxShadow: "0 2px 6px rgba(239, 68, 68, 0.3)",
+            boxShadow: "0 2px 6px rgba(199, 71, 61, 0.25)",
+            transition: "background-color 0.15s ease",
           }}
+          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#b03a31")}
+          onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#C7473D")}
         >
           <LogOut size={15} />
           <span>Keluar dari Akun (Logout)</span>
         </button>
-      </div>
+      </section>
     </div>
   );
 }

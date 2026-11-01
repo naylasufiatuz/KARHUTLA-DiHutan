@@ -1,4 +1,57 @@
-@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,500;1,9..144,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Inter:wght@400;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,500;1,9..144,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
+
+:root {
+  /* ==========================================================================
+     DIHUTAN — MODERN FOREST TECHNOLOGY DESIGN SYSTEM TOKENS
+     ========================================================================== */
+  --color-primary: #173F2B;         /* Deep Forest Green */
+  --color-secondary: #285C40;       /* Forest Green */
+  --color-accent: #8BAF70;          /* Moss Green */
+  --color-bg: #F5F7F2;              /* Soft Natural White */
+  --color-surface: #FFFFFF;         /* Pure Surface White */
+  --color-text-primary: #17251D;    /* Dark Forest Text */
+  --color-text-secondary: #647268;  /* Muted Green Gray */
+  --color-border: #DFE6DC;          /* Subtle Natural Border */
+  --color-success: #27834A;         /* Verified / Normal Green */
+  --color-warning: #D99A2B;         /* Alert / Waspada Amber */
+  --color-danger: #C7473D;          /* Emergency / Bahaya Crimson */
+
+  /* Success / Warning / Danger Surface Backgrounds */
+  --color-success-bg: #EAF5EE;
+  --color-success-border: #BCE3CB;
+  --color-warning-bg: #FEF8EC;
+  --color-warning-border: #F6DEAF;
+  --color-danger-bg: #FDF2F1;
+  --color-danger-border: #F8C8C4;
+
+  /* Typography */
+  --font-sans: "Plus Jakarta Sans", "Inter", "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Fraunces", Georgia, serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Elevation */
+  --shadow-sm: 0 1px 3px rgba(23, 37, 29, 0.05);
+  --shadow-md: 0 4px 12px rgba(23, 37, 29, 0.06);
+  --shadow-lg: 0 12px 32px rgba(23, 37, 29, 0.08);
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
+  --radius-pill: 9999px;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 @import "./landing.css";
 @import "./technology.css";
 @import "./book.css";

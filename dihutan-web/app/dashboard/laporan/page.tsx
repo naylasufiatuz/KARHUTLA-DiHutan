@@ -133,8 +133,8 @@ export default function DashboardLaporanPage() {
       {/* 1. Role Notice */}
       <div
         style={{
-          background: "#0c2016",
-          border: "1px solid rgba(255, 255, 255, 0.08)",
+          background: "#FFFFFF",
+          border: "1px solid #DFE6DC",
           borderRadius: "14px",
           padding: "14px 18px",
           marginBottom: "24px",
@@ -143,12 +143,13 @@ export default function DashboardLaporanPage() {
           alignItems: "center",
           flexWrap: "wrap",
           gap: "10px",
-          fontSize: "12px",
-          color: "#e2ecd8",
+          fontSize: "12.5px",
+          color: "#17251D",
+          boxShadow: "0 1px 3px rgba(23, 37, 29, 0.04)",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          <Shield size={18} color="#c9ff9f" />
+          <Shield size={18} color="#173F2B" />
           <span>
             Anda saat ini terhubung sebagai: <strong>{role}</strong>.{" "}
             {canVerifyReports
@@ -160,13 +161,16 @@ export default function DashboardLaporanPage() {
           onClick={() => refreshReports()}
           style={{
             background: "none",
-            border: "none",
-            color: "#8da18e",
+            border: "1px solid #DFE6DC",
+            borderRadius: "99px",
+            padding: "4px 10px",
+            color: "#647268",
             cursor: "pointer",
             display: "inline-flex",
             alignItems: "center",
             gap: "5px",
             fontSize: "11px",
+            fontWeight: 600,
           }}
           title="Sinkronisasi Data"
         >
@@ -180,9 +184,9 @@ export default function DashboardLaporanPage() {
         <div className="report-form-card">
           <span
             style={{
-              fontSize: "10px",
+              fontSize: "10.5px",
               fontWeight: 800,
-              color: "#c9ff9f",
+              color: "#173F2B",
               letterSpacing: "0.12em",
               textTransform: "uppercase",
             }}
@@ -191,15 +195,15 @@ export default function DashboardLaporanPage() {
           </span>
           <h2
             style={{
-              fontFamily: "Fraunces, Georgia, serif",
               fontSize: "20px",
-              color: "#f4f6ed",
+              fontWeight: 800,
+              color: "#17251D",
               margin: "4px 0 6px",
             }}
           >
             Buat Laporan Lapangan
           </h2>
-          <p style={{ fontSize: "11.5px", color: "#8da18e", margin: 0 }}>
+          <p style={{ fontSize: "12px", color: "#647268", margin: 0, lineHeight: 1.5 }}>
             Laporkan kepulan asap, pintu sekat kanal rusak, atau titik api
             gambut di sekitar kawasan Anda.
           </p>
@@ -207,19 +211,19 @@ export default function DashboardLaporanPage() {
           {isSuccessMsg && (
             <div
               style={{
-                background: "rgba(39, 174, 96, 0.15)",
-                border: "1px solid #2ecc71",
+                background: "#EAF5EE",
+                border: "1px solid #27834A",
                 borderRadius: "10px",
                 padding: "10px 14px",
                 marginTop: "12px",
-                fontSize: "11.5px",
-                color: "#c9ff9f",
+                fontSize: "12px",
+                color: "#166534",
                 display: "flex",
                 alignItems: "center",
                 gap: "8px",
               }}
             >
-              <CheckCircle2 size={16} color="#4ade80" />
+              <CheckCircle2 size={16} color="#27834A" />
               <span>
                 Laporan berhasil dikirim ke pos pantau dan tersimpan di database!
               </span>
@@ -339,9 +343,9 @@ export default function DashboardLaporanPage() {
             <div>
               <h3
                 style={{
-                  fontFamily: "Fraunces, Georgia, serif",
                   fontSize: "20px",
-                  color: "#f4f6ed",
+                  fontWeight: 800,
+                  color: "#17251D",
                   margin: 0,
                 }}
               >
@@ -349,8 +353,8 @@ export default function DashboardLaporanPage() {
               </h3>
               <p
                 style={{
-                  fontSize: "11.5px",
-                  color: "#8da18e",
+                  fontSize: "12px",
+                  color: "#647268",
                   margin: "2px 0 0",
                 }}
               >
@@ -373,13 +377,13 @@ export default function DashboardLaporanPage() {
                   display: "flex",
                   alignItems: "center",
                   gap: "6px",
-                  background: "rgba(255,255,255,0.06)",
-                  border: "1px solid rgba(255,255,255,0.1)",
+                  background: "#FFFFFF",
+                  border: "1px solid #DFE6DC",
                   borderRadius: "99px",
                   padding: "4px 10px",
                 }}
               >
-                <Search size={12} color="#8da18e" />
+                <Search size={13} color="#647268" />
                 <input
                   type="text"
                   placeholder="Cari laporan..."
@@ -389,9 +393,9 @@ export default function DashboardLaporanPage() {
                     background: "none",
                     border: "none",
                     outline: "none",
-                    color: "#f4f6ed",
-                    fontSize: "11px",
-                    width: "100px",
+                    color: "#17251D",
+                    fontSize: "11.5px",
+                    width: "110px",
                   }}
                 />
               </div>
@@ -409,21 +413,18 @@ export default function DashboardLaporanPage() {
                   key={st}
                   onClick={() => setFilterStatus(st)}
                   style={{
-                    padding: "4px 10px",
+                    padding: "5px 12px",
                     borderRadius: "99px",
-                    fontSize: "10px",
+                    fontSize: "10.5px",
                     fontWeight: 700,
                     background:
-                      filterStatus === st
-                        ? "rgba(201, 255, 159, 0.18)"
-                        : "rgba(255, 255, 255, 0.04)",
+                      filterStatus === st ? "#173F2B" : "#FFFFFF",
                     border: `1px solid ${
-                      filterStatus === st
-                        ? "#c9ff9f"
-                        : "rgba(255, 255, 255, 0.1)"
+                      filterStatus === st ? "#173F2B" : "#DFE6DC"
                     }`,
-                    color: filterStatus === st ? "#c9ff9f" : "#b5c7b4",
+                    color: filterStatus === st ? "#FFFFFF" : "#647268",
                     cursor: "pointer",
+                    transition: "all 0.15s ease",
                   }}
                 >
                   {st}
@@ -438,9 +439,10 @@ export default function DashboardLaporanPage() {
               style={{
                 padding: "36px",
                 textAlign: "center",
-                color: "#8da18e",
-                background: "rgba(0,0,0,0.2)",
-                borderRadius: "12px",
+                color: "#647268",
+                background: "#FFFFFF",
+                border: "1px solid #DFE6DC",
+                borderRadius: "14px",
               }}
             >
               <RotateCcw
@@ -450,7 +452,7 @@ export default function DashboardLaporanPage() {
                   margin: "0 auto 8px",
                 }}
               />
-              <p style={{ margin: 0, fontSize: "12px" }}>
+              <p style={{ margin: 0, fontSize: "12.5px" }}>
                 Memuat data laporan dari pusat komando...
               </p>
             </div>
@@ -459,19 +461,20 @@ export default function DashboardLaporanPage() {
               style={{
                 padding: "36px",
                 textAlign: "center",
-                color: "#8da18e",
-                background: "rgba(0,0,0,0.2)",
-                borderRadius: "12px",
+                color: "#647268",
+                background: "#FFFFFF",
+                border: "1px solid #DFE6DC",
+                borderRadius: "14px",
               }}
             >
               <FileText
-                size={28}
+                size={32}
                 style={{ opacity: 0.4, margin: "0 auto 8px" }}
               />
-              <p style={{ margin: 0, fontSize: "13px", fontWeight: 600 }}>
+              <p style={{ margin: 0, fontSize: "13.5px", fontWeight: 700, color: "#17251D" }}>
                 Tidak ada laporan yang sesuai kriteria pencarian.
               </p>
-              <p style={{ margin: "4px 0 0", fontSize: "11px" }}>
+              <p style={{ margin: "4px 0 0", fontSize: "12px", color: "#647268" }}>
                 Gunakan formulir di sebelah kiri untuk memasukkan laporan baru.
               </p>
             </div>
@@ -498,18 +501,18 @@ export default function DashboardLaporanPage() {
                     <div>
                       <span
                         style={{
-                          fontSize: "10px",
+                          fontSize: "10.5px",
                           fontWeight: 700,
-                          color: "#8da18e",
+                          color: "#647268",
                         }}
                       >
                         ID: {rep.id} · {rep.incidentType} · {rep.createdAt}
                       </span>
                       <h4
                         style={{
-                          fontFamily: "Fraunces, Georgia, serif",
                           fontSize: "16px",
-                          color: "#f4f6ed",
+                          fontWeight: 700,
+                          color: "#17251D",
                           margin: "4px 0",
                         }}
                       >
@@ -517,14 +520,15 @@ export default function DashboardLaporanPage() {
                       </h4>
                       <span
                         style={{
-                          fontSize: "11px",
-                          color: "#c9ff9f",
+                          fontSize: "11.5px",
+                          fontWeight: 600,
+                          color: "#173F2B",
                           display: "inline-flex",
                           alignItems: "center",
                           gap: "4px",
                         }}
                       >
-                        <MapPin size={11} />
+                        <MapPin size={12} color="#173F2B" />
                         {rep.locationName}
                       </span>
                     </div>
@@ -558,8 +562,8 @@ export default function DashboardLaporanPage() {
 
                   <p
                     style={{
-                      fontSize: "12px",
-                      color: "#c9d8c8",
+                      fontSize: "12.5px",
+                      color: "#36453B",
                       lineHeight: 1.55,
                       margin: 0,
                     }}
@@ -570,12 +574,12 @@ export default function DashboardLaporanPage() {
                   {rep.officerNotes && (
                     <div
                       style={{
-                        background: "rgba(201, 255, 159, 0.05)",
-                        borderLeft: "3px solid #c9ff9f",
+                        background: "#F0F7F2",
+                        borderLeft: "3px solid #27834A",
                         padding: "8px 12px",
                         borderRadius: "0 8px 8px 0",
-                        fontSize: "11px",
-                        color: "#c9ff9f",
+                        fontSize: "11.5px",
+                        color: "#166534",
                         display: "flex",
                         alignItems: "flex-start",
                         gap: "6px",
@@ -600,10 +604,10 @@ export default function DashboardLaporanPage() {
                       display: "flex",
                       justifyContent: "space-between",
                       alignItems: "center",
-                      fontSize: "10.5px",
-                      color: "#7a947c",
-                      borderTop: "1px solid rgba(255,255,255,0.06)",
-                      paddingTop: "8px",
+                      fontSize: "11px",
+                      color: "#647268",
+                      borderTop: "1px solid #DFE6DC",
+                      paddingTop: "10px",
                       flexWrap: "wrap",
                       gap: "6px",
                     }}
@@ -615,12 +619,12 @@ export default function DashboardLaporanPage() {
                         gap: "4px",
                       }}
                     >
-                      <User size={11} />
-                      Pelapor: <strong>{rep.reporterName}</strong>{" "}
+                      <User size={12} />
+                      Pelapor: <strong style={{ color: "#17251D" }}>{rep.reporterName}</strong>{" "}
                       {rep.reporterPhone && (
                         <span>
                           <Phone
-                            size={10}
+                            size={11}
                             style={{
                               display: "inline",
                               verticalAlign: "middle",
@@ -649,24 +653,25 @@ export default function DashboardLaporanPage() {
                         display: "flex",
                         alignItems: "center",
                         gap: "8px",
-                        background: "rgba(0,0,0,0.3)",
+                        background: "#F8FAF7",
+                        border: "1px solid #DFE6DC",
                         padding: "10px 12px",
-                        borderRadius: "8px",
+                        borderRadius: "10px",
                         marginTop: "4px",
                         flexWrap: "wrap",
                       }}
                     >
                       <span
                         style={{
-                          fontSize: "10px",
-                          fontWeight: 700,
-                          color: "#f1c40f",
+                          fontSize: "10.5px",
+                          fontWeight: 800,
+                          color: "#173F2B",
                           display: "inline-flex",
                           alignItems: "center",
                           gap: "4px",
                         }}
                       >
-                        <Shield size={11} />
+                        <Shield size={12} color="#173F2B" />
                         TINDAKAN PETUGAS:
                       </span>
                       {rep.status !== "DIVERIFIKASI" && (
@@ -681,10 +686,10 @@ export default function DashboardLaporanPage() {
                           style={{
                             padding: "4px 10px",
                             borderRadius: "99px",
-                            background: "rgba(241,196,15,0.2)",
-                            border: "1px solid #f1c40f",
-                            color: "#f1c40f",
-                            fontSize: "10px",
+                            background: "#FEF8EC",
+                            border: "1px solid #D99A2B",
+                            color: "#92400E",
+                            fontSize: "10.5px",
                             fontWeight: 700,
                             cursor: "pointer",
                           }}
@@ -704,10 +709,10 @@ export default function DashboardLaporanPage() {
                           style={{
                             padding: "4px 10px",
                             borderRadius: "99px",
-                            background: "rgba(230,126,34,0.2)",
-                            border: "1px solid #e67e22",
-                            color: "#e67e22",
-                            fontSize: "10px",
+                            background: "#FFF7ED",
+                            border: "1px solid #EA580C",
+                            color: "#9A3412",
+                            fontSize: "10.5px",
                             fontWeight: 700,
                             cursor: "pointer",
                           }}
@@ -727,10 +732,10 @@ export default function DashboardLaporanPage() {
                           style={{
                             padding: "4px 10px",
                             borderRadius: "99px",
-                            background: "rgba(46,204,113,0.2)",
-                            border: "1px solid #2ecc71",
-                            color: "#2ecc71",
-                            fontSize: "10px",
+                            background: "#EAF5EE",
+                            border: "1px solid #27834A",
+                            color: "#166534",
+                            fontSize: "10.5px",
                             fontWeight: 700,
                             cursor: "pointer",
                           }}
@@ -744,12 +749,12 @@ export default function DashboardLaporanPage() {
                           setCustomNotes(rep.officerNotes || "");
                         }}
                         style={{
-                          padding: "4px 10px",
+                          padding: "4px 12px",
                           borderRadius: "99px",
-                          background: "rgba(201,255,159,0.15)",
-                          border: "1px solid #c9ff9f",
-                          color: "#c9ff9f",
-                          fontSize: "10px",
+                          background: "#173F2B",
+                          border: "1px solid #173F2B",
+                          color: "#FFFFFF",
+                          fontSize: "10.5px",
                           fontWeight: 700,
                           cursor: "pointer",
                           marginLeft: "auto",
@@ -772,7 +777,7 @@ export default function DashboardLaporanPage() {
           style={{
             position: "fixed",
             inset: 0,
-            background: "rgba(0, 0, 0, 0.75)",
+            background: "rgba(23, 37, 29, 0.45)",
             backdropFilter: "blur(6px)",
             display: "flex",
             alignItems: "center",
@@ -784,14 +789,14 @@ export default function DashboardLaporanPage() {
         >
           <div
             style={{
-              background: "#0d261b",
-              border: "1px solid #2d553e",
+              background: "#FFFFFF",
+              border: "1px solid #DFE6DC",
               borderRadius: "16px",
               padding: "28px",
               maxWidth: "540px",
               width: "100%",
-              color: "#e2ecd8",
-              boxShadow: "0 24px 60px rgba(0,0,0,0.8)",
+              color: "#17251D",
+              boxShadow: "0 20px 50px rgba(23, 37, 29, 0.15)",
             }}
             onClick={(e) => e.stopPropagation()}
           >
@@ -806,19 +811,20 @@ export default function DashboardLaporanPage() {
               <div>
                 <span
                   style={{
-                    fontSize: "10px",
+                    fontSize: "10.5px",
                     fontWeight: 800,
-                    color: "#c9ff9f",
+                    color: "#173F2B",
                     letterSpacing: "0.1em",
+                    textTransform: "uppercase",
                   }}
                 >
                   DETAIL LAPORAN #{selectedReport.id}
                 </span>
                 <h3
                   style={{
-                    fontFamily: "Fraunces, Georgia, serif",
                     fontSize: "20px",
-                    color: "#f4f6ed",
+                    fontWeight: 800,
+                    color: "#17251D",
                     margin: "4px 0 0",
                   }}
                 >
@@ -830,7 +836,7 @@ export default function DashboardLaporanPage() {
                 style={{
                   background: "none",
                   border: "none",
-                  color: "#8da18e",
+                  color: "#647268",
                   cursor: "pointer",
                   padding: "4px",
                 }}
@@ -844,21 +850,22 @@ export default function DashboardLaporanPage() {
                 display: "grid",
                 gridTemplateColumns: "1fr 1fr",
                 gap: "12px",
-                fontSize: "11.5px",
+                fontSize: "12px",
                 marginBottom: "16px",
-                background: "rgba(0,0,0,0.25)",
-                padding: "12px",
+                background: "#F8FAF7",
+                border: "1px solid #DFE6DC",
+                padding: "14px",
                 borderRadius: "10px",
               }}
             >
               <div>
-                <span style={{ color: "#8da18e", display: "block" }}>
+                <span style={{ color: "#647268", display: "block", fontSize: "11px" }}>
                   Kategori
                 </span>
                 <strong>{selectedReport.incidentType}</strong>
               </div>
               <div>
-                <span style={{ color: "#8da18e", display: "block" }}>
+                <span style={{ color: "#647268", display: "block", fontSize: "11px" }}>
                   Status Terkini
                 </span>
                 <span
@@ -870,13 +877,13 @@ export default function DashboardLaporanPage() {
                 </span>
               </div>
               <div>
-                <span style={{ color: "#8da18e", display: "block" }}>
+                <span style={{ color: "#647268", display: "block", fontSize: "11px" }}>
                   Lokasi
                 </span>
                 <strong>{selectedReport.locationName}</strong>
               </div>
               <div>
-                <span style={{ color: "#8da18e", display: "block" }}>
+                <span style={{ color: "#647268", display: "block", fontSize: "11px" }}>
                   Pelapor
                 </span>
                 <strong>{selectedReport.reporterName}</strong>
@@ -886,9 +893,9 @@ export default function DashboardLaporanPage() {
             <div style={{ marginBottom: "16px" }}>
               <label
                 style={{
-                  fontSize: "11px",
+                  fontSize: "11.5px",
                   fontWeight: 700,
-                  color: "#c9ff9f",
+                  color: "#17251D",
                   display: "block",
                   marginBottom: "4px",
                 }}
@@ -897,12 +904,13 @@ export default function DashboardLaporanPage() {
               </label>
               <p
                 style={{
-                  fontSize: "12px",
-                  color: "#c9d8c8",
+                  fontSize: "12.5px",
+                  color: "#36453B",
                   lineHeight: 1.6,
                   margin: 0,
-                  background: "rgba(255,255,255,0.03)",
-                  padding: "10px",
+                  background: "#FAFCF9",
+                  border: "1px solid #DFE6DC",
+                  padding: "10px 12px",
                   borderRadius: "8px",
                 }}
               >
@@ -914,9 +922,9 @@ export default function DashboardLaporanPage() {
               <div style={{ marginBottom: "20px" }}>
                 <label
                   style={{
-                    fontSize: "11px",
+                    fontSize: "11.5px",
                     fontWeight: 700,
-                    color: "#f1c40f",
+                    color: "#173F2B",
                     display: "block",
                     marginBottom: "4px",
                   }}
@@ -930,13 +938,14 @@ export default function DashboardLaporanPage() {
                   placeholder="Ketik catatan hasil pengecekan lapangan, kondisi sekat kanal, atau instruksi pompa..."
                   style={{
                     width: "100%",
-                    background: "rgba(0,0,0,0.4)",
-                    border: "1px solid rgba(255,255,255,0.15)",
+                    background: "#FFFFFF",
+                    border: "1px solid #DFE6DC",
                     borderRadius: "8px",
-                    padding: "8px 10px",
-                    color: "#f4f6ed",
+                    padding: "10px 12px",
+                    color: "#17251D",
                     fontSize: "12px",
                     outline: "none",
+                    boxSizing: "border-box",
                   }}
                 />
                 <div
@@ -956,16 +965,16 @@ export default function DashboardLaporanPage() {
                           setSelectedReport(null);
                         }}
                         style={{
-                          padding: "6px 12px",
+                          padding: "6px 14px",
                           borderRadius: "6px",
                           background:
                             st === "SELESAI"
-                              ? "#27ae60"
+                              ? "#27834A"
                               : st === "INVESTIGASI"
-                              ? "#e67e22"
-                              : "#d4ac0d",
+                              ? "#EA580C"
+                              : "#D99A2B",
                           border: "none",
-                          color: "#ffffff",
+                          color: "#FFFFFF",
                           fontSize: "11px",
                           fontWeight: 700,
                           cursor: "pointer",
@@ -983,12 +992,13 @@ export default function DashboardLaporanPage() {
               <button
                 onClick={() => setSelectedReport(null)}
                 style={{
-                  background: "rgba(255,255,255,0.08)",
-                  border: "none",
+                  background: "#F0F4EE",
+                  border: "1px solid #DFE6DC",
                   borderRadius: "6px",
                   padding: "8px 16px",
-                  color: "#e2ecd8",
+                  color: "#17251D",
                   fontSize: "12px",
+                  fontWeight: 600,
                   cursor: "pointer",
                 }}
               >

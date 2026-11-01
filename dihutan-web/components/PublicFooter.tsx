@@ -6,7 +6,7 @@ export default function PublicFooter() {
   return (
     <footer
       style={{
-        background: "#082f22",
+        background: "#173F2B",
         color: "#ffffff",
         borderTop: "1px solid rgba(255, 255, 255, 0.08)",
         padding: "48px 24px 32px",
@@ -46,7 +46,7 @@ export default function PublicFooter() {
             </div>
             <div>
               <strong style={{ fontSize: "18px", letterSpacing: "-0.02em" }}>DiHutan</strong>
-              <span style={{ display: "block", fontSize: "8.5px", fontWeight: 800, letterSpacing: "0.14em", color: "#68d391" }}>
+              <span style={{ display: "block", fontSize: "8.5px", fontWeight: 800, letterSpacing: "0.14em", color: "#8BAF70" }}>
                 INTELIJEN HUTAN
               </span>
             </div>
@@ -58,7 +58,7 @@ export default function PublicFooter() {
 
         {/* Public Navigation */}
         <div>
-          <strong style={{ fontSize: "13px", color: "#68d391", letterSpacing: "0.08em", textTransform: "uppercase", display: "block", marginBottom: "14px" }}>
+          <strong style={{ fontSize: "13px", color: "#8BAF70", letterSpacing: "0.08em", textTransform: "uppercase", display: "block", marginBottom: "14px" }}>
             Jelajahi Sistem
           </strong>
           <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "8px", fontSize: "12.5px" }}>
@@ -72,7 +72,7 @@ export default function PublicFooter() {
 
         {/* Dashboard Services */}
         <div>
-          <strong style={{ fontSize: "13px", color: "#68d391", letterSpacing: "0.08em", textTransform: "uppercase", display: "block", marginBottom: "14px" }}>
+          <strong style={{ fontSize: "13px", color: "#8BAF70", letterSpacing: "0.08em", textTransform: "uppercase", display: "block", marginBottom: "14px" }}>
             Layanan Dashboard
           </strong>
           <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "8px", fontSize: "12.5px" }}>
@@ -81,13 +81,13 @@ export default function PublicFooter() {
             <li><Link href="/dashboard/laporan" style={{ color: "#c4d7cc", textDecoration: "none" }}>Pelaporan Kebakaran</Link></li>
             <li><Link href="/masuk" style={{ color: "#c4d7cc", textDecoration: "none" }}>Portal Masuk Petugas</Link></li>
             <li><Link href="/daftar" style={{ color: "#c4d7cc", textDecoration: "none" }}>Daftar Akun Pengguna</Link></li>
-            <li><a href="https://drive.google.com/file/d/1OvJh5XtWD4I64kgkJLK69zpy28fiMaIP/view" target="_blank" rel="noopener noreferrer" style={{ color: "#68d391", textDecoration: "none", fontWeight: 700 }}>Download APK Android ↗</a></li>
+            <li><a href="https://drive.google.com/file/d/1OvJh5XtWD4I64kgkJLK69zpy28fiMaIP/view" target="_blank" rel="noopener noreferrer" style={{ color: "#8BAF70", textDecoration: "none", fontWeight: 700 }}>Download APK Android ↗</a></li>
           </ul>
         </div>
 
         {/* Technical & Ethical Integrity */}
         <div>
-          <strong style={{ fontSize: "13px", color: "#68d391", letterSpacing: "0.08em", textTransform: "uppercase", display: "block", marginBottom: "14px" }}>
+          <strong style={{ fontSize: "13px", color: "#8BAF70", letterSpacing: "0.08em", textTransform: "uppercase", display: "block", marginBottom: "14px" }}>
             Integritas Data
           </strong>
           <p style={{ fontSize: "12px", color: "#a2c0ad", lineHeight: 1.55, margin: 0 }}>

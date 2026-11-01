@@ -14,6 +14,12 @@ import {
   ShieldAlert,
   Sparkles,
   CheckCircle2,
+  Lock,
+  Mail,
+  Loader2,
+  TreePine,
+  Activity,
+  Cpu,
 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import { UserRole } from "@/lib/dashboard-data";
@@ -83,7 +89,7 @@ function MasukContent() {
     setErrorMsg("");
 
     if (!email || !password) {
-      setErrorMsg("Mohon isi email dan kata sandi.");
+      setErrorMsg("Mohon masukkan alamat email dan kata sandi Anda.");
       return;
     }
 
@@ -157,15 +163,18 @@ function MasukContent() {
         minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
-        background: "#082f22",
-        color: "#ffffff",
-        position: "relative",
+        backgroundColor: "#F5F7F2",
+        color: "#17251D",
+        fontFamily:
+          '"Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
       }}
     >
-      {/* Top Bar */}
-      <div
+      {/* Top Navbar */}
+      <header
         style={{
-          padding: "20px 24px",
+          borderBottom: "1px solid #DFE6DC",
+          backgroundColor: "#FFFFFF",
+          padding: "14px 24px",
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
@@ -177,370 +186,663 @@ function MasukContent() {
             display: "inline-flex",
             alignItems: "center",
             gap: "8px",
-            color: "#c4d7cc",
+            color: "#647268",
             textDecoration: "none",
             fontSize: "13px",
             fontWeight: 600,
+            transition: "color 0.15s ease",
           }}
+          onMouseEnter={(e) => (e.currentTarget.style.color = "#173F2B")}
+          onMouseLeave={(e) => (e.currentTarget.style.color = "#647268")}
         >
           <ArrowLeft size={16} /> Kembali ke Beranda
         </Link>
-        <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-          <Image
-            src="/dihutan-logo-mark.png"
-            alt="Logo"
-            width={28}
-            height={28}
-          />
-          <strong style={{ fontSize: "16px" }}>DiHutan</strong>
+        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          <div
+            style={{
+              width: "32px",
+              height: "32px",
+              borderRadius: "8px",
+              backgroundColor: "#173F2B",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Image
+              src="/dihutan-logo-mark.png"
+              alt="Logo DiHutan"
+              width={22}
+              height={22}
+              style={{ objectFit: "contain" }}
+            />
+          </div>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <strong
+              style={{
+                fontSize: "16px",
+                letterSpacing: "-0.02em",
+                color: "#17251D",
+                lineHeight: 1.1,
+              }}
+            >
+              DiHutan
+            </strong>
+            <span
+              style={{
+                fontSize: "8.5px",
+                fontWeight: 800,
+                letterSpacing: "0.12em",
+                color: "#285C40",
+                textTransform: "uppercase",
+              }}
+            >
+              INTELIJEN HUTAN
+            </span>
+          </div>
         </div>
-      </div>
+      </header>
 
-      {/* Main Login Box */}
-      <div
+      {/* Main Container */}
+      <main
         style={{
           flexGrow: 1,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          padding: "24px",
+          padding: "clamp(24px, 4vw, 48px) 16px",
         }}
       >
         <div
           style={{
-            background: "#ffffff",
-            color: "#0f2417",
-            borderRadius: "22px",
-            padding: "36px 32px",
-            maxWidth: "460px",
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
+            maxWidth: "960px",
             width: "100%",
-            boxShadow: "0 24px 60px rgba(0, 0, 0, 0.4)",
+            backgroundColor: "#FFFFFF",
+            borderRadius: "18px",
+            border: "1px solid #DFE6DC",
+            boxShadow: "0 10px 30px rgba(23, 37, 29, 0.06)",
+            overflow: "hidden",
           }}
         >
-          <div style={{ textAlign: "center", marginBottom: "24px" }}>
-            <span
-              style={{
-                fontSize: "10px",
-                fontWeight: 800,
-                color: "#0a7544",
-                letterSpacing: "0.14em",
-                textTransform: "uppercase",
-              }}
-            >
-              PORTAL AUTENTIKASI
-            </span>
-            <h1
-              style={{
-                fontSize: "24px",
-                fontWeight: 800,
-                color: "#0f2417",
-                margin: "6px 0 4px",
-                letterSpacing: "-0.02em",
-              }}
-            >
-              Masuk ke DiHutan
-            </h1>
-            <p style={{ fontSize: "12.5px", color: "#6f8774", margin: 0 }}>
-              Akses dashboard pemantauan telemetri dan pengelolaan sistem
-            </p>
-          </div>
-
-          {/* Logged Out Success Banner */}
-          {isLoggedOut && !errorMsg && (
-            <div
-              style={{
-                background: "#f0fdf4",
-                border: "1px solid #bbf7d0",
-                borderRadius: "10px",
-                padding: "10px 14px",
-                display: "flex",
-                alignItems: "center",
-                gap: "8px",
-                fontSize: "12px",
-                color: "#166534",
-                marginBottom: "18px",
-              }}
-            >
-              <CheckCircle2
-                size={16}
-                color="#166534"
-                style={{ flexShrink: 0 }}
-              />
-              <span>
-                Anda telah berhasil keluar dari akun DiHutan. Sesi aman telah
-                ditutup.
-              </span>
-            </div>
-          )}
-
-          {errorMsg && (
-            <div
-              style={{
-                background: "#fef2f2",
-                border: "1px solid #fecaca",
-                borderRadius: "10px",
-                padding: "10px 14px",
-                display: "flex",
-                alignItems: "center",
-                gap: "8px",
-                fontSize: "12px",
-                color: "#991b1b",
-                marginBottom: "18px",
-              }}
-            >
-              <AlertCircle size={16} style={{ flexShrink: 0 }} />
-              <span>{errorMsg}</span>
-            </div>
-          )}
-
-          <form
-            onSubmit={handleSubmit}
-            style={{ display: "flex", flexDirection: "column", gap: "16px" }}
+          {/* Left Decorative Forest Showcase */}
+          <div
+            style={{
+              backgroundColor: "#173F2B",
+              color: "#FFFFFF",
+              padding: "clamp(32px, 4vw, 48px)",
+              position: "relative",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              overflow: "hidden",
+            }}
           >
+            {/* Background forest image with atmospheric tint */}
             <div
-              style={{ display: "flex", flexDirection: "column", gap: "6px" }}
+              style={{
+                position: "absolute",
+                inset: 0,
+                opacity: 0.28,
+                mixBlendMode: "luminosity",
+                pointerEvents: "none",
+              }}
             >
-              <label
-                style={{ fontSize: "12px", fontWeight: 700, color: "#234e32" }}
-              >
-                Alamat Email
-              </label>
-              <input
-                type="email"
-                placeholder="nama@email.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                style={{
-                  padding: "10px 14px",
-                  borderRadius: "10px",
-                  border: "1px solid #dce3dc",
-                  fontSize: "13px",
-                  outline: "none",
-                  fontFamily: "inherit",
-                }}
+              <Image
+                src="/hutan.jpg"
+                alt="Hutan Kalimantan"
+                fill
+                style={{ objectFit: "cover" }}
               />
             </div>
 
+            {/* Gradient overlay to guarantee text legibility */}
             <div
-              style={{ display: "flex", flexDirection: "column", gap: "6px" }}
-            >
+              style={{
+                position: "absolute",
+                inset: 0,
+                background:
+                  "linear-gradient(180deg, rgba(23, 63, 43, 0.85) 0%, rgba(23, 63, 43, 0.98) 100%)",
+                pointerEvents: "none",
+              }}
+            />
+
+            {/* Left Content */}
+            <div style={{ position: "relative", zIndex: 10 }}>
+              <div
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  padding: "5px 12px",
+                  borderRadius: "99px",
+                  backgroundColor: "rgba(139, 175, 112, 0.2)",
+                  border: "1px solid rgba(139, 175, 112, 0.4)",
+                  color: "#E2F0D8",
+                  fontSize: "11px",
+                  fontWeight: 700,
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                  marginBottom: "20px",
+                }}
+              >
+                <TreePine size={13} color="#8BAF70" />
+                <span>Teknologi Pemantauan Hutan</span>
+              </div>
+
+              <h2
+                style={{
+                  fontSize: "clamp(24px, 2.5vw, 32px)",
+                  fontWeight: 800,
+                  letterSpacing: "-0.03em",
+                  color: "#FFFFFF",
+                  margin: "0 0 12px 0",
+                  lineHeight: 1.2,
+                }}
+              >
+                Satu Pusat Kendali Lingkungan Rimba
+              </h2>
+              <p
+                style={{
+                  fontSize: "13.5px",
+                  color: "#D0DDD3",
+                  lineHeight: 1.6,
+                  margin: "0 0 24px 0",
+                }}
+              >
+                Masuk ke platform DiHutan untuk mengakses telemetri real-time muka
+                air gambut, status perangkat IoT fisik, ensiklopedia botani, dan
+                koordinasi verifikasi lapangan.
+              </p>
+
+              {/* Feature Highlights */}
               <div
                 style={{
                   display: "flex",
-                  justifyContent: "space-between",
+                  flexDirection: "column",
+                  gap: "12px",
+                  borderTop: "1px solid rgba(255, 255, 255, 0.12)",
+                  paddingTop: "20px",
                 }}
               >
-                <label
+                <div
                   style={{
-                    fontSize: "12px",
-                    fontWeight: 700,
-                    color: "#234e32",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "10px",
+                    fontSize: "12.5px",
+                    color: "#E2F0D8",
                   }}
                 >
-                  Kata Sandi
-                </label>
-                <span style={{ fontSize: "11px", color: "#0a7544" }}>
-                  Lupa sandi?
+                  <Activity size={16} color="#8BAF70" />
+                  <span>Monitoring Sensor Suhu, Kelembapan & Gas</span>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "10px",
+                    fontSize: "12.5px",
+                    color: "#E2F0D8",
+                  }}
+                >
+                  <Cpu size={16} color="#8BAF70" />
+                  <span>3 Pos Perangkat Hardware ESP32 Terintegrasi</span>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "10px",
+                    fontSize: "12.5px",
+                    color: "#E2F0D8",
+                  }}
+                >
+                  <Shield size={16} color="#8BAF70" />
+                  <span>Verifikasi Cepat & Tindak Lanjut Pihak Berwenang</span>
+                </div>
+              </div>
+            </div>
+
+            <div
+              style={{
+                position: "relative",
+                zIndex: 10,
+                marginTop: "32px",
+                fontSize: "11px",
+                color: "#A2C0AD",
+              }}
+            >
+              Fokus Kawasan: Koridor DAS Sungai Kapuas, Kalimantan Barat
+            </div>
+          </div>
+
+          {/* Right Form Card */}
+          <div
+            style={{
+              padding: "clamp(32px, 4vw, 44px)",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+            }}
+          >
+            <div style={{ marginBottom: "24px" }}>
+              <span
+                style={{
+                  fontSize: "10.5px",
+                  fontWeight: 800,
+                  color: "#285C40",
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                }}
+              >
+                PORTAL AUTENTIKASI
+              </span>
+              <h1
+                style={{
+                  fontSize: "24px",
+                  fontWeight: 800,
+                  color: "#17251D",
+                  margin: "6px 0 6px",
+                  letterSpacing: "-0.02em",
+                }}
+              >
+                Masuk ke DiHutan
+              </h1>
+              <p style={{ fontSize: "13px", color: "#647268", margin: 0 }}>
+                Gunakan kredensial terdaftar untuk membuka dashboard
+              </p>
+            </div>
+
+            {/* Logged Out Banner */}
+            {isLoggedOut && !errorMsg && (
+              <div
+                style={{
+                  backgroundColor: "#EAF5EE",
+                  border: "1px solid #BCE3CB",
+                  borderRadius: "10px",
+                  padding: "10px 14px",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "10px",
+                  fontSize: "12px",
+                  color: "#27834A",
+                  marginBottom: "18px",
+                }}
+              >
+                <CheckCircle2 size={16} style={{ flexShrink: 0 }} />
+                <span>
+                  Anda telah berhasil keluar dari akun. Sesi aman telah ditutup.
                 </span>
               </div>
-              <input
-                type="password"
-                placeholder="••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
+            )}
+
+            {/* Error Banner */}
+            {errorMsg && (
+              <div
                 style={{
-                  padding: "10px 14px",
+                  backgroundColor: "#FDF2F1",
+                  border: "1px solid #F8C8C4",
                   borderRadius: "10px",
-                  border: "1px solid #dce3dc",
-                  fontSize: "13px",
-                  outline: "none",
-                  fontFamily: "inherit",
+                  padding: "10px 14px",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "10px",
+                  fontSize: "12px",
+                  color: "#C7473D",
+                  marginBottom: "18px",
                 }}
-              />
+              >
+                <AlertCircle size={16} style={{ flexShrink: 0 }} />
+                <span>{errorMsg}</span>
+              </div>
+            )}
+
+            <form
+              onSubmit={handleSubmit}
+              style={{ display: "flex", flexDirection: "column", gap: "16px" }}
+            >
+              {/* Field Email */}
+              <div
+                style={{ display: "flex", flexDirection: "column", gap: "6px" }}
+              >
+                <label
+                  htmlFor="login-email"
+                  style={{
+                    fontSize: "12.5px",
+                    fontWeight: 700,
+                    color: "#17251D",
+                  }}
+                >
+                  Alamat Email
+                </label>
+                <div style={{ position: "relative" }}>
+                  <Mail
+                    size={16}
+                    color="#647268"
+                    style={{
+                      position: "absolute",
+                      left: "12px",
+                      top: "50%",
+                      transform: "translateY(-50%)",
+                    }}
+                  />
+                  <input
+                    id="login-email"
+                    type="email"
+                    placeholder="nama@email.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    style={{
+                      width: "100%",
+                      padding: "10px 12px 10px 38px",
+                      borderRadius: "10px",
+                      border: "1px solid #DFE6DC",
+                      backgroundColor: "#FFFFFF",
+                      color: "#17251D",
+                      fontSize: "13px",
+                      outline: "none",
+                      boxSizing: "border-box",
+                      transition: "border-color 0.15s ease",
+                    }}
+                    onFocus={(e) => (e.target.style.borderColor = "#173F2B")}
+                    onBlur={(e) => (e.target.style.borderColor = "#DFE6DC")}
+                  />
+                </div>
+              </div>
+
+              {/* Field Password */}
+              <div
+                style={{ display: "flex", flexDirection: "column", gap: "6px" }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                  }}
+                >
+                  <label
+                    htmlFor="login-pass"
+                    style={{
+                      fontSize: "12.5px",
+                      fontWeight: 700,
+                      color: "#17251D",
+                    }}
+                  >
+                    Kata Sandi
+                  </label>
+                  <span
+                    style={{
+                      fontSize: "11.5px",
+                      color: "#285C40",
+                      fontWeight: 600,
+                      cursor: "pointer",
+                    }}
+                    onClick={() =>
+                      alert(
+                        "Silakan gunakan email login akun demo atau hubungi administrator untuk menyetel ulang kata sandi."
+                      )
+                    }
+                  >
+                    Lupa sandi?
+                  </span>
+                </div>
+                <div style={{ position: "relative" }}>
+                  <Lock
+                    size={16}
+                    color="#647268"
+                    style={{
+                      position: "absolute",
+                      left: "12px",
+                      top: "50%",
+                      transform: "translateY(-50%)",
+                    }}
+                  />
+                  <input
+                    id="login-pass"
+                    type="password"
+                    placeholder="Masukkan kata sandi"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    style={{
+                      width: "100%",
+                      padding: "10px 12px 10px 38px",
+                      borderRadius: "10px",
+                      border: "1px solid #DFE6DC",
+                      backgroundColor: "#FFFFFF",
+                      color: "#17251D",
+                      fontSize: "13px",
+                      outline: "none",
+                      boxSizing: "border-box",
+                      transition: "border-color 0.15s ease",
+                    }}
+                    onFocus={(e) => (e.target.style.borderColor = "#173F2B")}
+                    onBlur={(e) => (e.target.style.borderColor = "#DFE6DC")}
+                  />
+                </div>
+              </div>
+
+              {/* Submit Button */}
+              <button
+                type="submit"
+                disabled={loading}
+                style={{
+                  backgroundColor: "#173F2B",
+                  color: "#FFFFFF",
+                  border: "none",
+                  borderRadius: "10px",
+                  padding: "12px 16px",
+                  fontSize: "13.5px",
+                  fontWeight: 700,
+                  cursor: loading ? "not-allowed" : "pointer",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "8px",
+                  marginTop: "6px",
+                  boxShadow: "0 2px 6px rgba(23, 63, 43, 0.2)",
+                  transition: "background-color 0.15s ease",
+                }}
+                onMouseEnter={(e) => {
+                  if (!loading)
+                    e.currentTarget.style.backgroundColor = "#285C40";
+                }}
+                onMouseLeave={(e) => {
+                  if (!loading)
+                    e.currentTarget.style.backgroundColor = "#173F2B";
+                }}
+              >
+                {loading ? (
+                  <>
+                    <Loader2 size={16} className="status-spin" />
+                    <span>Memproses Autentikasi...</span>
+                  </>
+                ) : (
+                  <>
+                    <LogIn size={16} />
+                    <span>Masuk ke Dashboard</span>
+                  </>
+                )}
+              </button>
+            </form>
+
+            {/* Quick Demo Access Matrix */}
+            <div
+              style={{
+                marginTop: "24px",
+                paddingTop: "18px",
+                borderTop: "1px solid #DFE6DC",
+              }}
+            >
+              <div
+                style={{
+                  fontSize: "10.5px",
+                  fontWeight: 800,
+                  color: "#647268",
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  marginBottom: "10px",
+                }}
+              >
+                <Sparkles size={13} color="#285C40" />
+                <span>Akses Cepat Pengujian 3 Peran:</span>
+              </div>
+
+              <div style={{ display: "grid", gap: "8px" }}>
+                <button
+                  type="button"
+                  onClick={() =>
+                    handleQuickLogin("USER", "relawan@dihutan.id")
+                  }
+                  style={{
+                    padding: "8px 12px",
+                    borderRadius: "8px",
+                    backgroundColor: "#EAF5EE",
+                    border: "1px solid #BCE3CB",
+                    color: "#27834A",
+                    fontSize: "11.5px",
+                    fontWeight: 700,
+                    cursor: "pointer",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    textAlign: "left",
+                  }}
+                >
+                  <span
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "8px",
+                    }}
+                  >
+                    <User size={14} color="#27834A" />
+                    <span>USER — Relawan / Warga Rimba</span>
+                  </span>
+                  <ArrowRight size={13} />
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    handleQuickLogin(
+                      "PIHAK_BERTANGGUNG_JAWAB",
+                      "petugas.bksda@dihutan.id"
+                    )
+                  }
+                  style={{
+                    padding: "8px 12px",
+                    borderRadius: "8px",
+                    backgroundColor: "#FEF8EC",
+                    border: "1px solid #F6DEAF",
+                    color: "#D99A2B",
+                    fontSize: "11.5px",
+                    fontWeight: 700,
+                    cursor: "pointer",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    textAlign: "left",
+                  }}
+                >
+                  <span
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "8px",
+                    }}
+                  >
+                    <ShieldAlert size={14} color="#D99A2B" />
+                    <span>PETUGAS — BKSDA / Manggala Agni</span>
+                  </span>
+                  <ArrowRight size={13} />
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    handleQuickLogin("ADMIN", "admin.sistem@dihutan.id")
+                  }
+                  style={{
+                    padding: "8px 12px",
+                    borderRadius: "8px",
+                    backgroundColor: "#FDF2F1",
+                    border: "1px solid #F8C8C4",
+                    color: "#C7473D",
+                    fontSize: "11.5px",
+                    fontWeight: 700,
+                    cursor: "pointer",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    textAlign: "left",
+                  }}
+                >
+                  <span
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "8px",
+                    }}
+                  >
+                    <Shield size={14} color="#C7473D" />
+                    <span>ADMIN — Administrator Sistem</span>
+                  </span>
+                  <ArrowRight size={13} />
+                </button>
+              </div>
             </div>
 
-            <button
-              type="submit"
-              disabled={loading}
+            {/* Registration Footer Link */}
+            <div
               style={{
-                background: "#0b3b2b",
-                color: "#ffffff",
-                border: "none",
-                borderRadius: "10px",
-                padding: "12px",
-                fontSize: "13.5px",
-                fontWeight: 700,
-                cursor: loading ? "not-allowed" : "pointer",
-                opacity: loading ? 0.7 : 1,
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "8px",
-                marginTop: "6px",
+                marginTop: "20px",
+                paddingTop: "14px",
+                borderTop: "1px solid #DFE6DC",
+                textAlign: "center",
+                fontSize: "12.5px",
+                color: "#647268",
               }}
             >
-              <LogIn size={16} />
-              <span>
-                {loading ? "Memproses Autentikasi..." : "Masuk ke Dashboard"}
-              </span>
-            </button>
-          </form>
-
-          {/* Quick Demo Login Matrix for Evaluators */}
-          <div
-            style={{
-              marginTop: "20px",
-              paddingTop: "16px",
-              borderTop: "1px solid #eef2ee",
-            }}
-          >
-            <span
-              style={{
-                fontSize: "10.5px",
-                fontWeight: 800,
-                color: "#0a7544",
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-                display: "flex",
-                alignItems: "center",
-                gap: "5px",
-                marginBottom: "8px",
-              }}
-            >
-              <Sparkles size={12} />
-              Akses Cepat Pengujian (3 Peran Sistem):
-            </span>
-
-            <div style={{ display: "grid", gap: "6px" }}>
-              <button
-                type="button"
-                onClick={() =>
-                  handleQuickLogin("USER", "relawan@dihutan.id")
-                }
+              Belum memiliki akun?{" "}
+              <Link
+                href="/daftar"
                 style={{
-                  padding: "7px 12px",
-                  borderRadius: "8px",
-                  background: "#f0fdf4",
-                  border: "1px solid #bbf7d0",
-                  color: "#166534",
-                  fontSize: "11px",
+                  color: "#173F2B",
                   fontWeight: 700,
-                  cursor: "pointer",
-                  display: "flex",
+                  textDecoration: "none",
+                  display: "inline-flex",
                   alignItems: "center",
-                  justifyContent: "space-between",
+                  gap: "2px",
                 }}
               >
-                <span
-                  style={{ display: "flex", alignItems: "center", gap: "6px" }}
-                >
-                  <User size={13} color="#166534" />
-                  <span>Masuk sebagai USER (Penjaga Warga / Relawan)</span>
-                </span>
-                <ArrowRight size={12} />
-              </button>
-
-              <button
-                type="button"
-                onClick={() =>
-                  handleQuickLogin(
-                    "PIHAK_BERTANGGUNG_JAWAB",
-                    "petugas.bksda@dihutan.id"
-                  )
-                }
-                style={{
-                  padding: "7px 12px",
-                  borderRadius: "8px",
-                  background: "#fefce8",
-                  border: "1px solid #fef08a",
-                  color: "#854d0e",
-                  fontSize: "11px",
-                  fontWeight: 700,
-                  cursor: "pointer",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                }}
-              >
-                <span
-                  style={{ display: "flex", alignItems: "center", gap: "6px" }}
-                >
-                  <ShieldAlert size={13} color="#854d0e" />
-                  <span>Masuk sebagai PIHAK BERTANGGUNG JAWAB (BKSDA)</span>
-                </span>
-                <ArrowRight size={12} />
-              </button>
-
-              <button
-                type="button"
-                onClick={() =>
-                  handleQuickLogin("ADMIN", "admin.sistem@dihutan.id")
-                }
-                style={{
-                  padding: "7px 12px",
-                  borderRadius: "8px",
-                  background: "#fef2f2",
-                  border: "1px solid #fecaca",
-                  color: "#991b1b",
-                  fontSize: "11px",
-                  fontWeight: 700,
-                  cursor: "pointer",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                }}
-              >
-                <span
-                  style={{ display: "flex", alignItems: "center", gap: "6px" }}
-                >
-                  <Shield size={13} color="#991b1b" />
-                  <span>Masuk sebagai ADMIN (Administrator Sistem)</span>
-                </span>
-                <ArrowRight size={12} />
-              </button>
+                Daftar Akun USER <ArrowRight size={13} />
+              </Link>
             </div>
-          </div>
-
-          <div
-            style={{
-              marginTop: "20px",
-              paddingTop: "14px",
-              borderTop: "1px solid #f0f3f0",
-              textAlign: "center",
-              fontSize: "12px",
-              color: "#6f8774",
-            }}
-          >
-            Belum memiliki akun terdaftar?{" "}
-            <Link
-              href="/daftar"
-              style={{
-                color: "#0a7544",
-                fontWeight: 700,
-                textDecoration: "none",
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "2px",
-              }}
-            >
-              Daftar Akun USER <ArrowRight size={12} />
-            </Link>
           </div>
         </div>
-      </div>
+      </main>
 
-      <div
+      {/* Footer copyright */}
+      <footer
         style={{
           padding: "16px",
           textAlign: "center",
-          fontSize: "11.5px",
-          color: "#688d77",
+          fontSize: "12px",
+          color: "#647268",
+          borderTop: "1px solid #DFE6DC",
+          backgroundColor: "#FFFFFF",
         }}
       >
         Platform DiHutan · Menjaga Hutan Kalimantan Melalui Telemetri Nyata
-      </div>
+      </footer>
     </div>
   );
 }
@@ -549,7 +851,7 @@ export default function MasukPage() {
   return (
     <Suspense
       fallback={
-        <div style={{ minHeight: "100vh", background: "#082f22" }} />
+        <div style={{ minHeight: "100vh", backgroundColor: "#F5F7F2" }} />
       }
     >
       <MasukContent />

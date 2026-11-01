@@ -57,7 +57,7 @@ export default function DashboardOverviewPage() {
 
           <div className="hero-banner-footer">
             <span>
-              <CheckCircle2 size={14} color="#4ade80" /> Seluruh sistem normal
+              <CheckCircle2 size={14} color="#27834A" /> Seluruh sistem normal
             </span>
             <span>
               <Clock size={13} /> Diperbarui 2 menit lalu
@@ -81,21 +81,21 @@ export default function DashboardOverviewPage() {
       {/* 2. DIAGRAM ALUR SISTEM KERJA DIHUTAN */}
       <div
         style={{
-          background: "#ffffff",
-          border: "1px solid #e1e7e1",
+          background: "#FFFFFF",
+          border: "1px solid #DFE6DC",
           borderRadius: "20px",
           padding: "24px 28px",
-          boxShadow: "0 4px 16px rgba(0,0,0,0.02)",
+          boxShadow: "0 1px 3px rgba(23, 37, 29, 0.04)",
         }}
       >
         <div style={{ marginBottom: "16px" }}>
-          <span style={{ fontSize: "10.5px", fontWeight: 800, color: "#0a7544", letterSpacing: "0.12em", textTransform: "uppercase" }}>
+          <span style={{ fontSize: "10.5px", fontWeight: 800, color: "#173F2B", letterSpacing: "0.12em", textTransform: "uppercase" }}>
             ALUR KERJA END-TO-END SISTEM DIHUTAN
           </span>
-          <h2 style={{ fontSize: "20px", fontWeight: 800, color: "#0f2417", margin: "4px 0 2px" }}>
+          <h2 style={{ fontSize: "20px", fontWeight: 800, color: "#17251D", margin: "4px 0 2px" }}>
             Dari Pembacaan Sensor Lapangan Hingga Tindak Lanjut Petugas
           </h2>
-          <p style={{ fontSize: "12px", color: "#6f8774", margin: 0 }}>
+          <p style={{ fontSize: "12px", color: "#647268", margin: 0 }}>
             Membedakan secara tegas proses otomatis pembacaan sensor dan tahapan verifikasi lapangan oleh manusia.
           </p>
         </div>
@@ -110,56 +110,56 @@ export default function DashboardOverviewPage() {
           }}
         >
           {/* Step 1 */}
-          <div style={{ background: "#f8faf8", border: "1px solid #e5ebe5", borderRadius: "14px", padding: "16px" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px", color: "#0a7544" }}>
+          <div style={{ background: "#F8FAF7", border: "1px solid #DFE6DC", borderRadius: "14px", padding: "16px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px", color: "#173F2B" }}>
               <Radio size={18} />
               <strong style={{ fontSize: "12px" }}>1. Sensor Lapangan</strong>
             </div>
-            <p style={{ fontSize: "11px", color: "#526857", margin: 0, lineHeight: 1.45 }}>
+            <p style={{ fontSize: "11.5px", color: "#647268", margin: 0, lineHeight: 1.45 }}>
               DHT11, MQ gas, dan probe gambut membaca kondisi fisik lingkungan secara periodik.
             </p>
           </div>
 
           {/* Step 2 */}
-          <div style={{ background: "#f8faf8", border: "1px solid #e5ebe5", borderRadius: "14px", padding: "16px" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px", color: "#0a7544" }}>
+          <div style={{ background: "#F8FAF7", border: "1px solid #DFE6DC", borderRadius: "14px", padding: "16px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px", color: "#173F2B" }}>
               <Cpu size={18} />
               <strong style={{ fontSize: "12px" }}>2. Pemrosesan ESP32</strong>
             </div>
-            <p style={{ fontSize: "11px", color: "#526857", margin: 0, lineHeight: 1.45 }}>
+            <p style={{ fontSize: "11.5px", color: "#647268", margin: 0, lineHeight: 1.45 }}>
               Mikrokontroler memvalidasi sinyal ADC dan mengirim paket telemetri ke server via jaringan.
             </p>
           </div>
 
           {/* Step 3 */}
-          <div style={{ background: "#f8faf8", border: "1px solid #e5ebe5", borderRadius: "14px", padding: "16px" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px", color: "#0a7544" }}>
+          <div style={{ background: "#F8FAF7", border: "1px solid #DFE6DC", borderRadius: "14px", padding: "16px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px", color: "#173F2B" }}>
               <Layers size={18} />
               <strong style={{ fontSize: "12px" }}>3. Backend Supabase</strong>
             </div>
-            <p style={{ fontSize: "11px", color: "#526857", margin: 0, lineHeight: 1.45 }}>
+            <p style={{ fontSize: "11.5px", color: "#647268", margin: 0, lineHeight: 1.45 }}>
               PostgreSQL menyimpan data telemetri ber-timestamp dan mengevaluasi aturan ambang batas.
             </p>
           </div>
 
           {/* Step 4 */}
-          <div style={{ background: "#f8faf8", border: "1px solid #e5ebe5", borderRadius: "14px", padding: "16px" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px", color: "#0a7544" }}>
+          <div style={{ background: "#F8FAF7", border: "1px solid #DFE6DC", borderRadius: "14px", padding: "16px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px", color: "#173F2B" }}>
               <Activity size={18} />
               <strong style={{ fontSize: "12px" }}>4. Peta &amp; Peringatan</strong>
             </div>
-            <p style={{ fontSize: "11px", color: "#526857", margin: 0, lineHeight: 1.45 }}>
+            <p style={{ fontSize: "11.5px", color: "#647268", margin: 0, lineHeight: 1.45 }}>
               Nilai anomali memunculkan status indikasi pada peta pemantauan kawasan Sungai Kapuas.
             </p>
           </div>
 
           {/* Step 5 */}
-          <div style={{ background: "#f8faf8", border: "1px solid #e5ebe5", borderRadius: "14px", padding: "16px" }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px", color: "#0a7544" }}>
+          <div style={{ background: "#F8FAF7", border: "1px solid #DFE6DC", borderRadius: "14px", padding: "16px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "8px", color: "#173F2B" }}>
               <FileCheck2 size={18} />
               <strong style={{ fontSize: "12px" }}>5. Verifikasi Petugas</strong>
             </div>
-            <p style={{ fontSize: "11px", color: "#526857", margin: 0, lineHeight: 1.45 }}>
+            <p style={{ fontSize: "11.5px", color: "#647268", margin: 0, lineHeight: 1.45 }}>
               Petugas BKSDA memeriksa lokasi fisik dan mencatat hasil verifikasi nyata di sistem.
             </p>
           </div>
@@ -242,7 +242,7 @@ export default function DashboardOverviewPage() {
         {/* Card Footer */}
         <div className="env-card-footer">
           <div className="env-footer-left">
-            <span style={{ color: "#22c55e", fontSize: "12px" }}>●</span>
+            <span style={{ color: "#27834A", fontSize: "12px" }}>●</span>
             <span>Pembaruan terakhir 20 Mei 2025, 09:41 WIB · Sensor DHT11 &amp; Probe Gambut</span>
           </div>
           <div className="env-footer-tag">DATA SIMULASI</div>
@@ -254,33 +254,33 @@ export default function DashboardOverviewPage() {
         {/* Kolom Kiri: Ringkasan Lokasi Pemantauan */}
         <div
           style={{
-            background: "#ffffff",
-            border: "1px solid #e1e7e1",
+            background: "#FFFFFF",
+            border: "1px solid #DFE6DC",
             borderRadius: "18px",
             padding: "24px",
-            boxShadow: "0 4px 16px rgba(0,0,0,0.02)",
+            boxShadow: "0 1px 3px rgba(23, 37, 29, 0.04)",
             display: "flex",
             flexDirection: "column",
           }}
         >
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "14px" }}>
             <div>
-              <span style={{ fontSize: "10.5px", fontWeight: 800, color: "#0a7544", letterSpacing: "0.1em", textTransform: "uppercase" }}>
+              <span style={{ fontSize: "10.5px", fontWeight: 800, color: "#173F2B", letterSpacing: "0.1em", textTransform: "uppercase" }}>
                 PEMANTAUAN KAWASAN
               </span>
-              <h3 style={{ fontSize: "17px", fontWeight: 800, color: "#0f2417", margin: "4px 0 0" }}>
+              <h3 style={{ fontSize: "17px", fontWeight: 800, color: "#17251D", margin: "4px 0 0" }}>
                 Kawasan Sungai Kapuas ({monitoringLocationsData.length} Titik Terdata)
               </h3>
             </div>
             <Link
               href="/dashboard/monitoring"
-              style={{ fontSize: "12px", fontWeight: 700, color: "#0a7544", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "4px" }}
+              style={{ fontSize: "12px", fontWeight: 700, color: "#173F2B", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "4px" }}
             >
               Peta Lengkap <ArrowRight size={13} />
             </Link>
           </div>
 
-          <p style={{ fontSize: "12px", color: "#526857", margin: "0 0 16px", lineHeight: 1.5 }}>
+          <p style={{ fontSize: "12px", color: "#647268", margin: "0 0 16px", lineHeight: 1.5 }}>
             Titik stasiun telemetri disebar di sepanjang koridor Sungai Kapuas untuk mendeteksi dehidrasi lapisan gambut dangkal.
           </p>
 
@@ -293,17 +293,17 @@ export default function DashboardOverviewPage() {
                   display: "flex",
                   justifyContent: "space-between",
                   alignItems: "center",
-                  padding: "10px 12px",
+                  padding: "10px 14px",
                   borderRadius: "10px",
-                  background: "#f8faf8",
-                  border: "1px solid #e5ebe5",
+                  background: "#F8FAF7",
+                  border: "1px solid #DFE6DC",
                   textDecoration: "none",
                   color: "inherit",
                 }}
               >
                 <div>
-                  <strong style={{ fontSize: "13px", color: "#0f2417", display: "block" }}>{loc.name}</strong>
-                  <span style={{ fontSize: "11px", color: "#6f8774" }}>
+                  <strong style={{ fontSize: "13px", color: "#17251D", display: "block" }}>{loc.name}</strong>
+                  <span style={{ fontSize: "11.5px", color: "#647268" }}>
                     {loc.subDistrict}, {loc.regency}
                   </span>
                 </div>
@@ -313,8 +313,9 @@ export default function DashboardOverviewPage() {
                     fontWeight: 700,
                     padding: "3px 8px",
                     borderRadius: "99px",
-                    background: loc.status === "normal" ? "#dcfce7" : loc.status === "perhatian" ? "#fef3c7" : "#fee2e2",
-                    color: loc.status === "normal" ? "#166534" : loc.status === "perhatian" ? "#92400e" : "#991b1b",
+                    background: loc.status === "normal" ? "#EAF5EE" : loc.status === "perhatian" ? "#FEF8EC" : "#FDF2F1",
+                    color: loc.status === "normal" ? "#166534" : loc.status === "perhatian" ? "#B45309" : "#C7473D",
+                    border: `1px solid ${loc.status === "normal" ? "#BBF7D0" : loc.status === "perhatian" ? "#FDE68A" : "#FECDD3"}`,
                   }}
                 >
                   {loc.status.toUpperCase()}
@@ -327,33 +328,33 @@ export default function DashboardOverviewPage() {
         {/* Kolom Kanan: Peringatan Terbaru & Status Verifikasi */}
         <div
           style={{
-            background: "#ffffff",
-            border: "1px solid #e1e7e1",
+            background: "#FFFFFF",
+            border: "1px solid #DFE6DC",
             borderRadius: "18px",
             padding: "24px",
-            boxShadow: "0 4px 16px rgba(0,0,0,0.02)",
+            boxShadow: "0 1px 3px rgba(23, 37, 29, 0.04)",
             display: "flex",
             flexDirection: "column",
           }}
         >
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "14px" }}>
             <div>
-              <span style={{ fontSize: "10.5px", fontWeight: 800, color: "#0a7544", letterSpacing: "0.1em", textTransform: "uppercase" }}>
+              <span style={{ fontSize: "10.5px", fontWeight: 800, color: "#173F2B", letterSpacing: "0.1em", textTransform: "uppercase" }}>
                 LOG INDIKASI &amp; VERIFIKASI
               </span>
-              <h3 style={{ fontSize: "17px", fontWeight: 800, color: "#0f2417", margin: "4px 0 0" }}>
+              <h3 style={{ fontSize: "17px", fontWeight: 800, color: "#17251D", margin: "4px 0 0" }}>
                 Peringatan Kondisi Lingkungan
               </h3>
             </div>
             <Link
               href="/dashboard/monitoring"
-              style={{ fontSize: "12px", fontWeight: 700, color: "#0a7544", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "4px" }}
+              style={{ fontSize: "12px", fontWeight: 700, color: "#173F2B", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "4px" }}
             >
               Semua Riwayat <ArrowRight size={13} />
             </Link>
           </div>
 
-          <p style={{ fontSize: "12px", color: "#526857", margin: "0 0 16px", lineHeight: 1.5 }}>
+          <p style={{ fontSize: "12px", color: "#647268", margin: "0 0 16px", lineHeight: 1.5 }}>
             Sistem mencatat pembacaan sensor yang melampaui batas aman. Seluruh indikasi wajib diverifikasi langsung oleh petugas sebelum ditetapkan sebagai kebakaran.
           </p>
 
@@ -365,30 +366,30 @@ export default function DashboardOverviewPage() {
                   style={{
                     padding: "12px 14px",
                     borderRadius: "10px",
-                    background: alt.severity === "critical" ? "#fff1f2" : "#fefce8",
-                    border: `1px solid ${alt.severity === "critical" ? "#fecdd3" : "#fef08a"}`,
+                    background: alt.severity === "critical" ? "#FFF1F2" : "#FEFCE8",
+                    border: `1px solid ${alt.severity === "critical" ? "#FECDD3" : "#FEF08A"}`,
                   }}
                 >
                   <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "4px" }}>
-                    <span style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "12px", fontWeight: 700, color: alt.severity === "critical" ? "#9f1239" : "#854d0e" }}>
+                    <span style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "12px", fontWeight: 700, color: alt.severity === "critical" ? "#9F1239" : "#854D0E" }}>
                       <AlertTriangle size={14} />
                       {alt.locationName} ({alt.parameter})
                     </span>
-                    <span style={{ fontSize: "10px", fontWeight: 800, textTransform: "uppercase", color: alt.severity === "critical" ? "#e11d48" : "#ca8a04" }}>
+                    <span style={{ fontSize: "10px", fontWeight: 800, textTransform: "uppercase", color: alt.severity === "critical" ? "#E11D48" : "#CA8A04" }}>
                       {alt.severity}
                     </span>
                   </div>
-                  <p style={{ fontSize: "11px", color: "#4c0519", margin: "0 0 4px" }}>
+                  <p style={{ fontSize: "11.5px", color: "#17251D", margin: "0 0 4px" }}>
                     <strong>{alt.title}</strong> — {alt.message} (Nilai: {alt.value})
                   </p>
-                  <span style={{ fontSize: "10px", color: "#881337" }}>Waktu terpicu: {alt.timestamp}</span>
+                  <span style={{ fontSize: "10.5px", color: "#647268" }}>Waktu terpicu: {alt.timestamp}</span>
                 </div>
               ))
             ) : (
-              <div style={{ padding: "24px", textAlign: "center", color: "#526857", background: "#f8faf8", borderRadius: "10px" }}>
-                <ShieldCheck size={28} color="#16a34a" style={{ margin: "0 auto 8px" }} />
-                <strong style={{ display: "block", fontSize: "13px" }}>Tidak Ada Peringatan Aktif</strong>
-                <span style={{ fontSize: "11px" }}>Semua sensor berada dalam rentang ambang batas normal.</span>
+              <div style={{ padding: "24px", textAlign: "center", color: "#647268", background: "#F8FAF7", border: "1px solid #DFE6DC", borderRadius: "10px" }}>
+                <ShieldCheck size={28} color="#27834A" style={{ margin: "0 auto 8px" }} />
+                <strong style={{ display: "block", fontSize: "13px", color: "#17251D" }}>Tidak Ada Peringatan Aktif</strong>
+                <span style={{ fontSize: "11.5px" }}>Semua sensor berada dalam rentang ambang batas normal.</span>
               </div>
             )}
           </div>
@@ -398,28 +399,28 @@ export default function DashboardOverviewPage() {
       {/* 5. ARTIKEL EDUKASI PILIHAN TERBARU */}
       <div
         style={{
-          background: "#ffffff",
-          border: "1px solid #e1e7e1",
+          background: "#FFFFFF",
+          border: "1px solid #DFE6DC",
           borderRadius: "20px",
           padding: "24px 28px",
-          boxShadow: "0 4px 16px rgba(0,0,0,0.02)",
+          boxShadow: "0 1px 3px rgba(23, 37, 29, 0.04)",
         }}
       >
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "18px" }}>
           <div>
-            <span style={{ fontSize: "10.5px", fontWeight: 800, color: "#0a7544", letterSpacing: "0.12em", textTransform: "uppercase" }}>
+            <span style={{ fontSize: "10.5px", fontWeight: 800, color: "#173F2B", letterSpacing: "0.12em", textTransform: "uppercase" }}>
               ENSIKLOPEDIA RIMBA KALIMANTAN
             </span>
-            <h2 style={{ fontSize: "20px", fontWeight: 800, color: "#0f2417", margin: "4px 0 2px" }}>
+            <h2 style={{ fontSize: "20px", fontWeight: 800, color: "#17251D", margin: "4px 0 2px" }}>
               Pengetahuan Ekosistem, Gambut &amp; Flora-Fauna Hutan
             </h2>
-            <p style={{ fontSize: "12px", color: "#6f8774", margin: 0 }}>
+            <p style={{ fontSize: "12px", color: "#647268", margin: 0 }}>
               Bacaan berbasis riset dan referensi botani tanpa gamifikasi kuis atau elemen permainan.
             </p>
           </div>
           <Link
             href="/dashboard/edukasi"
-            style={{ fontSize: "12.5px", fontWeight: 700, color: "#0a7544", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "4px" }}
+            style={{ fontSize: "12.5px", fontWeight: 700, color: "#173F2B", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "4px" }}
           >
             Buka Perpustakaan Digital <ArrowRight size={14} />
           </Link>
@@ -434,16 +435,16 @@ export default function DashboardOverviewPage() {
               style={{
                 textDecoration: "none",
                 color: "inherit",
-                background: "#fbfcfb",
-                border: "1px solid #e5ebe5",
+                background: "#FFFFFF",
+                border: "1px solid #DFE6DC",
                 borderRadius: "14px",
                 overflow: "hidden",
                 display: "flex",
                 flexDirection: "column",
-                transition: "transform 0.18s ease, border-color 0.18s ease",
+                transition: "transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease",
               }}
             >
-              <div style={{ height: "140px", position: "relative", background: "#0a2618" }}>
+              <div style={{ height: "140px", position: "relative", background: "#173F2B" }}>
                 <Image
                   src={art.heroImage || "/hutan.jpg"}
                   alt={art.title}
@@ -452,17 +453,17 @@ export default function DashboardOverviewPage() {
                 />
               </div>
               <div style={{ padding: "16px", display: "flex", flexDirection: "column", gap: "6px", flexGrow: 1 }}>
-                <div style={{ display: "flex", justifyContent: "space-between", fontSize: "10px", color: "#0a7544", fontWeight: 700 }}>
+                <div style={{ display: "flex", justifyContent: "space-between", fontSize: "10.5px", color: "#173F2B", fontWeight: 700 }}>
                   <span>{art.categoryTitle.toUpperCase()}</span>
-                  <span style={{ color: "#7a947c" }}>{art.readingTimeMinutes} Menit Baca</span>
+                  <span style={{ color: "#647268" }}>{art.readingTimeMinutes} Menit Baca</span>
                 </div>
-                <h4 style={{ fontSize: "15px", fontWeight: 800, color: "#0f2417", margin: 0, lineHeight: 1.3 }}>
+                <h4 style={{ fontSize: "15px", fontWeight: 800, color: "#17251D", margin: 0, lineHeight: 1.3 }}>
                   {art.title}
                 </h4>
-                <p style={{ fontSize: "11.5px", color: "#526857", lineHeight: 1.5, margin: 0, flexGrow: 1 }}>
+                <p style={{ fontSize: "11.5px", color: "#647268", lineHeight: 1.5, margin: 0, flexGrow: 1 }}>
                   {art.subtitle}
                 </p>
-                <span style={{ fontSize: "11.5px", fontWeight: 700, color: "#0a7544", marginTop: "8px", display: "inline-flex", alignItems: "center", gap: "4px" }}>
+                <span style={{ fontSize: "11.5px", fontWeight: 700, color: "#173F2B", marginTop: "8px", display: "inline-flex", alignItems: "center", gap: "4px" }}>
                   Baca artikel selengkapnya <ArrowRight size={12} />
                 </span>
               </div>

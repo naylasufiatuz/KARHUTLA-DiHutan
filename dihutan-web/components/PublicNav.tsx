@@ -20,7 +20,7 @@ export default function PublicNav() {
   return (
     <header
       style={{
-        background: "#082f22",
+        background: "#173F2B",
         borderBottom: "1px solid rgba(255, 255, 255, 0.08)",
         position: "sticky",
         top: 0,
@@ -74,7 +74,7 @@ export default function PublicNav() {
             <strong style={{ fontSize: "18px", letterSpacing: "-0.02em", display: "block", lineHeight: 1.1 }}>
               DiHutan
             </strong>
-            <span style={{ fontSize: "8.5px", fontWeight: 800, letterSpacing: "0.14em", color: "#68d391", textTransform: "uppercase" }}>
+            <span style={{ fontSize: "8.5px", fontWeight: 800, letterSpacing: "0.14em", color: "#8BAF70", textTransform: "uppercase" }}>
               INTELIJEN HUTAN
             </span>
           </div>
@@ -140,8 +140,8 @@ export default function PublicNav() {
               fontSize: "12.5px",
               fontWeight: 700,
               textDecoration: "none",
-              color: "#082f22",
-              background: "#68d391",
+              color: "#173F2B",
+              background: "#8BAF70",
             }}
           >
             <span>Buka Dashboard</span>

@@ -128,19 +128,20 @@ export default function DashboardPerangkatIoTPage() {
       {/* 1. Header Notice on Status Separation */}
       <div
         style={{
-          background: "#eaf5ee",
-          border: "1px solid #bbf7d0",
+          background: "#EAF5EE",
+          border: "1px solid #BFE2CB",
           borderRadius: "14px",
           padding: "14px 18px",
           marginBottom: "24px",
           display: "flex",
           alignItems: "center",
           gap: "12px",
-          fontSize: "12px",
-          color: "#0a7544",
+          fontSize: "12.5px",
+          color: "#173F2B",
+          lineHeight: 1.5,
         }}
       >
-        <Zap size={22} color="#0a7544" style={{ flexShrink: 0 }} />
+        <Zap size={22} color="#173F2B" style={{ flexShrink: 0 }} />
         <div>
           <strong>Arsitektur Logika &amp; Pemisahan Status Nyata:</strong> Status
           koneksi (ONLINE/OFFLINE) menunjukkan keterhubungan mikrokontroler
@@ -154,19 +155,19 @@ export default function DashboardPerangkatIoTPage() {
       {pingToast && (
         <div
           style={{
-            background: "#123023",
-            border: "1px solid #c9ff9f",
+            background: "#EAF5EE",
+            border: "1px solid #27834A",
             borderRadius: "10px",
             padding: "10px 16px",
             marginBottom: "16px",
             fontSize: "12px",
-            color: "#c9ff9f",
+            color: "#166534",
             display: "flex",
             alignItems: "center",
             gap: "10px",
           }}
         >
-          <CheckCircle2 size={16} />
+          <CheckCircle2 size={16} color="#27834A" />
           <span>{pingToast}</span>
         </div>
       )}
@@ -176,9 +177,9 @@ export default function DashboardPerangkatIoTPage() {
         <div style={{ marginBottom: "16px" }}>
           <span
             style={{
-              fontSize: "10px",
+              fontSize: "10.5px",
               fontWeight: 800,
-              color: "#0a7544",
+              color: "#173F2B",
               letterSpacing: "0.14em",
               textTransform: "uppercase",
             }}
@@ -187,15 +188,15 @@ export default function DashboardPerangkatIoTPage() {
           </span>
           <h3
             style={{
-              fontFamily: "Fraunces, Georgia, serif",
               fontSize: "20px",
-              color: "#0f2417",
+              fontWeight: 800,
+              color: "#17251D",
               margin: "4px 0 2px",
             }}
           >
             Rantai Daya, Sinyal Sensor, dan Aksi Aktuator
           </h3>
-          <p style={{ fontSize: "11.5px", color: "#6f8774", margin: 0 }}>
+          <p style={{ fontSize: "12px", color: "#647268", margin: 0 }}>
             Alur keterhubungan fisik dari catu daya, papan terminal,
             mikrokontroler, 3 sensor telemetri, hingga modul relay pembasah
           </p>
@@ -204,7 +205,7 @@ export default function DashboardPerangkatIoTPage() {
         <div className="diagram-flow-grid">
           {/* Node 1: Catu Daya */}
           <div className="diagram-node">
-            <Plug size={20} color="#0a7544" />
+            <Plug size={20} color="#173F2B" />
             <strong>Adaptor DC 12V/5V</strong>
             <span>Catu Daya Pasif</span>
           </div>
@@ -213,7 +214,7 @@ export default function DashboardPerangkatIoTPage() {
 
           {/* Node 2: Expansion Board */}
           <div className="diagram-node">
-            <Layers size={20} color="#0a7544" />
+            <Layers size={20} color="#173F2B" />
             <strong>Expansion Board</strong>
             <span>Distribusi Rel &amp; Terminal</span>
           </div>
@@ -222,7 +223,7 @@ export default function DashboardPerangkatIoTPage() {
 
           {/* Node 3: ESP32 Core */}
           <div className="diagram-node node-esp32">
-            <Cpu size={20} color="#15803d" />
+            <Cpu size={20} color="#27834A" />
             <strong>ESP32 Dual-Core</strong>
             <span>Pusat Logika Edge &amp; Wi-Fi</span>
           </div>
@@ -232,18 +233,18 @@ export default function DashboardPerangkatIoTPage() {
           {/* Node 4: 3 Sensors (DHT11, Gas, Soil) */}
           <div
             className="diagram-node"
-            style={{ background: "#e8f5ec", borderColor: "#86efac" }}
+            style={{ background: "#EAF5EE", borderColor: "#BFE2CB" }}
           >
             <Radio size={20} color="#166534" />
             <strong style={{ color: "#166534" }}>3 Sensor Masukan</strong>
-            <span style={{ color: "#15803d" }}>DHT11 + MQ Gas + Gambut</span>
+            <span style={{ color: "#27834A" }}>DHT11 + MQ Gas + Gambut</span>
           </div>
 
           <div className="diagram-arrow">&rarr;</div>
 
           {/* Node 5: Relay Module */}
           <div className="diagram-node">
-            <ToggleLeft size={20} color="#0a7544" />
+            <ToggleLeft size={20} color="#173F2B" />
             <strong>Modul Relay 5V</strong>
             <span>Sakelar Optocoupler</span>
           </div>
@@ -253,11 +254,11 @@ export default function DashboardPerangkatIoTPage() {
           {/* Node 6: Mini Pump */}
           <div
             className="diagram-node"
-            style={{ borderColor: "#7dd3fc", background: "#f0f9ff" }}
+            style={{ borderColor: "#BAE6FD", background: "#F0F9FF" }}
           >
-            <Droplets size={20} color="#0284c7" />
-            <strong style={{ color: "#0369a1" }}>Mini Water Pump</strong>
-            <span style={{ color: "#0284c7" }}>Pembasah AutoSpray</span>
+            <Droplets size={20} color="#0284C7" />
+            <strong style={{ color: "#0369A1" }}>Mini Water Pump</strong>
+            <span style={{ color: "#0284C7" }}>Pembasah AutoSpray</span>
           </div>
         </div>
       </div>
@@ -283,13 +284,13 @@ export default function DashboardPerangkatIoTPage() {
                 borderRadius: "99px",
                 fontSize: "11.5px",
                 fontWeight: 600,
-                background: filterCategory === cat.key ? "#0a7544" : "#ffffff",
+                background: filterCategory === cat.key ? "#173F2B" : "#FFFFFF",
                 border: `1px solid ${
-                  filterCategory === cat.key ? "#0a7544" : "#dce3dc"
+                  filterCategory === cat.key ? "#173F2B" : "#DFE6DC"
                 }`,
-                color: filterCategory === cat.key ? "#ffffff" : "#4a6350",
+                color: filterCategory === cat.key ? "#FFFFFF" : "#647268",
                 cursor: "pointer",
-                transition: "all 0.2s ease",
+                transition: "all 0.15s ease",
               }}
             >
               {cat.label}
@@ -300,12 +301,13 @@ export default function DashboardPerangkatIoTPage() {
         <button
           onClick={fetchDevices}
           style={{
-            background: "none",
-            border: "1px solid #dce3dc",
+            background: "#FFFFFF",
+            border: "1px solid #DFE6DC",
             borderRadius: "99px",
             padding: "6px 12px",
-            color: "#6f8774",
-            fontSize: "11px",
+            color: "#647268",
+            fontSize: "11.5px",
+            fontWeight: 600,
             cursor: "pointer",
             display: "inline-flex",
             alignItems: "center",
@@ -343,8 +345,9 @@ export default function DashboardPerangkatIoTPage() {
                   <span
                     className="status-badge"
                     style={{
-                      background: "rgba(255,255,255,0.08)",
-                      color: "#a5bca6",
+                      background: "#F0F4EE",
+                      color: "#647268",
+                      border: "1px solid #DFE6DC",
                     }}
                   >
                     Komponen Pasif
@@ -381,13 +384,13 @@ export default function DashboardPerangkatIoTPage() {
                   <div
                     className="hardware-spec-row"
                     style={{
-                      color: "#c9ff9f",
-                      borderTop: "1px solid rgba(255,255,255,0.06)",
-                      paddingTop: "4px",
+                      color: "#27834A",
+                      borderTop: "1px solid #DFE6DC",
+                      paddingTop: "6px",
                     }}
                   >
                     <span>Telemetri:</span>
-                    <strong style={{ color: "#c9ff9f" }}>
+                    <strong style={{ color: "#27834A" }}>
                       {dev.currentReading}
                     </strong>
                   </div>
@@ -397,16 +400,15 @@ export default function DashboardPerangkatIoTPage() {
               {/* Status Notes */}
               <p
                 style={{
-                  fontSize: "10.5px",
-                  color: "#8da18e",
-                  fontStyle: "italic",
-                  margin: "4px 0 0",
+                  fontSize: "11px",
+                  color: "#647268",
+                  margin: "6px 0 0",
                   display: "flex",
                   alignItems: "center",
-                  gap: "4px",
+                  gap: "5px",
                 }}
               >
-                <Lightbulb size={12} color="#c9ff9f" />
+                <Lightbulb size={13} color="#27834A" />
                 <span>{dev.statusNotes}</span>
               </p>
 
@@ -417,6 +419,7 @@ export default function DashboardPerangkatIoTPage() {
                     display: "inline-flex",
                     alignItems: "center",
                     gap: "4px",
+                    color: "#647268",
                   }}
                 >
                   <Clock size={11} /> {dev.lastPing}
@@ -427,12 +430,13 @@ export default function DashboardPerangkatIoTPage() {
                     <button
                       onClick={() => handleToggleDeviceStatus(dev)}
                       style={{
-                        background: "rgba(255,255,255,0.08)",
-                        border: "1px solid rgba(255,255,255,0.15)",
-                        color: "#ffffff",
-                        fontSize: "10px",
+                        background: "#F0F4EE",
+                        border: "1px solid #DFE6DC",
+                        color: "#17251D",
+                        fontSize: "10.5px",
+                        fontWeight: 600,
                         padding: "3px 8px",
-                        borderRadius: "4px",
+                        borderRadius: "6px",
                         cursor: "pointer",
                       }}
                       title="Uji Toggle Status"
@@ -446,11 +450,10 @@ export default function DashboardPerangkatIoTPage() {
                     style={{
                       background: "none",
                       border: "none",
-                      color: "#c9ff9f",
-                      fontSize: "11px",
+                      color: "#173F2B",
+                      fontSize: "11.5px",
                       fontWeight: 700,
                       cursor: "pointer",
-                      textDecoration: "underline",
                       display: "inline-flex",
                       alignItems: "center",
                       gap: "3px",
@@ -469,9 +472,9 @@ export default function DashboardPerangkatIoTPage() {
       <div className="status-history-box">
         <h3
           style={{
-            fontFamily: "Fraunces, Georgia, serif",
             fontSize: "18px",
-            color: "#0f2417",
+            fontWeight: 800,
+            color: "#17251D",
             margin: "0 0 4px",
           }}
         >
@@ -479,8 +482,8 @@ export default function DashboardPerangkatIoTPage() {
         </h3>
         <p
           style={{
-            fontSize: "11.5px",
-            color: "#6f8774",
+            fontSize: "12px",
+            color: "#647268",
             margin: "0 0 16px",
           }}
         >
@@ -509,12 +512,12 @@ export default function DashboardPerangkatIoTPage() {
                 <td>
                   <span
                     style={{
-                      padding: "2px 8px",
+                      padding: "3px 8px",
                       borderRadius: "6px",
-                      fontSize: "9.5px",
+                      fontSize: "10px",
                       fontWeight: 800,
-                      background: "#eaf5ee",
-                      color: "#0a7544",
+                      background: "#EAF5EE",
+                      color: "#166534",
                     }}
                   >
                     {log.changeType}
@@ -533,7 +536,7 @@ export default function DashboardPerangkatIoTPage() {
           style={{
             position: "fixed",
             inset: 0,
-            background: "rgba(9, 46, 29, 0.6)",
+            background: "rgba(23, 37, 29, 0.45)",
             backdropFilter: "blur(6px)",
             zIndex: 100,
             display: "flex",
@@ -545,13 +548,13 @@ export default function DashboardPerangkatIoTPage() {
         >
           <div
             style={{
-              background: "#ffffff",
-              border: "1px solid #e1e7e1",
+              background: "#FFFFFF",
+              border: "1px solid #DFE6DC",
               borderRadius: "20px",
               maxWidth: "540px",
               width: "100%",
               padding: "28px",
-              boxShadow: "0 24px 60px rgba(0, 0, 0, 0.15)",
+              boxShadow: "0 24px 60px rgba(23, 37, 29, 0.15)",
               position: "relative",
               maxHeight: "90vh",
               overflowY: "auto",
@@ -566,7 +569,7 @@ export default function DashboardPerangkatIoTPage() {
                 right: "16px",
                 background: "transparent",
                 border: "none",
-                color: "#6f8774",
+                color: "#647268",
                 cursor: "pointer",
                 padding: "4px",
               }}
@@ -576,9 +579,9 @@ export default function DashboardPerangkatIoTPage() {
 
             <span
               style={{
-                fontSize: "10px",
+                fontSize: "10.5px",
                 fontWeight: 800,
-                color: "#0a7544",
+                color: "#173F2B",
                 letterSpacing: "0.12em",
                 textTransform: "uppercase",
               }}
@@ -587,9 +590,9 @@ export default function DashboardPerangkatIoTPage() {
             </span>
             <h3
               style={{
-                fontFamily: "Fraunces, Georgia, serif",
                 fontSize: "22px",
-                color: "#0f2417",
+                fontWeight: 800,
+                color: "#17251D",
                 margin: "4px 0 12px",
               }}
             >
@@ -599,8 +602,8 @@ export default function DashboardPerangkatIoTPage() {
             <div
               style={{
                 height: "160px",
-                background: "#f8faf8",
-                border: "1px solid #edf1ed",
+                background: "#F8FAF7",
+                border: "1px solid #DFE6DC",
                 borderRadius: "12px",
                 display: "flex",
                 alignItems: "center",
@@ -620,7 +623,7 @@ export default function DashboardPerangkatIoTPage() {
             <p
               style={{
                 fontSize: "12.5px",
-                color: "#4a6350",
+                color: "#36453B",
                 lineHeight: 1.6,
                 margin: "0 0 16px",
               }}
@@ -630,8 +633,8 @@ export default function DashboardPerangkatIoTPage() {
 
             <h4
               style={{
-                fontSize: "12px",
-                color: "#0a7544",
+                fontSize: "12.5px",
+                color: "#173F2B",
                 margin: "0 0 8px",
                 fontWeight: 800,
               }}
@@ -640,13 +643,13 @@ export default function DashboardPerangkatIoTPage() {
             </h4>
             <div
               style={{
-                background: "#f7f9f7",
-                border: "1px solid #dce3dc",
+                background: "#F8FAF7",
+                border: "1px solid #DFE6DC",
                 borderRadius: "10px",
-                padding: "10px 14px",
+                padding: "12px 14px",
                 display: "grid",
-                gap: "6px",
-                fontSize: "11.5px",
+                gap: "8px",
+                fontSize: "12px",
                 marginBottom: "16px",
               }}
             >
@@ -658,8 +661,8 @@ export default function DashboardPerangkatIoTPage() {
                     justifyContent: "space-between",
                   }}
                 >
-                  <span style={{ color: "#6f8774" }}>{s.label}:</span>
-                  <strong style={{ color: "#0f2417", textAlign: "right" }}>
+                  <span style={{ color: "#647268" }}>{s.label}:</span>
+                  <strong style={{ color: "#17251D", textAlign: "right" }}>
                     {s.value}
                   </strong>
                 </div>
@@ -672,12 +675,13 @@ export default function DashboardPerangkatIoTPage() {
                 width: "100%",
                 padding: "11px",
                 borderRadius: "99px",
-                background: "#0a7544",
+                background: "#173F2B",
                 border: "none",
-                color: "#ffffff",
-                fontSize: "12px",
+                color: "#FFFFFF",
+                fontSize: "12.5px",
                 fontWeight: 700,
                 cursor: "pointer",
+                transition: "background-color 0.15s ease",
               }}
             >
               Tutup Rincian Alat

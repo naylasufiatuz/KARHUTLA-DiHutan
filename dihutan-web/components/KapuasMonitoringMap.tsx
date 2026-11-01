@@ -150,23 +150,29 @@ export default function KapuasMonitoringMap({
     // Add new markers
     filteredLocations.forEach((loc) => {
       const colors = getStatusColor(loc.status);
+      const isSelected = loc.id === selectedLocationId;
 
       // Create Custom DOM Element for Marker
       const el = document.createElement("div");
-      el.className = `map-custom-marker marker-${loc.status}`;
-      el.style.width = "32px";
-      el.style.height = "32px";
+      el.className = `map-custom-marker marker-${loc.status} ${
+        isSelected ? "is-selected-marker" : ""
+      }`;
+      el.style.width = isSelected ? "38px" : "32px";
+      el.style.height = isSelected ? "38px" : "32px";
       el.style.borderRadius = "50%";
       el.style.backgroundColor = colors.bg;
-      el.style.border = "2.5px solid #ffffff";
-      el.style.boxShadow = `0 4px 12px rgba(0,0,0,0.35), 0 0 16px ${colors.bg}88`;
+      el.style.border = isSelected ? "3px solid #ffffff" : "2.5px solid #ffffff";
+      el.style.boxShadow = isSelected
+        ? `0 0 0 4px #173F2B, 0 8px 20px rgba(0,0,0,0.4)`
+        : `0 4px 12px rgba(0,0,0,0.35), 0 0 16px ${colors.bg}88`;
       el.style.cursor = "pointer";
       el.style.display = "flex";
       el.style.alignItems = "center";
       el.style.justifyContent = "center";
       el.style.color = "#ffffff";
-      el.style.fontSize = "14px";
+      el.style.fontSize = isSelected ? "16px" : "14px";
       el.style.fontWeight = "bold";
+      el.style.transition = "all 0.25s ease";
       el.setAttribute("aria-label", `${loc.name} - ${colors.label}`);
 
       // Icon inside marker
@@ -227,7 +233,7 @@ export default function KapuasMonitoringMap({
 
       markersRef.current.push(marker);
     });
-  }, [filteredLocations, mapLoaded, onSelectLocation]);
+  }, [filteredLocations, mapLoaded, onSelectLocation, selectedLocationId]);
 
   // Focus location if selectedLocationId changes
   useEffect(() => {

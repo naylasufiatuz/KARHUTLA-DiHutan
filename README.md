@@ -217,3 +217,4 @@ Proyek ini dikembangkan sebagai inisiatif pelestarian lingkungan dan mitigasi be
 <div align="center">
   <p>🌱 <em>"Hutan yang lestari dan gambut yang basah adalah nafas bagi kehidupan kita bersama."</em></p>
 </div>
+

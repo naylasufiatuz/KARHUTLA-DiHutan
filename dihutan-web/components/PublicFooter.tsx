@@ -81,6 +81,7 @@ export default function PublicFooter() {
             <li><Link href="/dashboard/laporan" style={{ color: "#c4d7cc", textDecoration: "none" }}>Pelaporan Kebakaran</Link></li>
             <li><Link href="/masuk" style={{ color: "#c4d7cc", textDecoration: "none" }}>Portal Masuk Petugas</Link></li>
             <li><Link href="/daftar" style={{ color: "#c4d7cc", textDecoration: "none" }}>Daftar Akun Pengguna</Link></li>
+            <li><a href="https://drive.google.com/file/d/1OvJh5XtWD4I64kgkJLK69zpy28fiMaIP/view" target="_blank" rel="noopener noreferrer" style={{ color: "#68d391", textDecoration: "none", fontWeight: 700 }}>Download APK Android ↗</a></li>
           </ul>
         </div>
 

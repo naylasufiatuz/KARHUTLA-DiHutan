@@ -811,7 +811,7 @@ export default function LandingView() {
             <a className="login-nav register-nav-btn" href="/daftar">
               Daftar
             </a>
-            <a className="pill" href="#aplikasi">
+            <a className="pill" href="https://drive.google.com/file/d/1OvJh5XtWD4I64kgkJLK69zpy28fiMaIP/view" target="_blank" rel="noopener noreferrer">
               Download App
             </a>
           </div>
@@ -1223,7 +1223,7 @@ export default function LandingView() {
               </p>
               <a
                 className="dl-b"
-                href="https://drive.google.com/file/d/1OvJh5XtWD4I64kgkJLK69zpy28fiMaIP/view?usp=sharing"
+                href="https://drive.google.com/file/d/1OvJh5XtWD4I64kgkJLK69zpy28fiMaIP/view"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -1601,7 +1601,7 @@ export default function LandingView() {
                 <section aria-label="Terhubung">
                   <h2>TERHUBUNG</h2>
                   <a href="#risiko">Peta risiko</a>
-                  <a href="#aplikasi">Download aplikasi</a>
+                  <a href="https://drive.google.com/file/d/1OvJh5XtWD4I64kgkJLK69zpy28fiMaIP/view" target="_blank" rel="noopener noreferrer">Download aplikasi</a>
                   <a href="mailto:halo@dihutan.id">Hubungi kami ↗</a>
                 </section>
               </div>

@@ -13,6 +13,8 @@ import {
   RotateCcw,
   KeyRound,
   LogOut,
+  Smartphone,
+  Download,
 } from "lucide-react";
 import { useDashboard } from "@/lib/dashboard-context";
 import { UserRole } from "@/lib/dashboard-data";
@@ -759,6 +761,77 @@ export default function DashboardPengaturanPage() {
             <span>{isCheckingDb ? "Memeriksa..." : "Uji Koneksi Backend"}</span>
           </button>
         </div>
+      </div>
+
+      {/* 4.5 MOBILE APP DOWNLOAD CARD */}
+      <div
+        style={{
+          background: "#ffffff",
+          borderRadius: "16px",
+          padding: "24px",
+          border: "1px solid #d1fae5",
+          boxShadow: "0 2px 8px rgba(0,0,0,0.03)",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          flexWrap: "wrap",
+          gap: "16px",
+          marginBottom: "20px",
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+          <div
+            style={{
+              width: "44px",
+              height: "44px",
+              borderRadius: "12px",
+              background: "#ecfdf5",
+              color: "#059669",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexShrink: 0,
+            }}
+          >
+            <Smartphone size={22} />
+          </div>
+          <div>
+            <h3
+              style={{
+                fontSize: "15px",
+                fontWeight: 700,
+                color: "#065f46",
+                margin: "0 0 4px",
+              }}
+            >
+              Aplikasi Mobile DiHutan (Android APK)
+            </h3>
+            <p style={{ fontSize: "12px", color: "#6b7280", margin: 0 }}>
+              Versi Stabil v1.4.2 (28 MB) · Pasang langsung di smartphone petugas dan relawan lapangan.
+            </p>
+          </div>
+        </div>
+        <a
+          href="https://drive.google.com/file/d/1OvJh5XtWD4I64kgkJLK69zpy28fiMaIP/view"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            padding: "10px 20px",
+            borderRadius: "10px",
+            background: "#059669",
+            color: "#ffffff",
+            textDecoration: "none",
+            fontSize: "13px",
+            fontWeight: 700,
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "8px",
+            boxShadow: "0 2px 6px rgba(5, 150, 105, 0.3)",
+          }}
+        >
+          <Download size={15} />
+          <span>Unduh File APK Android ↗</span>
+        </a>
       </div>
 
       {/* 5. SESSION & SIGN OUT CARD */}

@@ -3,7 +3,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import {
-  Zap,
   Layers,
   Cpu,
   Radio,
@@ -11,10 +10,14 @@ import {
   Droplets,
   Plug,
   Clock,
-  Lightbulb,
   CheckCircle2,
   X,
   RotateCcw,
+  Search,
+  ArrowRight,
+  ShieldCheck,
+  Activity,
+  Sliders,
 } from "lucide-react";
 import {
   iotDevicesDataset,
@@ -28,6 +31,7 @@ export default function DashboardPerangkatIoTPage() {
   const [devices, setDevices] = useState<IoTDeviceItem[]>(iotDevicesDataset);
   const [selectedDevice, setSelectedDevice] = useState<IoTDeviceItem | null>(null);
   const [filterCategory, setFilterCategory] = useState<string>("ALL");
+  const [searchQuery, setSearchQuery] = useState<string>("");
   const [pingToast, setPingToast] = useState<string | null>(null);
 
   const fetchDevices = useCallback(async () => {
@@ -49,7 +53,12 @@ export default function DashboardPerangkatIoTPage() {
     fetch("/api/devices")
       .then((res) => (res.ok ? res.json() : null))
       .then((json) => {
-        if (active && json?.success && Array.isArray(json.data) && json.data.length > 0) {
+        if (
+          active &&
+          json?.success &&
+          Array.isArray(json.data) &&
+          json.data.length > 0
+        ) {
           setDevices(json.data);
         }
       })
@@ -61,22 +70,48 @@ export default function DashboardPerangkatIoTPage() {
   }, []);
 
   const categories = [
-    { key: "ALL", label: "Semua 8 Perangkat" },
-    { key: "Mikrokontroler", label: "Mikrokontroler" },
-    { key: "Distribusi", label: "Distribusi Sinyal" },
-    { key: "Sensor Lingkungan", label: "Sensor" },
-    { key: "Aktuator Mekanik", label: "Aktuator / Pompa" },
-    { key: "Catu Daya", label: "Catu Daya" },
+    { key: "ALL", label: "Semua", count: devices.length },
+    {
+      key: "Mikrokontroler",
+      label: "Mikrokontroler",
+      count: devices.filter((d) => d.category === "Mikrokontroler").length,
+    },
+    {
+      key: "Sensor Lingkungan",
+      label: "Sensor",
+      count: devices.filter((d) => d.category === "Sensor Lingkungan").length,
+    },
+    {
+      key: "Aktuator Mekanik",
+      label: "Aktuator & Pompa",
+      count: devices.filter((d) => d.category === "Aktuator Mekanik").length,
+    },
+    {
+      key: "Distribusi",
+      label: "Distribusi",
+      count: devices.filter((d) => d.category === "Distribusi").length,
+    },
+    {
+      key: "Catu Daya",
+      label: "Catu Daya",
+      count: devices.filter((d) => d.category === "Catu Daya").length,
+    },
   ];
 
-  const filteredDevices = devices.filter(
-    (d) => filterCategory === "ALL" || d.category === filterCategory
-  );
+  const filteredDevices = devices.filter((d) => {
+    const matchCategory =
+      filterCategory === "ALL" || d.category === filterCategory;
+    const matchSearch =
+      searchQuery.trim() === "" ||
+      d.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      d.code.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      d.fieldRole.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchCategory && matchSearch;
+  });
 
   const handleToggleDeviceStatus = async (dev: IoTDeviceItem) => {
     const nextConn = dev.connectionStatus === "ONLINE" ? "OFFLINE" : "ONLINE";
-    const nextOp =
-      dev.operationStatus === "ACTIVE" ? "INACTIVE" : "ACTIVE";
+    const nextOp = dev.operationStatus === "ACTIVE" ? "INACTIVE" : "ACTIVE";
 
     // Optimistic update
     setDevices((prev) =>
@@ -116,7 +151,9 @@ export default function DashboardPerangkatIoTPage() {
         }),
       });
 
-      setPingToast(`Status perangkat ${dev.name} berhasil diperbarui di database!`);
+      setPingToast(
+        `Status perangkat ${dev.name} berhasil diperbarui di database!`
+      );
       setTimeout(() => setPingToast(null), 4000);
     } catch {
       setPingToast(`Gagal sinkron status perangkat ${dev.name}.`);
@@ -124,213 +161,373 @@ export default function DashboardPerangkatIoTPage() {
   };
 
   return (
-    <div>
-      {/* 1. Header Notice on Status Separation */}
-      <div
-        style={{
-          background: "#EAF5EE",
-          border: "1px solid #BFE2CB",
-          borderRadius: "14px",
-          padding: "14px 18px",
-          marginBottom: "24px",
-          display: "flex",
-          alignItems: "center",
-          gap: "12px",
-          fontSize: "12.5px",
-          color: "#173F2B",
-          lineHeight: 1.5,
-        }}
-      >
-        <Zap size={22} color="#173F2B" style={{ flexShrink: 0 }} />
+    <div style={{ maxWidth: "1400px", margin: "0 auto", paddingBottom: "36px" }}>
+      {/* 1. Hardware Hero Header Banner */}
+      <div className="hardware-hero-card">
         <div>
-          <strong>Arsitektur Logika &amp; Pemisahan Status Nyata:</strong> Status
-          koneksi (ONLINE/OFFLINE) menunjukkan keterhubungan mikrokontroler
-          dengan gateway. Status ESP32 Online <em>tidak otomatis</em> berarti
-          pompa menyala. Pompa dan relay memiliki status operasional
-          (ACTIVE/INACTIVE) terpisah yang hanya terpicu saat ambang batas
-          kelembapan gambut kritis (&lt;30%) terlewati.
-        </div>
-      </div>
-
-      {pingToast && (
-        <div
-          style={{
-            background: "#EAF5EE",
-            border: "1px solid #27834A",
-            borderRadius: "10px",
-            padding: "10px 16px",
-            marginBottom: "16px",
-            fontSize: "12px",
-            color: "#166534",
-            display: "flex",
-            alignItems: "center",
-            gap: "10px",
-          }}
-        >
-          <CheckCircle2 size={16} color="#27834A" />
-          <span>{pingToast}</span>
-        </div>
-      )}
-
-      {/* 2. System Interconnection Architecture Diagram */}
-      <div className="system-diagram-box">
-        <div style={{ marginBottom: "16px" }}>
-          <span
-            style={{
-              fontSize: "10.5px",
-              fontWeight: 800,
-              color: "#173F2B",
-              letterSpacing: "0.14em",
-              textTransform: "uppercase",
-            }}
-          >
-            DIAGRAM HUBUNGAN ANTARPERANGKAT (SISTEM IOT DIHUTAN)
+          <span className="hardware-hero-badge">
+            <Cpu size={12} />
+            KATALOG INSTRUMENTASI FISIK IOT
           </span>
-          <h3
-            style={{
-              fontSize: "20px",
-              fontWeight: 800,
-              color: "#17251D",
-              margin: "4px 0 2px",
-            }}
-          >
-            Rantai Daya, Sinyal Sensor, dan Aksi Aktuator
-          </h3>
-          <p style={{ fontSize: "12px", color: "#647268", margin: 0 }}>
-            Alur keterhubungan fisik dari catu daya, papan terminal,
-            mikrokontroler, 3 sensor telemetri, hingga modul relay pembasah
+          <h1 className="hardware-hero-title">
+            Katalog Perangkat Keras &amp; Edge Telemetri
+          </h1>
+          <p className="hardware-hero-desc">
+            Dokumentasi foto produk asli, spesifikasi teknis lapangan, dan rantai
+            kelistrikan terpadu untuk monitoring muka air gambut dan pencegahan karhutla.
           </p>
         </div>
 
+        <div className="hardware-stats-cluster">
+          <div className="hardware-stat-pill">
+            <span>Total Alat</span>
+            <strong>{devices.length} Unit</strong>
+          </div>
+          <div className="hardware-stat-pill">
+            <span>Sensor Aktif</span>
+            <strong>3 Input</strong>
+          </div>
+          <div className="hardware-stat-pill">
+            <span>Integritas</span>
+            <strong style={{ color: "#C9FF9F" }}>100% Real</strong>
+          </div>
+        </div>
+      </div>
+
+      {/* 2. Interactive System Interconnection Architecture Diagram */}
+      <div className="system-diagram-box">
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "flex-start",
+            flexWrap: "wrap",
+            gap: "12px",
+          }}
+        >
+          <div>
+            <span
+              style={{
+                fontSize: "10.5px",
+                fontWeight: 800,
+                color: "#173F2B",
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+              }}
+            >
+              ARSITEKTUR KONEKSI FISIK (PIPELINE ELEKTRONIK &amp; MEKANIK)
+            </span>
+            <h2
+              style={{
+                fontFamily: "Fraunces, Georgia, serif",
+                fontSize: "20px",
+                fontWeight: 750,
+                color: "#17251D",
+                margin: "4px 0 2px",
+              }}
+            >
+              Rantai Daya, Pengolahan Sinyal, dan Aksi Aktuator
+            </h2>
+            <p style={{ fontSize: "12px", color: "#647268", margin: 0 }}>
+              Klik tahapan node untuk memfilter kartu perangkat keras yang bersesuaian
+            </p>
+          </div>
+
+          <div
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "6px",
+              background: "#EAF5EE",
+              border: "1px solid #BCE3CB",
+              borderRadius: "999px",
+              padding: "5px 12px",
+              fontSize: "11px",
+              fontWeight: 700,
+              color: "#173F2B",
+            }}
+          >
+            <ShieldCheck size={14} color="#27834A" />
+            <span>Verifikasi Lab Fisik</span>
+          </div>
+        </div>
+
         <div className="diagram-flow-grid">
-          {/* Node 1: Catu Daya */}
-          <div className="diagram-node">
-            <Plug size={20} color="#173F2B" />
+          {/* Node 1 */}
+          <div
+            className={`diagram-node ${
+              filterCategory === "Catu Daya" ? "is-active-pipeline" : ""
+            }`}
+            onClick={() => setFilterCategory("Catu Daya")}
+          >
+            <span className="diagram-node-number">TAHAP 01</span>
+            <div className="diagram-node-icon">
+              <Plug size={20} color="#173F2B" />
+            </div>
             <strong>Adaptor DC 12V/5V</strong>
             <span>Catu Daya Pasif</span>
           </div>
 
-          <div className="diagram-arrow">&rarr;</div>
-
-          {/* Node 2: Expansion Board */}
-          <div className="diagram-node">
-            <Layers size={20} color="#173F2B" />
-            <strong>Expansion Board</strong>
-            <span>Distribusi Rel &amp; Terminal</span>
-          </div>
-
-          <div className="diagram-arrow">&rarr;</div>
-
-          {/* Node 3: ESP32 Core */}
-          <div className="diagram-node node-esp32">
-            <Cpu size={20} color="#27834A" />
-            <strong>ESP32 Dual-Core</strong>
-            <span>Pusat Logika Edge &amp; Wi-Fi</span>
-          </div>
-
-          <div className="diagram-arrow">&harr;</div>
-
-          {/* Node 4: 3 Sensors (DHT11, Gas, Soil) */}
+          {/* Node 2 */}
           <div
-            className="diagram-node"
-            style={{ background: "#EAF5EE", borderColor: "#BFE2CB" }}
+            className={`diagram-node ${
+              filterCategory === "Distribusi" ? "is-active-pipeline" : ""
+            }`}
+            onClick={() => setFilterCategory("Distribusi")}
           >
-            <Radio size={20} color="#166534" />
-            <strong style={{ color: "#166534" }}>3 Sensor Masukan</strong>
-            <span style={{ color: "#27834A" }}>DHT11 + MQ Gas + Gambut</span>
+            <span className="diagram-node-number">TAHAP 02</span>
+            <div className="diagram-node-icon">
+              <Layers size={20} color="#173F2B" />
+            </div>
+            <strong>Expansion Board</strong>
+            <span>Distribusi Terminal</span>
           </div>
 
-          <div className="diagram-arrow">&rarr;</div>
+          {/* Node 3 */}
+          <div
+            className={`diagram-node ${
+              filterCategory === "Mikrokontroler" ? "is-active-pipeline" : ""
+            }`}
+            onClick={() => setFilterCategory("Mikrokontroler")}
+          >
+            <span className="diagram-node-number">TAHAP 03</span>
+            <div
+              className="diagram-node-icon"
+              style={{ background: "#EAF5EE", borderColor: "#BCE3CB" }}
+            >
+              <Cpu size={20} color="#27834A" />
+            </div>
+            <strong>ESP32 Core Board</strong>
+            <span>Komputasi Edge</span>
+          </div>
 
-          {/* Node 5: Relay Module */}
-          <div className="diagram-node">
-            <ToggleLeft size={20} color="#173F2B" />
-            <strong>Modul Relay 5V</strong>
+          {/* Node 4 */}
+          <div
+            className={`diagram-node ${
+              filterCategory === "Sensor Lingkungan" ? "is-active-pipeline" : ""
+            }`}
+            onClick={() => setFilterCategory("Sensor Lingkungan")}
+          >
+            <span className="diagram-node-number">TAHAP 04</span>
+            <div
+              className="diagram-node-icon"
+              style={{ background: "#FEF8EC", borderColor: "#F6DEAF" }}
+            >
+              <Radio size={20} color="#D99A2B" />
+            </div>
+            <strong>3 Sensor Input</strong>
+            <span>DHT11 + Gas + Gambut</span>
+          </div>
+
+          {/* Node 5 */}
+          <div
+            className={`diagram-node ${
+              filterCategory === "Aktuator Mekanik" ? "is-active-pipeline" : ""
+            }`}
+            onClick={() => setFilterCategory("Aktuator Mekanik")}
+          >
+            <span className="diagram-node-number">TAHAP 05</span>
+            <div className="diagram-node-icon">
+              <ToggleLeft size={20} color="#173F2B" />
+            </div>
+            <strong>Relay 5V Modul</strong>
             <span>Sakelar Optocoupler</span>
           </div>
 
-          <div className="diagram-arrow">&rarr;</div>
-
-          {/* Node 6: Mini Pump */}
+          {/* Node 6 */}
           <div
-            className="diagram-node"
-            style={{ borderColor: "#BAE6FD", background: "#F0F9FF" }}
+            className={`diagram-node ${
+              filterCategory === "Aktuator Mekanik" ? "is-active-pipeline" : ""
+            }`}
+            onClick={() => setFilterCategory("Aktuator Mekanik")}
           >
-            <Droplets size={20} color="#0284C7" />
-            <strong style={{ color: "#0369A1" }}>Mini Water Pump</strong>
-            <span style={{ color: "#0284C7" }}>Pembasah AutoSpray</span>
+            <span className="diagram-node-number">TAHAP 06</span>
+            <div
+              className="diagram-node-icon"
+              style={{ background: "#F0F9FF", borderColor: "#BAE6FD" }}
+            >
+              <Droplets size={20} color="#0284C7" />
+            </div>
+            <strong>Pompa &amp; Solenoid</strong>
+            <span>Otomasi AutoSpray</span>
           </div>
         </div>
       </div>
 
-      {/* 3. Category Filter Tabs */}
+      {/* 3. Search Bar and Category Filter Strip */}
       <div
         style={{
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
           flexWrap: "wrap",
-          gap: "10px",
-          marginBottom: "20px",
+          gap: "14px",
+          marginBottom: "24px",
+          background: "#FFFFFF",
+          border: "1px solid #DFE6DC",
+          borderRadius: "16px",
+          padding: "12px 18px",
+          boxShadow: "0 1px 3px rgba(23, 37, 29, 0.03)",
         }}
       >
-        <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+        {/* Search Input */}
+        <div
+          style={{
+            position: "relative",
+            display: "flex",
+            alignItems: "center",
+            minWidth: "260px",
+            flex: 1,
+            maxWidth: "360px",
+          }}
+        >
+          <Search
+            size={15}
+            color="#647268"
+            style={{ position: "absolute", left: "12px", pointerEvents: "none" }}
+          />
+          <input
+            type="text"
+            placeholder="Cari alat, kode (ESP32), atau fungsi..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            style={{
+              width: "100%",
+              padding: "8px 30px 8px 34px",
+              backgroundColor: "#F5F7F2",
+              border: "1px solid #DFE6DC",
+              borderRadius: "999px",
+              fontSize: "12px",
+              color: "#17251D",
+              outline: "none",
+            }}
+          />
+          {searchQuery && (
+            <button
+              onClick={() => setSearchQuery("")}
+              style={{
+                position: "absolute",
+                right: "10px",
+                background: "none",
+                border: "none",
+                color: "#647268",
+                cursor: "pointer",
+                fontSize: "11px",
+              }}
+            >
+              ✕
+            </button>
+          )}
+        </div>
+
+        {/* Category Pills */}
+        <div style={{ display: "flex", gap: "6px", flexWrap: "wrap" }}>
           {categories.map((cat) => (
             <button
               key={cat.key}
               onClick={() => setFilterCategory(cat.key)}
               style={{
-                padding: "7px 14px",
-                borderRadius: "99px",
+                padding: "6px 14px",
+                borderRadius: "999px",
                 fontSize: "11.5px",
                 fontWeight: 600,
-                background: filterCategory === cat.key ? "#173F2B" : "#FFFFFF",
+                background:
+                  filterCategory === cat.key ? "#173F2B" : "#F5F7F2",
                 border: `1px solid ${
                   filterCategory === cat.key ? "#173F2B" : "#DFE6DC"
                 }`,
                 color: filterCategory === cat.key ? "#FFFFFF" : "#647268",
                 cursor: "pointer",
-                transition: "all 0.15s ease",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "5px",
+                transition: "all 0.16s ease",
               }}
             >
-              {cat.label}
+              <span>{cat.label}</span>
+              <span
+                style={{
+                  background:
+                    filterCategory === cat.key
+                      ? "rgba(255, 255, 255, 0.22)"
+                      : "#E2E9DF",
+                  color: filterCategory === cat.key ? "#FFFFFF" : "#173F2B",
+                  fontSize: "10px",
+                  fontWeight: 800,
+                  padding: "1px 6px",
+                  borderRadius: "999px",
+                }}
+              >
+                {cat.count}
+              </span>
             </button>
           ))}
         </div>
 
+        {/* Refresh Hardware Button */}
         <button
           onClick={fetchDevices}
           style={{
-            background: "#FFFFFF",
+            background: "#F5F7F2",
             border: "1px solid #DFE6DC",
-            borderRadius: "99px",
-            padding: "6px 12px",
-            color: "#647268",
+            borderRadius: "999px",
+            padding: "7px 14px",
+            color: "#17251D",
             fontSize: "11.5px",
-            fontWeight: 600,
+            fontWeight: 700,
             cursor: "pointer",
             display: "inline-flex",
             alignItems: "center",
-            gap: "5px",
+            gap: "6px",
+            transition: "all 0.16s ease",
           }}
+          title="Sinkronisasi status perangkat"
         >
           <RotateCcw size={12} />
-          <span>Refresh Hardware</span>
+          <span>Sinkron Hardware</span>
         </button>
       </div>
+
+      {pingToast && (
+        <div
+          style={{
+            background: "#EAF5EE",
+            border: "1px solid #BCE3CB",
+            borderRadius: "10px",
+            padding: "12px 18px",
+            marginBottom: "20px",
+            fontSize: "12.5px",
+            color: "#166534",
+            display: "flex",
+            alignItems: "center",
+            gap: "10px",
+            fontWeight: 600,
+            boxShadow: "0 2px 8px rgba(39, 131, 74, 0.08)",
+          }}
+        >
+          <CheckCircle2 size={18} color="#27834A" />
+          <span>{pingToast}</span>
+        </div>
+      )}
 
       {/* 4. Hardware Cards Grid (8 Devices) */}
       <div className="hardware-grid">
         {filteredDevices.map((dev) => (
           <div key={dev.id} className="hardware-card">
-            {/* Visual Cutout */}
+            {/* Visual Studio Showcase */}
             <div className="hardware-card-visual">
+              <span className="hardware-card-code-tag">{dev.code}</span>
+
               <Image
                 src={dev.image}
                 alt={dev.name}
-                width={200}
+                width={220}
                 height={140}
-                style={{ objectFit: "contain" }}
+                style={{
+                  maxHeight: "140px",
+                  width: "auto",
+                  objectFit: "contain",
+                }}
               />
 
               {/* Status Badges Overlay */}
@@ -338,7 +535,18 @@ export default function DashboardPerangkatIoTPage() {
                 <span
                   className={`status-badge status-${dev.connectionStatus}`}
                 >
-                  Koneksi: {dev.connectionStatus}
+                  <span
+                    style={{
+                      width: "6px",
+                      height: "6px",
+                      borderRadius: "50%",
+                      backgroundColor:
+                        dev.connectionStatus === "ONLINE"
+                          ? "#27834A"
+                          : "#C7473D",
+                    }}
+                  ></span>
+                  {dev.connectionStatus}
                 </span>
 
                 {dev.isPassive ? (
@@ -350,13 +558,13 @@ export default function DashboardPerangkatIoTPage() {
                       border: "1px solid #DFE6DC",
                     }}
                   >
-                    Komponen Pasif
+                    Pasif
                   </span>
                 ) : (
                   <span
                     className={`status-badge status-${dev.operationStatus}`}
                   >
-                    Status: {dev.operationStatus}
+                    {dev.operationStatus}
                   </span>
                 )}
               </div>
@@ -364,53 +572,29 @@ export default function DashboardPerangkatIoTPage() {
 
             {/* Content Body */}
             <div className="hardware-card-body">
-              <span className="hardware-category-tag">
-                {dev.category} · {dev.code}
-              </span>
+              <span className="hardware-category-tag">{dev.category}</span>
               <h3 className="hardware-name">{dev.name}</h3>
               <p className="hardware-role">{dev.fieldRole}</p>
 
-              {/* Hardware Specs Snippet */}
+              {/* Live Telemetry Reading Chip (if available) */}
+              {dev.currentReading && (
+                <div className="hardware-telemetry-chip">
+                  <Activity size={13} color="#27834A" />
+                  <span>{dev.currentReading}</span>
+                </div>
+              )}
+
+              {/* Specifications Matrix */}
               <div className="hardware-specs-list">
                 <div className="hardware-spec-row">
-                  <span>Tegangan:</span>
+                  <span>Tegangan Kerja:</span>
                   <strong>{dev.workingVoltage}</strong>
                 </div>
                 <div className="hardware-spec-row">
                   <span>Sumber Daya:</span>
                   <strong>{dev.powerSource}</strong>
                 </div>
-                {dev.currentReading && (
-                  <div
-                    className="hardware-spec-row"
-                    style={{
-                      color: "#27834A",
-                      borderTop: "1px solid #DFE6DC",
-                      paddingTop: "6px",
-                    }}
-                  >
-                    <span>Telemetri:</span>
-                    <strong style={{ color: "#27834A" }}>
-                      {dev.currentReading}
-                    </strong>
-                  </div>
-                )}
               </div>
-
-              {/* Status Notes */}
-              <p
-                style={{
-                  fontSize: "11px",
-                  color: "#647268",
-                  margin: "6px 0 0",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "5px",
-                }}
-              >
-                <Lightbulb size={13} color="#27834A" />
-                <span>{dev.statusNotes}</span>
-              </p>
 
               {/* Footer */}
               <div className="hardware-card-footer">
@@ -418,48 +602,41 @@ export default function DashboardPerangkatIoTPage() {
                   style={{
                     display: "inline-flex",
                     alignItems: "center",
-                    gap: "4px",
+                    gap: "5px",
                     color: "#647268",
+                    fontSize: "11px",
                   }}
                 >
-                  <Clock size={11} /> {dev.lastPing}
+                  <Clock size={12} /> {dev.lastPing}
                 </span>
 
-                <div style={{ display: "flex", gap: "6px" }}>
+                <div style={{ display: "flex", gap: "8px" }}>
                   {canManageContent && !dev.isPassive && (
                     <button
                       onClick={() => handleToggleDeviceStatus(dev)}
                       style={{
                         background: "#F0F4EE",
                         border: "1px solid #DFE6DC",
-                        color: "#17251D",
-                        fontSize: "10.5px",
-                        fontWeight: 600,
-                        padding: "3px 8px",
+                        color: "#173F2B",
+                        fontSize: "11px",
+                        fontWeight: 700,
+                        padding: "5px 10px",
                         borderRadius: "6px",
                         cursor: "pointer",
                       }}
-                      title="Uji Toggle Status"
+                      title="Uji simulasi ubah status alat"
                     >
-                      Ubah Status
+                      <Sliders size={11} style={{ marginRight: "3px" }} />
+                      Uji Status
                     </button>
                   )}
 
                   <button
                     onClick={() => setSelectedDevice(dev)}
-                    style={{
-                      background: "none",
-                      border: "none",
-                      color: "#173F2B",
-                      fontSize: "11.5px",
-                      fontWeight: 700,
-                      cursor: "pointer",
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: "3px",
-                    }}
+                    className="btn-detail-hardware"
                   >
-                    Detail &rarr;
+                    <span>Spesifikasi</span>
+                    <ArrowRight size={13} />
                   </button>
                 </div>
               </div>
@@ -468,28 +645,85 @@ export default function DashboardPerangkatIoTPage() {
         ))}
       </div>
 
-      {/* 5. Device Status Change History Table */}
-      <div className="status-history-box">
-        <h3
+      {filteredDevices.length === 0 && (
+        <div
           style={{
-            fontSize: "18px",
-            fontWeight: 800,
-            color: "#17251D",
-            margin: "0 0 4px",
-          }}
-        >
-          Riwayat Perubahan Status Perangkat
-        </h3>
-        <p
-          style={{
-            fontSize: "12px",
+            background: "#FFFFFF",
+            border: "1px solid #DFE6DC",
+            borderRadius: "16px",
+            padding: "48px 24px",
+            textAlign: "center",
             color: "#647268",
-            margin: "0 0 16px",
           }}
         >
-          Log peristiwa operasional mikrokontroler, sensor tanah, modul relay,
-          dan pompa mini
-        </p>
+          <Cpu size={36} color="#8BAF70" style={{ marginBottom: "12px" }} />
+          <h3 style={{ color: "#17251D", margin: "0 0 6px" }}>
+            Tidak ada perangkat yang sesuai pencarian
+          </h3>
+          <p style={{ fontSize: "13px", margin: "0 0 16px" }}>
+            Coba gunakan kata kunci lain atau pilih tab kategori &quot;Semua&quot;.
+          </p>
+          <button
+            onClick={() => {
+              setSearchQuery("");
+              setFilterCategory("ALL");
+            }}
+            style={{
+              background: "#173F2B",
+              color: "#FFFFFF",
+              border: "none",
+              padding: "8px 18px",
+              borderRadius: "999px",
+              fontSize: "12px",
+              fontWeight: 700,
+              cursor: "pointer",
+            }}
+          >
+            Reset Filter
+          </button>
+        </div>
+      )}
+
+      {/* 5. Device Status Change History Table */}
+      <div className="status-history-box" style={{ marginTop: "16px" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginBottom: "16px",
+            flexWrap: "wrap",
+            gap: "10px",
+          }}
+        >
+          <div>
+            <span
+              style={{
+                fontSize: "10.5px",
+                fontWeight: 800,
+                color: "#173F2B",
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+              }}
+            >
+              LOG OPERASIONAL HARDWARE
+            </span>
+            <h3
+              style={{
+                fontFamily: "Fraunces, Georgia, serif",
+                fontSize: "18px",
+                fontWeight: 750,
+                color: "#17251D",
+                margin: "4px 0 0",
+              }}
+            >
+              Riwayat Perubahan Status Komponen Lapangan
+            </h3>
+          </div>
+          <span style={{ fontSize: "11.5px", color: "#647268" }}>
+            Total {initialDeviceLogs.length} Aktivitas Tercatat
+          </span>
+        </div>
 
         <table className="history-table">
           <thead>
@@ -504,40 +738,65 @@ export default function DashboardPerangkatIoTPage() {
           <tbody>
             {initialDeviceLogs.map((log) => (
               <tr key={log.id}>
-                <td>{log.timestamp}</td>
                 <td>
-                  <strong>{log.deviceCode}</strong>
+                  <span
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "4px",
+                      color: "#647268",
+                    }}
+                  >
+                    <Clock size={11} /> {log.timestamp}
+                  </span>
                 </td>
-                <td>{log.deviceName}</td>
+                <td>
+                  <code
+                    style={{
+                      background: "#EAF5EE",
+                      color: "#173F2B",
+                      padding: "2px 6px",
+                      borderRadius: "4px",
+                      fontSize: "11px",
+                      fontWeight: 700,
+                    }}
+                  >
+                    {log.deviceCode}
+                  </code>
+                </td>
+                <td style={{ fontWeight: 700, color: "#17251D" }}>
+                  {log.deviceName}
+                </td>
                 <td>
                   <span
                     style={{
                       padding: "3px 8px",
                       borderRadius: "6px",
-                      fontSize: "10px",
+                      fontSize: "10.5px",
                       fontWeight: 800,
                       background: "#EAF5EE",
                       color: "#166534",
+                      border: "1px solid #BCE3CB",
                     }}
                   >
                     {log.changeType}
                   </span>
                 </td>
-                <td>{log.details}</td>
+                <td style={{ color: "#36453B" }}>{log.details}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
 
-      {/* 6. Detail Modal Dialog */}
+      {/* 6. Hardware Specification Detail Modal Dialog */}
       {selectedDevice && (
         <div
           style={{
             position: "fixed",
             inset: 0,
-            background: "rgba(23, 37, 29, 0.45)",
-            backdropFilter: "blur(6px)",
+            background: "rgba(23, 37, 29, 0.55)",
+            backdropFilter: "blur(8px)",
             zIndex: 100,
             display: "flex",
             alignItems: "center",
@@ -550,11 +809,11 @@ export default function DashboardPerangkatIoTPage() {
             style={{
               background: "#FFFFFF",
               border: "1px solid #DFE6DC",
-              borderRadius: "20px",
-              maxWidth: "540px",
+              borderRadius: "22px",
+              maxWidth: "600px",
               width: "100%",
-              padding: "28px",
-              boxShadow: "0 24px 60px rgba(23, 37, 29, 0.15)",
+              padding: "30px",
+              boxShadow: "0 28px 70px rgba(23, 37, 29, 0.22)",
               position: "relative",
               maxHeight: "90vh",
               overflowY: "auto",
@@ -565,92 +824,117 @@ export default function DashboardPerangkatIoTPage() {
               onClick={() => setSelectedDevice(null)}
               style={{
                 position: "absolute",
-                top: "16px",
-                right: "16px",
-                background: "transparent",
-                border: "none",
-                color: "#647268",
+                top: "18px",
+                right: "18px",
+                background: "#F5F7F2",
+                border: "1px solid #DFE6DC",
+                borderRadius: "50%",
+                width: "32px",
+                height: "32px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "#17251D",
                 cursor: "pointer",
-                padding: "4px",
+                transition: "all 0.15s ease",
               }}
+              title="Tutup dialog"
             >
-              <X size={18} />
+              <X size={16} />
             </button>
 
             <span
               style={{
-                fontSize: "10.5px",
+                fontSize: "11px",
                 fontWeight: 800,
                 color: "#173F2B",
                 letterSpacing: "0.12em",
                 textTransform: "uppercase",
+                background: "#EAF5EE",
+                padding: "3px 8px",
+                borderRadius: "6px",
               }}
             >
               {selectedDevice.category} · {selectedDevice.code}
             </span>
-            <h3
+
+            <h2
               style={{
-                fontSize: "22px",
-                fontWeight: 800,
+                fontFamily: "Fraunces, Georgia, serif",
+                fontSize: "24px",
+                fontWeight: 750,
                 color: "#17251D",
-                margin: "4px 0 12px",
+                margin: "8px 0 14px",
+                lineHeight: 1.25,
               }}
             >
               {selectedDevice.name}
-            </h3>
+            </h2>
 
+            {/* Modal Image Showcase */}
             <div
               style={{
-                height: "160px",
-                background: "#F8FAF7",
+                height: "190px",
+                background:
+                  "radial-gradient(circle at 50% 50%, #FFFFFF 0%, #F4F7F2 100%)",
                 border: "1px solid #DFE6DC",
-                borderRadius: "12px",
+                borderRadius: "14px",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                marginBottom: "16px",
+                marginBottom: "20px",
+                padding: "16px",
               }}
             >
               <Image
                 src={selectedDevice.image}
                 alt={selectedDevice.name}
-                width={220}
-                height={140}
-                style={{ objectFit: "contain" }}
+                width={260}
+                height={160}
+                style={{
+                  maxHeight: "160px",
+                  width: "auto",
+                  objectFit: "contain",
+                  filter: "drop-shadow(0 8px 18px rgba(23, 37, 29, 0.14))",
+                }}
               />
             </div>
 
+            {/* Description */}
             <p
               style={{
-                fontSize: "12.5px",
+                fontSize: "13px",
                 color: "#36453B",
-                lineHeight: 1.6,
-                margin: "0 0 16px",
+                lineHeight: 1.65,
+                margin: "0 0 18px",
               }}
             >
               {selectedDevice.fullDesc}
             </p>
 
+            {/* Technical Specifications Table */}
             <h4
               style={{
-                fontSize: "12.5px",
+                fontSize: "13px",
                 color: "#173F2B",
-                margin: "0 0 8px",
+                margin: "0 0 10px",
                 fontWeight: 800,
+                letterSpacing: "0.04em",
+                textTransform: "uppercase",
               }}
             >
-              Spesifikasi Lengkap Lapangan
+              Lembar Spesifikasi Teknis Lapangan
             </h4>
             <div
               style={{
                 background: "#F8FAF7",
                 border: "1px solid #DFE6DC",
-                borderRadius: "10px",
-                padding: "12px 14px",
+                borderRadius: "12px",
+                padding: "14px 16px",
                 display: "grid",
-                gap: "8px",
-                fontSize: "12px",
-                marginBottom: "16px",
+                gap: "10px",
+                fontSize: "12.5px",
+                marginBottom: "20px",
               }}
             >
               {selectedDevice.specs.map((s, i) => (
@@ -659,6 +943,12 @@ export default function DashboardPerangkatIoTPage() {
                   style={{
                     display: "flex",
                     justifyContent: "space-between",
+                    paddingBottom:
+                      i < selectedDevice.specs.length - 1 ? "8px" : "0",
+                    borderBottom:
+                      i < selectedDevice.specs.length - 1
+                        ? "1px dashed #DFE6DC"
+                        : "none",
                   }}
                 >
                   <span style={{ color: "#647268" }}>{s.label}:</span>
@@ -673,18 +963,19 @@ export default function DashboardPerangkatIoTPage() {
               onClick={() => setSelectedDevice(null)}
               style={{
                 width: "100%",
-                padding: "11px",
-                borderRadius: "99px",
+                padding: "12px",
+                borderRadius: "999px",
                 background: "#173F2B",
                 border: "none",
                 color: "#FFFFFF",
-                fontSize: "12.5px",
+                fontSize: "13px",
                 fontWeight: 700,
                 cursor: "pointer",
                 transition: "background-color 0.15s ease",
+                boxShadow: "0 4px 14px rgba(23, 63, 43, 0.2)",
               }}
             >
-              Tutup Rincian Alat
+              Tutup Rincian Perangkat
             </button>
           </div>
         </div>

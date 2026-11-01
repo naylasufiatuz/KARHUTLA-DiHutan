@@ -1,4 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,800;1,9..144,400;1,9..144,500;1,9..144,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
+@import "./landing.css";
+@import "./technology.css";
+@import "./book.css";
+@import "./register.css";
+@import "./dashboard.css";
+@import "./encyclopedia.css";
 
 :root {
   /* ==========================================================================
@@ -51,10 +57,3 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-@import "./landing.css";
-@import "./technology.css";
-@import "./book.css";
-@import "./register.css";
-@import "./dashboard.css";
-@import "./encyclopedia.css";

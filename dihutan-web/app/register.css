@@ -1,0 +1,550 @@
+/* ==========================================================================
+   PENJAGA RIMBA — HALAMAN DAFTAR (REGISTER PAGE STYLES)
+   ========================================================================== */
+
+.register-page {
+  min-height: 100vh;
+  min-width: 320px;
+  background: var(--forest, #07150e);
+  color: var(--ink, #f4f6ed);
+  font-family: "Inter", "Helvetica Neue", system-ui, sans-serif;
+  position: relative;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.register-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  min-height: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px clamp(20px, 4vw, 64px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(7, 21, 14, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.register-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.register-brand img {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+}
+
+.register-brand strong {
+  font-size: 22px;
+  letter-spacing: -0.05em;
+  color: #fff;
+}
+
+.register-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.register-nav-link {
+  color: #cad8ca;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.register-nav-link:hover {
+  color: #c9ff9f;
+}
+
+.register-home-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 99px;
+  border: 1px solid rgba(201, 255, 159, 0.35);
+  background: rgba(201, 255, 159, 0.1);
+  color: #c9ff9f;
+  font-size: 11px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.register-home-btn:hover {
+  background: rgba(201, 255, 159, 0.22);
+  transform: translateY(-1px);
+}
+
+/* --------------------------------------------------------------------------
+   REGISTER MAIN LAYOUT & BACKGROUND
+   -------------------------------------------------------------------------- */
+.register-main {
+  flex-grow: 1;
+  position: relative;
+  isolation: isolate;
+  padding: clamp(40px, 6vw, 80px) 0 clamp(60px, 8vw, 100px);
+}
+
+.register-main::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(ellipse at 80% 20%, rgba(35, 78, 48, 0.35) 0%, transparent 60%),
+    radial-gradient(ellipse at 20% 80%, rgba(20, 50, 32, 0.4) 0%, transparent 65%),
+    linear-gradient(180deg, rgba(7, 21, 14, 0.94) 0%, rgba(7, 21, 14, 0.98) 100%),
+    url("/hutan.jpg") center center / cover no-repeat;
+  pointer-events: none;
+}
+
+.register-wrap {
+  width: min(1140px, calc(100% - 48px));
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 480px);
+  gap: clamp(36px, 6vw, 84px);
+  align-items: flex-start;
+}
+
+/* --------------------------------------------------------------------------
+   LEFT STORY COLUMN
+   -------------------------------------------------------------------------- */
+.register-story {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.register-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #c9ff9f;
+}
+
+.register-kicker::before {
+  content: "";
+  width: 20px;
+  height: 2px;
+  background: #c9ff9f;
+  border-radius: 99px;
+}
+
+.register-title {
+  font: 700 clamp(32px, 4.4vw, 54px) / 1.05 "Fraunces", Georgia, serif;
+  letter-spacing: -0.04em;
+  color: #f4f6ed;
+  margin: 0;
+}
+
+.register-title i {
+  color: #c9ff9f;
+  font-style: italic;
+  font-weight: 500;
+}
+
+.register-lead {
+  font-size: clamp(14px, 1.25vw, 16px);
+  line-height: 1.7;
+  color: #b8ccb6;
+  margin: 0;
+}
+
+.register-benefits {
+  display: grid;
+  gap: 14px;
+  margin: 10px 0;
+}
+
+.benefit-card {
+  padding: 14px 18px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.benefit-card:hover {
+  transform: translateX(4px);
+  border-color: rgba(201, 255, 159, 0.3);
+  background: rgba(201, 255, 159, 0.04);
+}
+
+.benefit-icon {
+  font-size: 22px;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.benefit-card strong {
+  display: block;
+  font-size: 13.5px;
+  color: #eef7eb;
+  margin-bottom: 3px;
+}
+
+.benefit-card p {
+  font-size: 11.5px;
+  color: #9cb09b;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.register-quote {
+  padding: 14px 18px 14px 22px;
+  border-left: 3px solid #7cb96b;
+  background: rgba(124, 185, 107, 0.08);
+  font: 600 clamp(15px, 1.35vw, 18px) / 1.4 "Caveat", cursive;
+  color: #c9ff9f;
+  border-radius: 0 10px 10px 0;
+}
+
+/* --------------------------------------------------------------------------
+   RIGHT FORM CARD
+   -------------------------------------------------------------------------- */
+.register-card {
+  position: relative;
+  padding: clamp(24px, 3.5vw, 36px);
+  border-radius: 20px;
+  background: linear-gradient(155deg, rgba(22, 52, 36, 0.88) 0%, rgba(9, 24, 16, 0.94) 100%);
+  border: 1.5px solid rgba(201, 255, 159, 0.25);
+  box-shadow: 0 28px 75px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.register-card-head {
+  margin-bottom: 22px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.register-card-head h2 {
+  font: 700 24px / 1.2 "Fraunces", Georgia, serif;
+  color: #f4f6ed;
+  margin: 0 0 6px;
+}
+
+.register-card-head p {
+  font-size: 12px;
+  color: #aebdae;
+  margin: 0;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.register-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.register-field label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #c9d8c8;
+}
+
+.register-input,
+.register-select {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: rgba(7, 21, 14, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #f4f6ed;
+  font-size: 12.5px;
+  font-family: inherit;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.register-select {
+  cursor: pointer;
+}
+
+.register-select option {
+  background: #0d2217;
+  color: #f4f6ed;
+}
+
+.register-input:focus,
+.register-select:focus {
+  border-color: #c9ff9f;
+  box-shadow: 0 0 0 3px rgba(201, 255, 159, 0.15);
+  background: rgba(7, 21, 14, 0.95);
+}
+
+.register-input-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.register-input-group .register-input {
+  padding-right: 44px;
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  color: #8da18c;
+  font-size: 15px;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.password-toggle-btn:hover {
+  color: #c9ff9f;
+}
+
+.register-checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 11px;
+  color: #aebdae;
+  line-height: 1.5;
+  cursor: pointer;
+  user-select: none;
+  margin-top: 4px;
+}
+
+.register-checkbox-label input[type="checkbox"] {
+  margin-top: 2px;
+  accent-color: #27ae60;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+
+.register-submit-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  margin-top: 8px;
+  padding: 13px 20px;
+  border-radius: 99px;
+  background: #1e4429;
+  border: 1px solid rgba(201, 255, 159, 0.45);
+  color: #eaf5cf;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  transition: all 0.22s ease;
+}
+
+.register-submit-btn:hover:not(:disabled) {
+  background: #275635;
+  border-color: #c9ff9f;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45), 0 0 16px rgba(201, 255, 159, 0.25);
+}
+
+.register-submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.register-note {
+  font-size: 11px;
+  color: #ffd77a;
+  background: rgba(255, 215, 122, 0.08);
+  border: 1px solid rgba(255, 215, 122, 0.2);
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin: 6px 0 0;
+  line-height: 1.5;
+}
+
+.register-card-footer {
+  margin-top: 18px;
+  text-align: center;
+  font-size: 11.5px;
+  color: #8da08c;
+}
+
+.register-card-footer a {
+  color: #c9ff9f;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.register-card-footer a:hover {
+  text-decoration: underline;
+}
+
+/* --------------------------------------------------------------------------
+   SUCCESS SCREEN
+   -------------------------------------------------------------------------- */
+.register-success-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 24px 10px;
+  gap: 16px;
+  animation: successFadeIn 0.35s ease-out both;
+}
+
+@keyframes successFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.success-badge-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(201, 255, 159, 0.15);
+  border: 2px solid #c9ff9f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  box-shadow: 0 0 24px rgba(201, 255, 159, 0.3);
+}
+
+.register-success-view h3 {
+  font: 700 24px / 1.2 "Fraunces", Georgia, serif;
+  color: #f4f6ed;
+  margin: 0;
+}
+
+.success-registered-info {
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 11.5px;
+  color: #c9d8c8;
+  width: 100%;
+}
+
+.success-registered-info strong {
+  color: #c9ff9f;
+}
+
+.success-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  margin-top: 8px;
+}
+
+.success-primary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 20px;
+  border-radius: 99px;
+  background: #1e4429;
+  border: 1px solid #c9ff9f;
+  color: #eaf5cf;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.success-primary-btn:hover {
+  background: #275635;
+  transform: translateY(-2px);
+}
+
+.success-secondary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 18px;
+  border-radius: 99px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #d2ded1;
+  font-size: 11.5px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.success-secondary-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+/* --------------------------------------------------------------------------
+   RESPONSIVE DESIGN
+   -------------------------------------------------------------------------- */
+@media (max-width: 880px) {
+  .register-wrap {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .register-title {
+    font-size: 34px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   NAVBAR LINK & HELPER BUTTONS
+   -------------------------------------------------------------------------- */
+.register-nav-btn {
+  text-decoration: none !important;
+  background: rgba(201, 255, 159, 0.12) !important;
+  border: 1px solid rgba(201, 255, 159, 0.45) !important;
+  color: #c9ff9f !important;
+  font-weight: 700 !important;
+  transition: all 0.2s ease !important;
+}
+
+.register-nav-btn:hover {
+  background: rgba(201, 255, 159, 0.22) !important;
+  border-color: #c9ff9f !important;
+  box-shadow: 0 0 12px rgba(201, 255, 159, 0.25);
+  transform: translateY(-1px);
+}
+

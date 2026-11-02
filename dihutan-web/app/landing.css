@@ -5,8 +5,8 @@
   --moss: #c9ff9f;
   --tea: #e0b86a;
   --paper: #ece2c3;
-  --serif: "Fraunces", Georgia, serif;
-  --hand: "Caveat", "Segoe Script", cursive;
+  --serif: Georgia, "Times New Roman", serif;
+  --hand: "Inter", sans-serif;
   color-scheme: dark;
 }
 

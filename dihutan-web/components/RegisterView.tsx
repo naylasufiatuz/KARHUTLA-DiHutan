@@ -1,10 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
-import { Activity, Bell, Users, ShieldCheck, Leaf } from "lucide-react";
+import { ShieldCheck, MapPin, Leaf } from "lucide-react";
 
 interface RegisteredUser {
   nama: string;
@@ -147,6 +146,8 @@ export default function RegisterView() {
     setTelepon("");
     setPassword("");
     setConfirmPassword("");
+    setShowPassword(false);
+    setShowConfirmPassword(false);
     setAgreed(false);
     setErrorMsg("");
     setIsSuccess(false);
@@ -157,115 +158,67 @@ export default function RegisterView() {
     <div className="register-page">
       {/* Top Header Navigation */}
       <header className="register-header">
-        <Link href="/" className="register-brand" aria-label="DiHutan Beranda">
-          <Image
-            src="/dihutan-logo-mark.png"
-            alt="Logo DiHutan"
-            width={38}
-            height={38}
-            priority
-          />
-          <strong>DiHutan</strong>
+        <Link href="/" className="register-close-btn" aria-label="Tutup halaman daftar">
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M6 6l12 12M18 6 6 18" />
+          </svg>
         </Link>
-        <div className="register-header-actions">
-          <Link href="/" className="register-nav-link">
-            BERANDA
-          </Link>
-          <Link href="/technology" className="register-nav-link">
-            TEKNOLOGI
-          </Link>
-          <Link href="/" className="register-home-btn">
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <path d="m15 18-6-6 6-6" />
-            </svg>
-            Kembali
-          </Link>
-        </div>
       </header>
 
       {/* Main Registration Content */}
-      <main className="register-main">
-        <div className="register-wrap">
+      <main className="login-section register-main">
+        <div className="wrap login-wrap register-wrap">
           {/* Left Column: Story, Values & Benefits */}
-          <div className="register-story">
-            <span className="register-kicker">PENDAFTARAN PENJAGA RIMBA</span>
-            <h1 className="register-title">
-              Menjadi Bagian dari <i>Pelindung Rimba</i> Kalimantan
-            </h1>
+          <div className="login-copy register-story">
+            <span className="login-kicker">RUANG PENJAGA · DIHUTAN</span>
+            <h2 className="register-title">
+              Hutan memanggil.
+              <br />
+              <i>Daftar,</i>
+              <br />
+              jaga bersama.
+            </h2>
             <p className="register-lead">
-              Bergabunglah bersama ribuan warga, relawan pemadam, dan pemerhati lingkungan dalam
-              jaringan deteksi dini kebakaran hutan dan konservasi berbasis IoT DiHutan.
+              Bergabung ke ruang pemantauan untuk membaca tanda-tanda alam,
+              berbagi laporan lapangan, dan ikut menjaga hutan Kalimantan.
             </p>
 
-            <div className="register-benefits">
-              <div className="benefit-card">
-                <div className="benefit-icon" style={{ width: "36px", height: "36px", borderRadius: "10px", backgroundColor: "#EAF5EE", display: "flex", alignItems: "center", justifyContent: "center", color: "#27834A" }}><Activity size={18} /></div>
-                <div>
-                  <strong>Akses Peta Pantau & Data Sensor Lapangan</strong>
-                  <p>
-                    Pantau kondisi suhu kanopi, kelembaban gambut, dan gas udara di DAS Kapuas secara
-                    transparan dan terstruktur.
-                  </p>
-                </div>
-              </div>
-
-              <div className="benefit-card">
-                <div className="benefit-icon" style={{ width: "36px", height: "36px", borderRadius: "10px", backgroundColor: "#FEF8EC", display: "flex", alignItems: "center", justifyContent: "center", color: "#D99A2B" }}><Bell size={18} /></div>
-                <div>
-                  <strong>Peringatan Dini Cepat Karhutla</strong>
-                  <p>
-                    Terima notifikasi darurat saat sensor mendeteksi potensi lonjakan panas ekstrem atau
-                    indikasi asap sebelum api membesar.
-                  </p>
-                </div>
-              </div>
-
-              <div className="benefit-card">
-                <div className="benefit-icon" style={{ width: "36px", height: "36px", borderRadius: "10px", backgroundColor: "#EAF2E8", display: "flex", alignItems: "center", justifyContent: "center", color: "#173F2B" }}><Users size={18} /></div>
-                <div>
-                  <strong>Kolaborasi Komunitas & Pelaporan Terpadu</strong>
-                  <p>
-                    Sampaikan laporan kondisi lapangan dengan koordinat lokasi dan koordinasi langsung
-                    dengan posko pemadam setempat.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="register-quote">
-              &ldquo;Menjaga rimba bukan tugas satu pihak, melainkan ikhtiar bersama yang dihidupkan oleh
-              setiap mata dan hati yang peduli.&rdquo;
+            <div className="login-location register-location">
+              <MapPin size={20} aria-hidden="true" />
+              <span>DAS Kapuas · Kalimantan Barat</span>
             </div>
           </div>
 
           {/* Right Column: Register Form Card or Success View */}
-          <div className="register-card">
+          <div className="login-card register-card">
             {!isSuccess ? (
               <>
-                <div className="register-card-head">
-                  <h2>Daftar Akun Penjaga</h2>
-                  <p>Lengkapi formulir berikut untuk mendapatkan hak akses pemantauan rimba.</p>
-                  <div style={{ display: "inline-flex", alignItems: "center", gap: "6px", marginTop: "10px", padding: "5px 12px", borderRadius: "8px", backgroundColor: "#EAF5EE", border: "1px solid #BCE3CB", color: "#27834A", fontSize: "11.5px", fontWeight: 700 }}><ShieldCheck size={14} /><span>Hak Akses Publik: <strong>USER</strong> (Relawan / Warga Rimba)</span></div>
+                <div className="login-card-head register-card-head">
+                  <div>
+                    <h3 className="login-card-title">Daftar akun penjaga</h3>
+                    <p className="login-card-subtitle">Lengkapi data untuk bergabung menjaga hutan.</p>
+                    <div className="register-access-badge"><ShieldCheck size={14} /><span>Hak Akses Publik: <strong>USER</strong> (Relawan / Warga Rimba)</span></div>
+                  </div>
                 </div>
 
-                <form className="register-form" onSubmit={handleSubmit} noValidate>
+                <form className="login-form register-form" onSubmit={handleSubmit} noValidate>
                   {/* Nama Lengkap */}
-                  <div className="register-field">
+                  <div className="login-field register-field">
                     <label htmlFor="reg-nama">Nama Lengkap</label>
                     <input
                       id="reg-nama"
                       type="text"
-                      className="register-input"
+                      className="login-input register-input"
                       placeholder="cth. Budi Setiawan"
                       value={nama}
                       onChange={(e) => setNama(e.target.value)}
@@ -274,12 +227,12 @@ export default function RegisterView() {
                   </div>
 
                   {/* Email */}
-                  <div className="register-field">
+                  <div className="login-field register-field">
                     <label htmlFor="reg-email">Alamat Email</label>
                     <input
                       id="reg-email"
                       type="email"
-                      className="register-input"
+                      className="login-input register-input"
                       placeholder="nama@email.com"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
@@ -288,12 +241,12 @@ export default function RegisterView() {
                   </div>
 
                   {/* Nomor WhatsApp / Telepon */}
-                  <div className="register-field">
+                  <div className="login-field register-field">
                     <label htmlFor="reg-tel">No. WhatsApp / Telepon Aktif</label>
                     <input
                       id="reg-tel"
                       type="tel"
-                      className="register-input"
+                      className="login-input register-input"
                       placeholder="081234567890"
                       value={telepon}
                       onChange={(e) => setTelepon(e.target.value)}
@@ -302,11 +255,11 @@ export default function RegisterView() {
                   </div>
 
                   {/* Peran Penjaga */}
-                  <div className="register-field">
+                  <div className="login-field register-field">
                     <label htmlFor="reg-peran">Peran Penjaga Rimba</label>
                     <select
                       id="reg-peran"
-                      className="register-select"
+                      className="login-input register-select"
                       value={peran}
                       onChange={(e) => setPeran(e.target.value)}
                     >
@@ -329,11 +282,11 @@ export default function RegisterView() {
                   </div>
 
                   {/* Wilayah Pantau */}
-                  <div className="register-field">
+                  <div className="login-field register-field">
                     <label htmlFor="reg-wilayah">Wilayah Fokus Pemantauan</label>
                     <select
                       id="reg-wilayah"
-                      className="register-select"
+                      className="login-input register-select"
                       value={wilayah}
                       onChange={(e) => setWilayah(e.target.value)}
                     >
@@ -358,13 +311,13 @@ export default function RegisterView() {
                   </div>
 
                   {/* Kata Sandi */}
-                  <div className="register-field">
+                  <div className="login-field register-field">
                     <label htmlFor="reg-pass">Kata Sandi (Minimal 8 karakter)</label>
-                    <div className="register-input-group">
+                    <div className="login-input-wrap register-input-group">
                       <input
                         id="reg-pass"
                         type={showPassword ? "text" : "password"}
-                        className="register-input"
+                        className="login-input register-input"
                         placeholder="Buat kata sandi aman"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
@@ -373,7 +326,7 @@ export default function RegisterView() {
                       />
                       <button
                         type="button"
-                        className="password-toggle-btn"
+                        className="login-eye password-toggle-btn"
                         onClick={() => setShowPassword(!showPassword)}
                         aria-label={showPassword ? "Sembunyikan sandi" : "Tampilkan sandi"}
                       >
@@ -411,13 +364,13 @@ export default function RegisterView() {
                   </div>
 
                   {/* Konfirmasi Kata Sandi */}
-                  <div className="register-field">
+                  <div className="login-field register-field">
                     <label htmlFor="reg-confirm-pass">Ulangi Kata Sandi</label>
-                    <div className="register-input-group">
+                    <div className="login-input-wrap register-input-group">
                       <input
                         id="reg-confirm-pass"
                         type={showConfirmPassword ? "text" : "password"}
-                        className="register-input"
+                        className="login-input register-input"
                         placeholder="Ulangi kata sandi Anda"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
@@ -425,7 +378,7 @@ export default function RegisterView() {
                       />
                       <button
                         type="button"
-                        className="password-toggle-btn"
+                        className="login-eye password-toggle-btn"
                         onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                         aria-label={showConfirmPassword ? "Sembunyikan sandi" : "Tampilkan sandi"}
                       >
@@ -463,7 +416,7 @@ export default function RegisterView() {
                   </div>
 
                   {/* Persetujuan Kode Etik */}
-                  <label className="register-checkbox-label">
+                  <label className="login-remember register-checkbox-label">
                     <input
                       type="checkbox"
                       checked={agreed}
@@ -485,7 +438,7 @@ export default function RegisterView() {
                   {/* Submit Button */}
                   <button
                     type="submit"
-                    className="register-submit-btn"
+                    className="login-submit register-submit-btn"
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? (
@@ -512,7 +465,7 @@ export default function RegisterView() {
                   </button>
                 </form>
 
-                <div className="register-card-footer">
+                <div className="login-footer register-card-footer">
                   Sudah memiliki akun?{" "}
                   <Link href="/masuk">Masuk ke Ruang Pemantauan &rarr;</Link>
                 </div>
@@ -588,4 +541,3 @@ export default function RegisterView() {
     </div>
   );
 }
-

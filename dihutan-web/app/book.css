@@ -126,7 +126,7 @@
 
 .cover-title {
   margin: 18px 0 0;
-  font: 700 clamp(22px, 2.6vw, 34px) / 0.95 "Fraunces", Georgia, serif;
+  font: 700 clamp(22px, 2.6vw, 34px) / 0.95 Georgia, "Times New Roman", serif;
   letter-spacing: -0.05em;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.6);
 }
@@ -558,7 +558,7 @@
 
 .chapter-title {
   margin: 2px 0 6px;
-  font: 700 clamp(16px, 1.8vw, 22px) / 1.1 "Fraunces", Georgia, serif;
+  font: 700 clamp(16px, 1.8vw, 22px) / 1.1 Georgia, "Times New Roman", serif;
   letter-spacing: -0.03em;
   color: var(--book-ink);
 }
@@ -576,7 +576,7 @@
   margin: 8px 0;
   border-left: 3px solid #6b8455;
   background: rgba(107, 132, 85, 0.09);
-  font: 600 clamp(12px, 1.1vw, 13.5px) / 1.35 "Caveat", cursive;
+  font: 600 clamp(12px, 1.1vw, 13.5px) / 1.35 var(--font-sans);
   color: #1f3321;
 }
 
@@ -721,7 +721,7 @@
 }
 
 .logic-step-number {
-  font: italic 14px / 1 "Fraunces", Georgia, serif;
+  font: italic 14px / 1 Georgia, "Times New Roman", serif;
   color: #557046;
 }
 
@@ -862,7 +862,7 @@
 }
 
 .value-number {
-  font: italic 13px / 1 "Fraunces", Georgia, serif;
+  font: italic 13px / 1 Georgia, "Times New Roman", serif;
   color: #2e4a2f;
 }
 
@@ -994,7 +994,7 @@
 }
 
 .toc-header h3 {
-  font: 700 15px / 1 "Fraunces", Georgia, serif;
+  font: 700 15px / 1 Georgia, "Times New Roman", serif;
   color: #152417;
 }
 

@@ -92,8 +92,10 @@ menyampaikan status. - Jangan menggunakan merah hanya sebagai
 dekorasi. - Pastikan teks dan latar memiliki kontras yang cukup. -
 Jangan membuat seluruh halaman menjadi hijau gelap.
 2.2 Tipografi
-Gunakan maksimal dua keluarga font: - Heading: Manrope atau
-Plus Jakarta Sans. - Body/UI: Inter atau DM Sans.
+Gunakan tipografi yang konsisten dengan landing page: Inter untuk
+heading, body, dan UI; Georgia digunakan hanya untuk aksen editorial
+serif/italic. Sediakan fallback system yang setara jika font eksternal
+gagal dimuat.
 
 Pilih satu kombinasi dan gunakan secara konsisten di seluruh website.
 Jika font eksternal gagal dimuat, sediakan fallback sans-serif.

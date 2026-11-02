@@ -1228,7 +1228,7 @@ export default function DashboardMonitoringPage() {
             <span className="inspector-eyebrow">LOG AKTIVITAS TELEMETRI</span>
             <h3
               style={{
-                fontFamily: "Fraunces, Georgia, serif",
+                fontFamily: "Georgia, Times New Roman, serif",
                 fontSize: "18px",
                 color: "#17251D",
                 margin: "4px 0 0",

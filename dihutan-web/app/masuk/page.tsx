@@ -15,6 +15,8 @@ import {
   Sparkles,
   CheckCircle2,
   Lock,
+  Eye,
+  EyeOff,
   Mail,
   Loader2,
   TreePine,
@@ -31,6 +33,7 @@ function MasukContent() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -159,6 +162,7 @@ function MasukContent() {
 
   return (
     <div
+      className="auth-login-page"
       style={{
         minHeight: "100vh",
         display: "flex",
@@ -166,11 +170,12 @@ function MasukContent() {
         backgroundColor: "#F5F7F2",
         color: "#17251D",
         fontFamily:
-          '"Plus Jakarta Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+          '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
       }}
     >
       {/* Top Navbar */}
       <header
+        className="auth-login-header"
         style={{
           borderBottom: "1px solid #DFE6DC",
           backgroundColor: "#FFFFFF",
@@ -328,7 +333,7 @@ function MasukContent() {
                 }}
               >
                 <TreePine size={13} color="#8BAF70" />
-                <span>Teknologi Pemantauan Hutan</span>
+                <span>Ruang Penjaga · DiHutan</span>
               </div>
 
               <h2
@@ -341,7 +346,13 @@ function MasukContent() {
                   lineHeight: 1.2,
                 }}
               >
-                Satu Pusat Kendali Lingkungan Rimba
+                Hutan
+                <br />
+                memanggil.
+                <br />
+                <i>Masuk,</i>
+                <br />
+                <i>penjaga.</i>
               </h2>
               <p
                 style={{
@@ -351,9 +362,8 @@ function MasukContent() {
                   margin: "0 0 24px 0",
                 }}
               >
-                Masuk ke platform DiHutan untuk mengakses telemetri real-time muka
-                air gambut, status perangkat IoT fisik, ensiklopedia botani, dan
-                koordinasi verifikasi lapangan.
+                Masuk ke ruang pemantauan untuk kembali ke peta, membaca kabar dari
+                sensor, dan melanjutkan langkahmu menjaga hutan.
               </p>
 
               {/* Feature Highlights */}
@@ -448,10 +458,10 @@ function MasukContent() {
                   letterSpacing: "-0.02em",
                 }}
               >
-                Masuk ke DiHutan
+                Selamat datang kembali
               </h1>
               <p style={{ fontSize: "13px", color: "#647268", margin: 0 }}>
-                Gunakan kredensial terdaftar untuk membuka dashboard
+                Gunakan akun penjaga hutanmu.
               </p>
             </div>
 
@@ -481,6 +491,8 @@ function MasukContent() {
             {/* Error Banner */}
             {errorMsg && (
               <div
+                role="alert"
+                aria-live="polite"
                 style={{
                   backgroundColor: "#FDF2F1",
                   border: "1px solid #F8C8C4",
@@ -535,6 +547,7 @@ function MasukContent() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
+                    autoComplete="email"
                     style={{
                       width: "100%",
                       padding: "10px 12px 10px 38px",
@@ -574,12 +587,17 @@ function MasukContent() {
                   >
                     Kata Sandi
                   </label>
-                  <span
+                  <button
+                    type="button"
                     style={{
                       fontSize: "11.5px",
                       color: "#285C40",
                       fontWeight: 600,
                       cursor: "pointer",
+                      border: 0,
+                      padding: 0,
+                      background: "transparent",
+                      fontFamily: "inherit",
                     }}
                     onClick={() =>
                       alert(
@@ -588,7 +606,7 @@ function MasukContent() {
                     }
                   >
                     Lupa sandi?
-                  </span>
+                  </button>
                 </div>
                 <div style={{ position: "relative" }}>
                   <Lock
@@ -603,14 +621,15 @@ function MasukContent() {
                   />
                   <input
                     id="login-pass"
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     placeholder="Masukkan kata sandi"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
+                    autoComplete="current-password"
                     style={{
                       width: "100%",
-                      padding: "10px 12px 10px 38px",
+                      padding: "10px 42px 10px 38px",
                       borderRadius: "10px",
                       border: "1px solid #DFE6DC",
                       backgroundColor: "#FFFFFF",
@@ -623,6 +642,30 @@ function MasukContent() {
                     onFocus={(e) => (e.target.style.borderColor = "#173F2B")}
                     onBlur={(e) => (e.target.style.borderColor = "#DFE6DC")}
                   />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword((visible) => !visible)}
+                    aria-label={showPassword ? "Sembunyikan kata sandi" : "Tampilkan kata sandi"}
+                    style={{
+                      position: "absolute",
+                      right: "10px",
+                      top: "50%",
+                      transform: "translateY(-50%)",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      width: "28px",
+                      height: "28px",
+                      padding: 0,
+                      border: 0,
+                      borderRadius: "6px",
+                      background: "transparent",
+                      color: "#647268",
+                      cursor: "pointer",
+                    }}
+                  >
+                    {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                  </button>
                 </div>
               </div>
 
@@ -672,6 +715,7 @@ function MasukContent() {
 
             {/* Quick Demo Access Matrix */}
             <div
+              className="auth-quick-demo"
               style={{
                 marginTop: "24px",
                 paddingTop: "18px",

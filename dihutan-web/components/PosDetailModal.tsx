@@ -317,14 +317,16 @@ export default function PosDetailModal({
             </div>
           </div>
 
-          {/* Highlights */}
+          {/* Field impact */}
           <div className="pos-modal-section">
-            <h3>Keunggulan &amp; Nilai Nyata di Lahan Gambut</h3>
+            <h3>Dampak Nyata di Lahan Gambut</h3>
             <ul className="pos-modal-highlights">
               {currentPos.highlights.map((h, i) => (
                 <li key={i}>
-                  <span className="pos-check-icon">✓</span>
-                  <span>{h}</span>
+                  <span className="pos-highlight-number" aria-hidden="true">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="pos-highlight-copy">{h}</span>
                 </li>
               ))}
             </ul>
@@ -367,4 +369,3 @@ export default function PosDetailModal({
     </div>
   );
 }
-

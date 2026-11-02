@@ -1608,22 +1608,59 @@
   padding: 0;
   margin: 0;
   display: grid;
-  gap: 6px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
 }
 
 .pos-modal-highlights li {
-  font-size: 11.5px;
-  color: #c9d8c8;
+  min-height: 118px;
+  padding: 18px 16px;
+  border-top: 1px solid rgba(201, 255, 159, 0.35);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(145deg, rgba(201, 255, 159, 0.08), rgba(255, 255, 255, 0.02));
+  color: #e2ebe0;
   display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  line-height: 1.5;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  line-height: 1.6;
 }
 
-.pos-check-icon {
+.pos-highlight-number {
+  display: block;
+  width: 42px;
   color: #c9ff9f;
-  font-weight: 800;
+  font: 700 34px / 1 Georgia, "Times New Roman", serif;
+  letter-spacing: -0.06em;
   flex-shrink: 0;
+}
+
+.pos-highlight-copy {
+  display: block;
+  max-width: 29ch;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.pos-modal-highlights li:hover {
+  border-top-color: #c9ff9f;
+  background: linear-gradient(145deg, rgba(201, 255, 159, 0.12), rgba(255, 255, 255, 0.04));
+}
+
+@media (max-width: 640px) {
+  .pos-modal-highlights {
+    grid-template-columns: 1fr;
+  }
+
+  .pos-modal-highlights li {
+    min-height: 0;
+    padding: 15px;
+  }
+
+  .pos-highlight-copy {
+    max-width: none;
+    font-size: 13px;
+  }
 }
 
 .pos-modal-footer {

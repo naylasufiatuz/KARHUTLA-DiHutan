@@ -131,7 +131,7 @@ function SpreadPeta() {
 
         <h3
           style={{
-            font: '700 12.5px/1.2 "Fraunces", Georgia, serif',
+            font: '700 12.5px/1.2 Georgia, "Times New Roman", serif',
             color: "#18281a",
             marginBottom: "8px",
           }}
@@ -421,7 +421,7 @@ function SpreadRespons() {
 
         <h3
           style={{
-            font: '700 12.5px/1.2 "Fraunces", Georgia, serif',
+            font: '700 12.5px/1.2 Georgia, "Times New Roman", serif',
             color: "#18281a",
             marginBottom: "8px",
           }}
@@ -619,7 +619,7 @@ function SpreadPeringatan() {
 
         <h3
           style={{
-            font: '700 12.5px/1.2 "Fraunces", Georgia, serif',
+            font: '700 12.5px/1.2 Georgia, "Times New Roman", serif',
             color: "#18281a",
             marginBottom: "8px",
           }}
@@ -814,7 +814,7 @@ function SpreadEdukasi() {
 
         <h3
           style={{
-            font: '700 12.5px/1.2 "Fraunces", Georgia, serif',
+            font: '700 12.5px/1.2 Georgia, "Times New Roman", serif',
             color: "#18281a",
             marginBottom: "8px",
           }}
@@ -959,7 +959,7 @@ function SpreadPelaporan() {
 
         <h3
           style={{
-            font: '700 12.5px/1.2 "Fraunces", Georgia, serif',
+            font: '700 12.5px/1.2 Georgia, "Times New Roman", serif',
             color: "#18281a",
             marginBottom: "8px",
           }}
@@ -1061,7 +1061,7 @@ function SpreadFinal() {
         >
           <h2
             style={{
-              font: '700 clamp(16px,1.9vw,22px)/1.15 "Fraunces", Georgia, serif',
+              font: '700 clamp(16px,1.9vw,22px)/1.15 Georgia, "Times New Roman", serif',
               color: "#111e13",
               letterSpacing: "-0.03em",
               marginBottom: "6px",
@@ -1188,7 +1188,7 @@ function SpreadFinal() {
                 color: "#162518",
                 maxWidth: "240px",
                 margin: "0 auto",
-                fontFamily: '"Fraunces", Georgia, serif',
+                fontFamily: 'Georgia, "Times New Roman", serif',
                 fontStyle: "italic",
               }}
             >
@@ -1486,7 +1486,7 @@ export default function PenjaraRimbaBook() {
                   <span>
                     <strong
                       style={{
-                        fontFamily: '"Fraunces", Georgia, serif',
+                        fontFamily: 'Georgia, "Times New Roman", serif',
                         fontStyle: "italic",
                         marginRight: "8px",
                         color: "#557046",

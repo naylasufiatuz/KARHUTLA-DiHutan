@@ -219,7 +219,7 @@ export default function DashboardPerangkatIoTPage() {
             </span>
             <h2
               style={{
-                fontFamily: "Fraunces, Georgia, serif",
+                fontFamily: "Georgia, Times New Roman, serif",
                 fontSize: "20px",
                 fontWeight: 750,
                 color: "#17251D",
@@ -710,7 +710,7 @@ export default function DashboardPerangkatIoTPage() {
             </span>
             <h3
               style={{
-                fontFamily: "Fraunces, Georgia, serif",
+                fontFamily: "Georgia, Times New Roman, serif",
                 fontSize: "18px",
                 fontWeight: 750,
                 color: "#17251D",
@@ -860,7 +860,7 @@ export default function DashboardPerangkatIoTPage() {
 
             <h2
               style={{
-                fontFamily: "Fraunces, Georgia, serif",
+                fontFamily: "Georgia, Times New Roman, serif",
                 fontSize: "24px",
                 fontWeight: 750,
                 color: "#17251D",

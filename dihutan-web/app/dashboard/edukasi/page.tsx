@@ -529,7 +529,7 @@ export default function DashboardEdukasiPage() {
                 fontWeight: 600,
                 padding: "6px 14px",
                 cursor: "pointer",
-                fontFamily: "DM Sans, sans-serif",
+                fontFamily: "Inter, sans-serif",
               }}
               onClick={() => { setSearch(""); setSelectedCat("ALL"); }}
             >
